@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Offset from './Components/Offset';
+import Offset from './components/Offset';
 
 function App() {
   return (
