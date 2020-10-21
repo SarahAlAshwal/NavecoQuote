@@ -1,33 +1,30 @@
 import React, {useState} from 'react';
+import './Offset.css';
 import {
 	CircularInput,
 	CircularTrack,
 	CircularProgress,
   CircularThumb,
-  useCircularInputContext
 } from 'react-circular-input'
-
-const CustomComponent = () => {
-	const { getPointFromValue, value } = useCircularInputContext()
-	const { x, y } = getPointFromValue()
-
-	return (
-		<text x={x} y={y} textAnchor="middle" dy="0.35em" fill="rgb(0,0,255)" font-size= "calc(5px + 2vmin)" style={{ pointerEvents: 'none', fontWeight: "bold" }}>
-			{Math.round(value * 100)}
-		</text>
-	)
-}
 
 export default function Offset (props) {
 	const [value, setValue] = useState(0.25)
+	
+	const stepValue = v => Math.round(v * 10) / 10
 
-	return (
-      <CircularInput value={value} onChange={setValue}>
-			<CircularTrack />
-			<CircularProgress  stroke="rgb(0, 0, 255)" />
-			<CircularThumb fill="white" stroke="rgb(0, 0, 255)" strokeWidth="5" />
-      <CustomComponent/>
-    </CircularInput>
+return (
+	<CircularInput
+		value={stepValue(value)}
+		onChange={v => setValue(stepValue(v))}
+	>
+		<CircularTrack />
+		<CircularProgress radius = '10px' />
+		<CircularThumb />
+
+		<text x={100} y={100} textAnchor="middle" dy="0.3em" fontWeight="bold">
+			{Math.round(stepValue(value) * 100)}%
+		</text>
+	</CircularInput>
     
 	);
 }

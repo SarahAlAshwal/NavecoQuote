@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import Offset from './components/Offset';
 import MonthlyForm from './components/MonthlyForm';
-
 import {useApplicationData} from "./hooks/useApplicationData";
+import Header from './components/Header'
 
 function App() {
   const {
@@ -11,15 +11,18 @@ function App() {
     handleChangeAmount
   } = useApplicationData();
   return (
-    <div className="App">
-      <header className="App-header">
-        <Offset/>
+    <main >
+      <Header/>
+      <div className="userInput">
         <MonthlyForm
         handleChangeAmount={handleChangeAmount}
         state={state}
         />
-      </header>
+     
     </div>
+
+      
+    </main>
   );
 }
 
