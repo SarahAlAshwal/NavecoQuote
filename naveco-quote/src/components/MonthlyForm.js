@@ -1,42 +1,6 @@
-import React, { useState } from "react";
-//import { FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core';
+import React from "react";
 
 export default function MonthlyForm(props) {
-  const rate = 175 / 1094;
-
-
-  const [state, setState] = useState({
-    monthlyAmount: 175,
-    powerPerMonth: 1094,
-    yearlyAmount: 175 * 12,
-    powerPerYear: 1094 * 12,
-    message: "This is fairly average. It is likely that we can offset this entirely. 😃"
-  });
-
-  const handleChangeAmount = (event) => {
-    const input = event.target.value.replace(/[^0-9]/gi, '')
-    const monthlyAmount = input;
-    const powerPerMonth = input / rate;
-    const powerPerYear = (input / rate) * 12;
-    const yearlyAmount = input * 12;
-    let message = "This is fairly average. It is likely that we can offset this entirely. 😃";
-
-    if (yearlyAmount > 3000) {
-      message = "Above average. We'll do our best. 😅";
-    } else if (yearlyAmount <= 1800) {
-      message = "Not bad, shouldn't be hard to offset this entirely. 😀";
-    }
-
-
-    setState({
-      ...state,
-      monthlyAmount,
-      powerPerMonth,
-      powerPerYear,
-      yearlyAmount,
-      message
-    });
-  }
   return (
     <main className="">
       <div className="">
@@ -49,16 +13,16 @@ export default function MonthlyForm(props) {
             name="monthlyAmount"
             type="text"
             placeholder="$"
-            value={state.monthlyAmount ? state.monthlyAmount : ""}
-            onChange={handleChangeAmount}
+            value={props.state.monthlyAmount ? props.state.monthlyAmount : ""}
+            onChange={props.handleChangeAmount}
             data-testid="amount-input"
           /> / per month
         </form>
-        <div className="">{state.message}</div>
+        <div className="">{props.state.message}</div>
         <section className="">
-          <div className="">{state.powerPerMonth}  kWhs used per month</div>
-          <div className="">${state.yearlyAmount} spent on power each year</div>
-          <div className="">{state.powerPerYear} kWhs used per year</div>
+          <div className="">{props.state.powerPerMonth}  kWhs used per month</div>
+          <div className="">${props.state.yearlyAmount} spent on power each year</div>
+          <div className="">{props.state.powerPerYear} kWhs used per year</div>
         </section>
       </section>
     </main>
