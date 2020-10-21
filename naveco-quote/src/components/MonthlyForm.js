@@ -14,10 +14,11 @@ export default function MonthlyForm(props) {
   });
 
   const handleChangeAmount = (event) => {
-    const monthlyAmount = event.target.value;
-    const powerPerMonth = event.target.value / rate;
-    const powerPerYear = (event.target.value / rate) * 12;
-    const yearlyAmount = event.target.value * 12;
+    const input = event.target.value.replace(/[^0-9]/gi, '')
+    const monthlyAmount = input;
+    const powerPerMonth = input / rate;
+    const powerPerYear = (input / rate) * 12;
+    const yearlyAmount = input * 12;
     let message = "This is fairly average. It is likely that we can offset this entirely. 😃";
 
     if (yearlyAmount > 3000) {
