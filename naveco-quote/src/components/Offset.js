@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './Offset.css';
 import {
 	CircularInput,
 	CircularTrack,
@@ -22,7 +23,7 @@ export default function Offset (props) {
 	const [value, setValue] = useState(0.25)
 
 	return (
-      <CircularInput value={value} onChange={setValue}>
+      <CircularInput className={'offset'} value={value} onChange={setValue}>
 			<CircularTrack />
 			<CircularProgress  stroke="rgb(0, 0, 255)" />
 			<CircularThumb fill="white" stroke="rgb(0, 0, 255)" strokeWidth="5" />

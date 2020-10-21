@@ -1,14 +1,19 @@
 import React from 'react';
 import './App.css';
 import Offset from './components/Offset';
+import MonthlyForms from './components/MonthlyForm'
+import Header from './components/Header'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <main >
+      <Header/>
+      <div className="userInput">
         <Offset/>
-      </header>
-    </div>
+        <MonthlyForms/>
+      </div>
+      
+    </main>
   );
 }
 
