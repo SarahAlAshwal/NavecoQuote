@@ -32,7 +32,7 @@ export default function SavingSummery(props) {
             {`Size: ${props.capactity} KW System`}
           </Typography>
           {/* <Typography gutterBottom variant="h5" component="h2">
-            {`Pitch: 25 `}
+            {`Pitch: 25
           </Typography> */}
           <Typography gutterBottom variant="h5" component="h2">
             {`Address: ${props.city}`}
