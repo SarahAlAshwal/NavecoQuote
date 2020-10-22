@@ -37,6 +37,12 @@ export function useApplicationData() {
     });
   }
 
-  return {state, handleChangeAmount}; 
+  const calculateMonthlyACPower = function(address, systemCapacity = 10, ModuleType = 1, losses = 10.2, arrayType = 1, dataset = 'tmy3', inv_eff = 99,   ){
+    const format = 'jason';
+    const apiKey = 'le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg'
+
+  }
+
+  return {state, handleChangeAmount, calculateMonthlyACPower}; 
 
 }
