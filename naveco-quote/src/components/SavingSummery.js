@@ -6,22 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import Card from '@material-ui/core/Card';
 import SettingsIcon from '@material-ui/icons/Settings';
+import styles from "../AppStyle";
 
 
-
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-    fontSize: '15px',
-  },
-  typography:{
-    fontSize: 'medium',
-  },
-  saving:{
-  display:'flex',
-  flexDirection: 'row',
-  }
-});
+const useStyles = makeStyles(styles);
 
 export default function SavingSummery(props) {
 

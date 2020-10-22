@@ -5,7 +5,7 @@ import MonthlyForm from './components/MonthlyForm';
 import {useApplicationData} from "./hooks/useApplicationData";
 import Header from './components/Header';
 
-import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 function App() {
   const {
