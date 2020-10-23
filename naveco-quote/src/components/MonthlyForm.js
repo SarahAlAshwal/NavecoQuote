@@ -20,6 +20,7 @@ const useStyles = makeStyles({
 
 export default function MonthlyForm(props) {
   const classes = useStyles();
+  
   return (
 
     <Card className={classes.root} >
@@ -47,7 +48,7 @@ export default function MonthlyForm(props) {
           {props.state.powerPerYear}  kWhs used per year
         </Typography>
         <CardActions>
-          <Button variant="contained" color="primary" >
+          <Button variant="contained" color="primary" onClick = {() => props.calculate()} >
             Calculate
           </Button>
         </CardActions>
