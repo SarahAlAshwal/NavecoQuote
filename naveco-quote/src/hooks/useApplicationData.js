@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from 'axios';
 
 export function useApplicationData() {
   const rate = 175 / 1094;
@@ -9,7 +10,9 @@ export function useApplicationData() {
     powerPerMonth: 1094,
     yearlyAmount: 175 * 12,
     powerPerYear: 1094 * 12,
-    message: "This is fairly average. It is likely that we can offset this entirely. 😃"
+    message: "This is fairly average. It is likely that we can offset this entirely. 😃",
+    acMonthly:[],
+    acAnnual:0
   });
   
   const handleChangeAmount = (event) => {
@@ -37,9 +40,33 @@ export function useApplicationData() {
     });
   }
 
-  const calculateMonthlyACPower = function(address, systemCapacity = 10, ModuleType = 1, losses = 10.2, arrayType = 1, dataset = 'tmy3', inv_eff = 99,   ){
-    const format = 'jason';
-    const apiKey = 'le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg'
+  const calculateMonthlyACPower = function(address, systemCapacity = 10, moduleType = 1, losses = 10.2, arrayType = 1, dataset = 'intl', invEff = 99, tilt=20, azimuth = 180){
+    const apiKey = 'le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg';
+    address= "14446+Evangeline+Trail+Wilmot+NS"
+
+      //const url = `https://developer.nrel.gov/api/pvwatts/v6.json?api_key=${apiKey}&addresss=${address}&system_capacity=${systemCapacity}&azimuth=${azimuth}&tilt=${tilt}&array_type=${arrayType}&module_type=${moduleType}&losses=${losses}&dataset=${dataset}&inv_eff=${invEff}`;
+      //const url=' https://developer.nrel.gov/api/pvwatts/v6.json?api_key=DEMO_KEY&lat=40&lon=-105&system_capacity=4&azimuth=180&tilt=40&array_type=1&module_type=1&losses=10'
+      //const url = 'https://developer.nrel.gov/api/pvwatts/v6.json?api_key=le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg&address=14446+Evangeline+Trail+Wilmot+NS&system_capacity=4&azimuth=180&tilt=40&array_type=1&module_type=1&losses=10'
+      const url = `https://developer.nrel.gov/api/pvwatts/v6.json?api_key=${apiKey}&address=${address}&system_capacity=${systemCapacity}&azimuth=${azimuth}&tilt=${tilt}&array_type=${arrayType}&module_type=${moduleType}&losses=${losses}&inv_eff=${invEff}`;
+      axios.get(url)
+      .then((res)=>{
+
+        //setState(prev => ({ ...prev, acMonthly: res.data.outputs.ac_monthly, acAnnual: res.data.outputs.ac_annual}));
+
+        setState({
+          ...state,
+          acMonthly:res.data.outputs.ac_monthly,
+          acAnnual:res.data.outputs.ac_annual});
+      
+      })
+      
+      .catch((err)=> {
+        console.log(err);
+      })
+
+   
+
+    
 
   }
 
