@@ -13,35 +13,37 @@ export default function PriceCard() {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardContent>
-
-        <Typography variant="h5" component="h2">
-          Total Price
+    <Card className={classes.rootPrice}>
+      <CardContent className={classes.cardContent}>
+        <div className={classes.cardDiv}>
+          <Typography variant="h5" component="h2">
+            Total Price
         </Typography>
+        </div>
         <div className={classes.inlineClass}>
-          <Typography variant="h6" component="h2">
+          <Typography variant="h6" component="h2" className={classes.priceCardValue}>
             $19,745.00
           </Typography>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
             Including HST + Rebate Deducted
           </Typography>
         </div>
-        
-
-        <Typography className={classes.pos} color="textSecondary">
-          
-          New energy bill
-          $27.47/month
+        <br />
+        <div className={classes.inlineClass}>
+          <Typography variant="h5" component="h2">
+            New energy bill
         </Typography>
-        <Typography variant="body2" component="p">
-          
-          <br />
-          
-        </Typography>
+        </div>
+        <div className={classes.inlineClass}>
+          <Typography variant="h6" component="h2" className={classes.priceCardValue}>
+            $27.47
+          </Typography>
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
+            /month
+          </Typography>
+        </div>
       </CardContent>
-
-      <CardActions>
+      <CardActions className={classes.cardContent}>
         <Button size="small" variant="contained" color="primary">
           Price
         </Button>
