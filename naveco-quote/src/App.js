@@ -5,6 +5,7 @@ import MonthlyForm from './components/MonthlyForm';
 import {useApplicationData} from "./hooks/useApplicationData";
 import Header from './components/Header';
 import SavingTable from './components/SavingTable';
+import OffsetBill from './components/OffsetBill';
 
 import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
@@ -35,6 +36,7 @@ function App() {
                 calculate={onCalculate}
               />}
               {state.acMonthly[0] && <SavingTable acMontly = {state.acMonthly} monthlyAmount = {state.monthlyAmount}/>}
+              <OffsetBill></OffsetBill>
             </div>
           </Route>
           <Route path='/how'>

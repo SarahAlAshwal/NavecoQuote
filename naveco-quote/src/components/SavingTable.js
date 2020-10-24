@@ -10,11 +10,23 @@ import Paper from '@material-ui/core/Paper';
 import style from '../styles/SavingTableStyle';
 
 const StyledTableCell = withStyles((theme: Theme) =>
-  createStyles(style),
+  createStyles({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    }}),
 )(TableCell);
 
 const StyledTableRow = withStyles((theme: Theme) =>
-  createStyles(style),
+  createStyles({ 
+    root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    }
+  },}),
 )(TableRow);
 
 function createData(month: string, monthlyProduction: number, value: number, grid: number) {
