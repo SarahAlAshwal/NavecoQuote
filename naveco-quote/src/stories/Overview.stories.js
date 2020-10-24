@@ -3,11 +3,11 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import PriceCard from "../components/PriceCard";
-import PaybackCard from "../components/PaybackCard";
-import SavingSummery from "../components/SavingSummery";
-import OverviewHeader from "../components/OverviewHeader";
-import FirstYear from "../components/FirstYear";
+import PriceCard from '../components/Overview/PriceCard';
+import PaybackCard from "../components/Overview/PaybackCard";
+import SavingSummery from "../components/Overview/SavingSummery";
+import OverviewHeader from "../components/Overview/OverviewHeader";
+import FirstYear from "../components/Overview/FirstYear";
 
 storiesOf("Overview", module)
   .addParameters({

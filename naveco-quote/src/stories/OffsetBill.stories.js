@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import OffsetBill from "../components/OffsetBill"
+import OffsetBill from "../components/Overview/OffsetBill"
 
 storiesOf("Offset Bill", module)
   .addParameters({
