@@ -26,7 +26,8 @@ export default theme => ({
   },
   inlineClass : {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   typography:{
     fontSize: 'medium',
@@ -38,5 +39,25 @@ export default theme => ({
   Button: {
     marginRight: theme.spacing(6),
     marginLeft: theme.spacing(6)
+  },
+  rootPrice: {
+    minWidth: 275,
+    fontSize: '15px'
+  },
+  cardDiv: {
+    display: "flex",
+    justifyContent: 'center'
+  },
+  cardContent: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: 'center'
+  },
+  priceCardValue: {
+    color: 'DarkBlue'
+  },
+  OverviewHeader: {
+    display: "flex",
+    justifyContent: 'space-between'
   }
 });
