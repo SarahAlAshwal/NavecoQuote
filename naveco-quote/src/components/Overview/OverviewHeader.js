@@ -8,7 +8,7 @@ import PrintIcon from '@material-ui/icons/Print';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import PermDataSettingIcon from '@material-ui/icons/PermDataSetting';
 
-import styles from "../AppStyle";
+import styles from "../../AppStyle";
 
 
 

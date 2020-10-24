@@ -4,13 +4,9 @@ import Offset from './components/Offset';
 import MonthlyForm from './components/MonthlyForm';
 import {useApplicationData} from "./hooks/useApplicationData";
 import Header from './components/Header';
-import SavingTable from './components/SavingTable';
-<<<<<<< HEAD
-import OffsetBill from './components/OffsetBill';
-=======
-import PaybackCard from './components/PaybackCard';
-import PriceCard from './components/PriceCard';
->>>>>>> 0e8f3d5fc9d6a352b2eda4097d7c0e3a0f38c9de
+import SavingTable from './components/Overview/SavingTable';
+import PaybackCard from './components/Overview/PaybackCard';
+import PriceCard from './components/Overview/PriceCard';
 
 import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
@@ -63,11 +59,8 @@ function App() {
                 }
               />}
               {state.acMonthly[0] && <SavingTable acMontly = {state.acMonthly} monthlyAmount = {state.monthlyAmount}/>}
-<<<<<<< HEAD
-              <OffsetBill></OffsetBill>
-=======
+             
               
->>>>>>> 0e8f3d5fc9d6a352b2eda4097d7c0e3a0f38c9de
             </div>
           </Route>
           <Route path='/how'>
