@@ -1,5 +1,5 @@
 import React from 'react';
-import {calculatePayback,calculateSystemNetCostAfterRebate,calculateROI, calculateSystemGrossCostAfterRebate, totalSaving, newBill} from '../../helpers/overviewCalculation';
+import {calculatePayback,calculateSystemNetCostAfterRebate,calculateROI, calculateSystemGrossCostAfterRebate, totalSaving, newBill, totalOriginal} from '../../helpers/overviewCalculation';
 import OverviewHeader from './OverviewHeader';
 import SavingSummery from './SavingSummery';
 import FirstYear from './FirstYear';
@@ -22,7 +22,7 @@ export default function Overview (props) {
     <FirstYear kwhs = {props.acAnnual} amount = {props.acAnnual * rate}/>
     <div className="cards">
       <PriceCard cost = {calculateSystemGrossCostAfterRebate(systemBaseCost)} newBill = {newBill(props.monthlyAmount, props.acAnnual)}/>
-      <OffsetBill/>
+      <OffsetBill solar = {totalSaving(props.acAnnual)/totalOriginal(props.monthlyAmount)} />
       <PaybackCard
         paybackPeriod = {
           calculatePayback(props.acAnnual, calculateSystemNetCostAfterRebate(systemBaseCost))}

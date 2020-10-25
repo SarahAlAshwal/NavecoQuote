@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import styles from "../../AppStyle";
+import {formatNumbers} from '../../helpers/formatNumbers';
 
 const useStyles = makeStyles(styles);
 
@@ -22,7 +23,7 @@ export default function PriceCard(props) {
         </div>
         <div className={classes.inlineClass}>
           <Typography variant="h6" component="h2" className={classes.priceCardValue}>
-            ${props.cost}
+            ${formatNumbers(props.cost)}
           </Typography>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
             Including HST + Rebate Deducted
@@ -36,7 +37,7 @@ export default function PriceCard(props) {
         </div>
         <div className={classes.inlineClass}>
           <Typography variant="h6" component="h2" className={classes.priceCardValue}>
-            {`$${props.newBill}`}
+            {`$${formatNumbers(props.newBill)}`}
           </Typography>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
             /month

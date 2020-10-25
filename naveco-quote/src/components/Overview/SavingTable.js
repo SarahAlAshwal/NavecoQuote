@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import style from '../../styles/SavingTableStyle';
+import {formatNumbers} from '../../helpers/formatNumbers';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -67,9 +68,9 @@ export default function CustomizedTables(props) {
               <StyledTableCell component="th" scope="row">
                 {row.month}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.monthlyProduction}</StyledTableCell>
-              <StyledTableCell align="right">{row.value}</StyledTableCell>
-              <StyledTableCell align="right">{row.grid}</StyledTableCell>
+              <StyledTableCell align="right">{formatNumbers(row.monthlyProduction)}</StyledTableCell>
+              <StyledTableCell align="right">{formatNumbers(row.value)}</StyledTableCell>
+              <StyledTableCell align="right">{formatNumbers(row.grid)}</StyledTableCell>
             
             </StyledTableRow>
           ))}

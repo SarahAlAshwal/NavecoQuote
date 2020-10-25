@@ -40,6 +40,7 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
     for  (let year in dataPerYear) {
       sum += dataPerYear[year].amount;
     }
+   
     return sum;
   }
 

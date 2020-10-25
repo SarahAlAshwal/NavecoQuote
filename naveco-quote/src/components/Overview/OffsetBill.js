@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent'
 import { PieChart } from 'react-minimal-pie-chart';
+import {formatNumbers} from '../../helpers/formatNumbers';
 
 const useStyles = makeStyles({
   root: {
@@ -15,9 +16,11 @@ export default function OffsetBill (props) {
   const classes = useStyles();
   
   const dataMock=[
-    { title: 'Solar', value: 70, color: '#ffd700', },
-    { title: 'Grid', value: 30, color: '#FF0000' },
+    { title: 'Solar', value: (props.solar) * 100 , color: '#ffd700', },
+    { title: 'Grid', value: (1 - (props.solar)) * 100 , color: '#FF0000' },
     ];
+
+    
 
   const defaultLabelStyle = {
       fontSize: '10px',
@@ -34,7 +37,7 @@ export default function OffsetBill (props) {
         data={dataMock}
         animate={true}
         segmentsShift={(index) => (index === 0 ? shiftSize : 0.5)}
-        label={({ dataEntry }) => dataEntry.title ==='Solar' ? `${dataEntry.value}%`: ''}
+        label={({ dataEntry }) => dataEntry.title ==='Solar' ? ` Solar ${formatNumbers(dataEntry.value)}%`: `Grid ${formatNumbers(dataEntry.value)}`}
         labelStyle={{
           ...defaultLabelStyle,
         }}
