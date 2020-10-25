@@ -51,6 +51,9 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
   export function calculateProfit(acAnnual, rate = 0.12, degradationRate = 0.005, escalationRate = 0.029) {
     let sum = 0;
     const dataPerYear = createData(acAnnual, rate, degradationRate, escalationRate);
+
+  }
+
   export function totalSaving (acAnnual) {
     const dataPerYear = calculateAcAnnualForManyYears(acAnnual)
     //the average value of power produced for the system's lifespan.
@@ -59,21 +62,6 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
       console.log('aa ', dataPerYear[year].amount);
       sum += dataPerYear[year].amount;
     }
-    return sum;
-  }
-
-  export function calculatePayback(acAnnual, netCost, rate, degradationRate, escalationRate) {
-    
-    //the average value of power produced for the system's lifespan.
-    const sum = calculateProfit(acAnnual, rate, degradationRate, escalationRate);
-    const avg = sum / 25;
-    return netCost / avg;
-  }
-  
-  export function calculateNewBill(oldBill, savedAmount) {
-    return oldBill - savedAmount;
-  };
-   
     return sum;
   }
 

@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import styles from "../../AppStyle";
 import {formatNumbers} from '../../helpers/formatNumbers';
 
+
 const useStyles = makeStyles(styles);
 
 export default function PriceCard(props) {
