@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import styles from "../../AppStyle";
+import {formatNumbers} from '../../helpers/formatNumbers';
 
 const useStyles = makeStyles(styles);
 
@@ -21,7 +22,7 @@ export default function PaybackCard(props) {
         </div>
         <div className={classes.inlineClass}>
           <Typography variant="h6" component="h2" className={classes.priceCardValue}>
-            {props.paybackPeriod} Years
+            {formatNumbers(props.paybackPeriod)} Years
           </Typography>
         </div>
         <br />
@@ -32,7 +33,7 @@ export default function PaybackCard(props) {
         </div>
         <div className={classes.inlineClass}>
           <Typography variant="h6" component="h2" className={classes.priceCardValue}>
-            {props.roi}%
+            {formatNumbers(props.roi)}%
           </Typography>
         </div>
       </CardContent>

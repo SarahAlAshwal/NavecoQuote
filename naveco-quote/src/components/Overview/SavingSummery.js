@@ -1,12 +1,12 @@
 import React from 'react';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import { IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import Card from '@material-ui/core/Card';
 import SettingsIcon from '@material-ui/icons/Settings';
 import styles from "../../AppStyle";
+import {formatNumbers} from '../../helpers/formatNumbers';
 
 
 const useStyles = makeStyles(styles);
@@ -21,7 +21,7 @@ export default function SavingSummery(props) {
         <div className={classes.saving}>
           <AttachMoneyIcon fontSize="large"/>
           <Typography gutterBottom variant="h5" component="h2">
-            {`Congratulations!! You can save ${props.saved} with this solar system in the next 25 years!`}
+            {`Congratulations!! You can save ${formatNumbers(props.saved)} with this solar system in the next 25 years!`}
         </Typography>
         </div>
 
