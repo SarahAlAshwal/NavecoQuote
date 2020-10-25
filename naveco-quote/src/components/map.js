@@ -1,39 +1,77 @@
 import React from "react";
-import { Button } from "../stories/Button";
+import { Button,TextField , Typography, Box } from '@material-ui/core';
+import './frontPage.css';
 
-export default function Google_Maps(props) {
- 
-  const handleAddress = (event) => {
-    let start_address = "https://maps.google.com/maps?width=520&height=400&hl=en&t=h&z=19&ie=UTF8&iwloc=B&output=embed&q=%20"
-    let input_address = document.getElementById('add').value;
-    let final_address = start_address  + input_address;
-    document.getElementById('gmap_canvas').src = final_address;
+//initial web address
+const webaddress = "https://maps.google.com/maps?width=520&height=400&hl=en&t=h&z=19&ie=UTF8&iwloc=B&output=embed&q=%20";
+
+export default function GoogleMaps(props) {
+
+  //adds user input to the webaddress and diplays the map on click
+  const handleAddress = () => {
+    props.state.finaladdr = webaddress + props.state.address;
+
+    //to diplay the hidden map
+    document.getElementById('gmap_canvas').style.visibility = 'visible';
+    // to reload
+    document.getElementById('gmap_canvas').src = props.state.finaladdr;
     document.getElementById('gmap_canvas').contentWindow.location.reload();
   }
+
+  //updates the address
+  const UpdateAddress = (event) => {
+    props.state.address = event.target.value;
+  }
+
+//residential
+  const handleAreatypeRes = () => {
+        props.state.isresidential = true;
+        document.getElementById("res").style.color = "blue"
+        document.getElementById("com").style.color = "black"
+  }
+//commercial
+  const handleAreatypeCom = () => {
+        props.state.isresidential =  false;
+        document.getElementById("res").style.color = "black"
+        document.getElementById("com").style.color = "blue"
+  }
+
   return (
-    <main className="">
+    <main className="wrapper">
+      <Box component="span" ml={50} textAlign="center">
       <div className="">
-        Enter your Address
+      <Typography variant="h4">
+      Enter your Address
+      </Typography>
       </div>
       <section className="">
         <form autoComplete="off" onSubmit={event => event.preventDefault()}>
-          <input
-            className="add"
-            id="add"
-            name="Address"
-            type="text"
-            placeholder="Address"
-          /> 
-          <Button  primary={true} backgroundColor={'blue'} size={'small'} label={'Enter'} onClick={handleAddress}/>
+        <TextField
+          id="add"
+          label="Address"
+          style={{ margin: 8 }}
+          placeholder="Enter your address"
+          /*helperText="Full width!"*/
+          fullWidth
+          margin="normal"
+          onChange={UpdateAddress}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+        />
+          <Button color="default" id="res" onClick={handleAreatypeRes}>residential  /</Button>
+          <Button color="default" id="com" onClick={handleAreatypeCom}>commercial</Button> 
+          <Button variant="contained" color="primary" onClick={handleAddress}>Enter</Button>
         </form>
         <div className=""></div>
         <section className="">
-        <iframe width="520" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" id="gmap_canvas" 
-          src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=25%20Woodridge%20crescent%20Ottawa+()&amp;t=h&amp;z=19&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+        <iframe width="520" height="400" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" id="gmap_canvas" className="responsive-iframe"
+          src={props.state.finaladdr}>
         </iframe> 
-        
         </section>
       </section>
+      </Box>
     </main>
   );
 }
