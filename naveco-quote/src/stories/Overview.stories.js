@@ -8,6 +8,7 @@ import PaybackCard from "../components/Overview/PaybackCard";
 import SavingSummery from "../components/Overview/SavingSummery";
 import OverviewHeader from "../components/Overview/OverviewHeader";
 import FirstYear from "../components/Overview/FirstYear";
+import FinancingForm from "../components/Overview/FinancingForm";
 
 storiesOf("Overview", module)
   .addParameters({
@@ -27,7 +28,13 @@ storiesOf("Overview", module)
     paybackPeriod = {'8.3'}
     roi = {'12.0'}
   />
-  );
+  ).add("Financing", () => <FinancingForm 
+    handleChange={action('handleChange')}
+    interestRate={4.75}
+    loanTermInYears={10}
+    loanAmount={19876}
+  />
+);
 
 
 

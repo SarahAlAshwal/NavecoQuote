@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import MonthlyForm from './components/MonthlyForm';
 import {useApplicationData} from "./hooks/useApplicationData";

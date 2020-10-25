@@ -36,7 +36,7 @@ export default function PriceCard(props) {
         </div>
         <div className={classes.inlineClass}>
           <Typography variant="h6" component="h2" className={classes.priceCardValue}>
-            $27.47 to dynamise
+          ${props.newBill}
           </Typography>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
             /month
