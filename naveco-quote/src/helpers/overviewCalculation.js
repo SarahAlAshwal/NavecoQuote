@@ -70,3 +70,9 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
     const avg = sum / lifespan;
     return netCost / avg;
   };
+
+  export function calculateMonthlyPaiment(principal, percentageRate, term) {
+    const lengthOfLoan = term * 12;
+    const rate = percentageRate / 100 / 12;
+    return (principal * rate) / (1 - (Math.pow((1 + rate), lengthOfLoan * -1)));
+  }

@@ -4,7 +4,7 @@ import {
   calculateSystemNetCostAfterRebate,
   calculateROI,
   calculateSystemGrossCostAfterRebate,
-  totalSaving, newBill, totalOriginal
+  totalSaving, newBill, totalOriginal,
 } from '../../helpers/overviewCalculation';
 import OverviewHeader from './OverviewHeader';
 import SavingSummery from './SavingSummery';
@@ -38,11 +38,13 @@ export default function Overview (props) {
       
 
     </div>
-    <FinancingForm 
-      interestRate={4.75}
-      loanTermInYears={10}
-      loanAmount={19745}
-      newBill = {newBill(props.monthlyAmount, props.acAnnual)}
+      <FinancingForm
+        newBill={newBill(props.monthlyAmount, props.acAnnual)}
+        loan={props.state.loan}
+        interestRate={props.state.interestRate}
+        loanTermInYears={props.state.loanTermInYears}
+        monthlyPayments={props.state.monthlyPayments}
+        handleLoanChange={props.handleLoanChange}
     />
       
     <SavingTable acMontly={props.acMonthly} monthlyAmount={props.monthlyAmount} />

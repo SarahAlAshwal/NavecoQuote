@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
+
+import { calculateMonthlyPaiment } from '../helpers/overviewCalculation';
 
 export function useApplicationData() {
   const rate = 0.12;
@@ -12,9 +14,13 @@ export function useApplicationData() {
     powerPerYear: 1094 * 12,
     message: "This is fairly average. It is likely that we can offset this entirely. 😃",
     acMonthly:[],
-    acAnnual:0
+    acAnnual:0,
+    loan: 19745,
+    interestRate: 4.75,
+    loanTermInYears: 10,
+    monthlyPayments: calculateMonthlyPaiment(19745, 4.75, 10)
   });
-  
+
   const handleChangeAmount = (event) => {
     const input = event.target.value.replace(/[^0-9]/gi, '')
     const monthlyAmount = input;
@@ -39,6 +45,26 @@ export function useApplicationData() {
       message
     });
   }
+
+
+
+  const handleLoanChange = (evt) => {
+    const value = evt.target.value;
+
+    setState({
+      ...state,
+      [evt.target.name]: value,
+    });
+  }
+
+  useEffect(() => {
+    const monthlyPayments = calculateMonthlyPaiment(state.loan, state.interestRate, state.loanTermInYears);
+    setState({
+      ...state,
+      monthlyPayments,
+    });
+  }, [state.interestRate, state.loanTermInYears]);
+
 
   const calculateMonthlyACPower = function(address, systemCapacity = 8.3, moduleType = 1, losses = 10.2, arrayType = 1, dataset = 'intl', invEff = 99, tilt=20, azimuth = 180){
     const apiKey = 'le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg';
@@ -69,6 +95,7 @@ export function useApplicationData() {
     state,
     handleChangeAmount,
     calculateMonthlyACPower,
+    handleLoanChange
   }; 
 
 }

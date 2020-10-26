@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
@@ -13,64 +13,28 @@ const useStyles = makeStyles(styles);
 
 export default function FinancingForm(props) {
   const classes = useStyles();
-
-  const [state, setState] = useState({
-    loan: props.loanAmount,
-    interestRate: props.interestRate,
-    loanTermInYears: props.loanTermInYears,
-    monthlyPayments: calculateMonthlyPaiment(props.loanAmount, props.interestRate, props.loanTermInYears)
-  })
-
-  function calculateMonthlyPaiment(principal, percentageRate, term) {
-    const lengthOfLoan = term * 12;
-    const rate = percentageRate / 100 / 12;
-    return (principal * rate) / (1 - (Math.pow((1 + rate), lengthOfLoan * -1)));
-  }
-
-  function handleChange(evt) {
-    const value = evt.target.value;
-
-    setState({
-      ...state,
-      [evt.target.name]: value,
-    });
-  }
-
-
-  useEffect(() => {
-    const monthlyPayments = calculateMonthlyPaiment(props.loanAmount, state.interestRate, state.loanTermInYears);
-    setState({
-      ...state,
-      monthlyPayments,
-    });
-    console.log (monthlyPayments)
-  }, [state.interestRate, state.loanTermInYears]);
-
-
-    
-  
   return (
     <Card className={classes.rootFinancing}>
       <CardContent className={classes.cardContent}>
         <div>
           <TextField
             label="Loan Amount"
-            defaultValue={props.loanAmount}
+            defaultValue={props.loan}
             disabled
           />
           <br />
           <TextField
             label="Loan term in years"
             name="loanTermInYears"
-            onChange={handleChange}
-            defaultValue={state.loanTermInYears}
+            onChange={props.handleLoanChange}
+            defaultValue={props.loanTermInYears}
           />
           <br />
           <TextField
             label="Interest Rate"
             name="interestRate"
-            onChange={handleChange}
-            defaultValue={state.interestRate}
+            onChange={props.handleLoanChange}
+            defaultValue={props.interestRate}
           />
         </div>
         <div>
@@ -79,7 +43,7 @@ export default function FinancingForm(props) {
               Monthly Payments
           </Typography>
             <Typography variant="h5" component="h2">
-              ${formatNumbers(state.monthlyPayments)}
+              ${formatNumbers(props.monthlyPayments)}
             </Typography>
 
           </div>
@@ -89,7 +53,7 @@ export default function FinancingForm(props) {
               New energy bill + Finance Payment
           </Typography>
             <Typography className={classes.title} color="textSecondary" gutterBottom>
-              ${formatNumbers(state.monthlyPayments + props.newBill)}
+              ${formatNumbers(props.monthlyPayments + props.newBill)}
             </Typography>
           </div>
         </div>
