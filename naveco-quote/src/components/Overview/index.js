@@ -16,6 +16,7 @@ import PaybackCard from './PaybackCard';
 import SavingTable from './SavingTable';
 import OffsetBill from './OffsetBill';
 import  '../../styles/OverviewStyle.css';
+import YearsSlide from './YearsSlide';
 
 export default function Overview (props) {
 
@@ -40,7 +41,7 @@ export default function Overview (props) {
 
     </div>
    
-      
+    <YearsSlide/>  
     <SavingTable acMontly={props.acMonthly} monthlyAmount={props.monthlyAmount} />
   </>
 
