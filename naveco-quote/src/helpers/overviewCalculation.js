@@ -10,7 +10,7 @@ export function calculateAcAnnualForManyYears (acAnnual, lifespan = 25, rate = 0
       // Amount is calculated based on newly calculated power factoring escalation rate
       let newRate = rate * ( 1 + escalationRate );
       dataPerYear[currentYear + 1] = {acAnnual: newPower, amount: (newPower  * newRate)};
-      currentYear++;
+      currentYear ++;
       rate = newRate;
     }
 
@@ -33,33 +33,11 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
     return profit / investment * 100 / projectLC;
   }
 
-  function createData(acAnnual, rate, degradationRate, escalationRate) {
-    const dataPerYear = {};
-    let currentYear = new Date().getFullYear();
-    dataPerYear[currentYear] = {acAnnual, amount: (acAnnual * rate)};
-    let year = currentYear;
-    for (let i = 1; i < 25; i++) {
-      // power of every year is calculated based on prevous year's power factoring degradation rate
-      const newPower = dataPerYear[year].acAnnual - (dataPerYear[year].acAnnual * degradationRate);
-      // Amount is calculated based on newly calculated power factoring escalation rate
-      dataPerYear[year + 1] = {acAnnual: newPower, amount: (newPower  * rate * ( 1 + escalationRate ))};
-      year++;
-    }
-    return dataPerYear;
-  }
-
-  export function calculateProfit(acAnnual, rate = 0.12, degradationRate = 0.005, escalationRate = 0.029) {
-    let sum = 0;
-    const dataPerYear = createData(acAnnual, rate, degradationRate, escalationRate);
-
-  }
-
   export function totalSaving (acAnnual) {
     const dataPerYear = calculateAcAnnualForManyYears(acAnnual)
     //the average value of power produced for the system's lifespan.
     let sum = 0;
     for  (let year in dataPerYear) {
-      console.log('aa ', dataPerYear[year].amount);
       sum += dataPerYear[year].amount;
     }
     return sum;
@@ -92,6 +70,3 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
     const avg = sum / lifespan;
     return netCost / avg;
   };
-
-
-  

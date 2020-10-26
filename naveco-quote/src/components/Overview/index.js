@@ -4,8 +4,6 @@ import {
   calculateSystemNetCostAfterRebate,
   calculateROI,
   calculateSystemGrossCostAfterRebate,
-  calculateNewBill,
-  calculateProfit,
   totalSaving, newBill, totalOriginal
 } from '../../helpers/overviewCalculation';
 import OverviewHeader from './OverviewHeader';
@@ -15,12 +13,12 @@ import PriceCard from './PriceCard';
 import PaybackCard from './PaybackCard';
 import SavingTable from './SavingTable';
 import OffsetBill from './OffsetBill';
+import FinancingForm from './FinancingForm';
 import  '../../styles/OverviewStyle.css';
 
 export default function Overview (props) {
 
   const systemBaseCost = 16520;
-  const profit = 10000;
   const rate = 0.12;
 
   return (
@@ -35,11 +33,17 @@ export default function Overview (props) {
         paybackPeriod = {
           calculatePayback(props.acAnnual, calculateSystemNetCostAfterRebate(systemBaseCost))}
         roi = {
-          calculateROI(calculateProfit(props.acAnnual), calculateSystemNetCostAfterRebate(systemBaseCost))}> 
-      </PaybackCard> 
+          calculateROI(totalSaving(props.acAnnual), calculateSystemNetCostAfterRebate(systemBaseCost))}> 
+      </PaybackCard>
+      
 
     </div>
-   
+    <FinancingForm 
+      interestRate={4.75}
+      loanTermInYears={10}
+      loanAmount={19745}
+      newBill = {newBill(props.monthlyAmount, props.acAnnual)}
+    />
       
     <SavingTable acMontly={props.acMonthly} monthlyAmount={props.monthlyAmount} />
   </>
