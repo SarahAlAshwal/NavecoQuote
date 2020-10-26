@@ -27,32 +27,28 @@ export default function FinancingForm(props) {
     return (principal * rate) / (1 - (Math.pow((1 + rate), lengthOfLoan * -1)));
   }
 
-  function setnewEnergyBill(setMonthlyPaiment) {
-    return setMonthlyPaiment;
-  }
-
   function handleChange(evt) {
     const value = evt.target.value;
 
     setState({
       ...state,
-      [evt.target.name]: value
+      [evt.target.name]: value,
     });
-
-    const monthlyPayments = calculateMonthlyPaiment(state.loanAmount, state.interestRate, state.loanTermInYears);
-
-    setState({
-      ...state,
-      monthlyPayments
-    });
-
   }
 
 
   useEffect(() => {
-    console.log(state.monthlyPayments);
-  });
+    const monthlyPayments = calculateMonthlyPaiment(props.loanAmount, state.interestRate, state.loanTermInYears);
+    setState({
+      ...state,
+      monthlyPayments,
+    });
+    console.log (monthlyPayments)
+  }, [state.interestRate, state.loanTermInYears]);
 
+
+    
+  
   return (
     <Card className={classes.rootFinancing}>
       <CardContent className={classes.cardContent}>
