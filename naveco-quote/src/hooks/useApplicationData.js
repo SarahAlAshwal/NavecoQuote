@@ -4,7 +4,6 @@ import axios from 'axios';
 export function useApplicationData() {
   const rate = 0.12;
 
-
   const [state, setState] = useState({
     monthlyAmount: 175,
     powerPerMonth: 1094,
@@ -12,7 +11,8 @@ export function useApplicationData() {
     powerPerYear: 1094 * 12,
     message: "This is fairly average. It is likely that we can offset this entirely. 😃",
     acMonthly:[],
-    acAnnual:0
+    acAnnual:0,
+    year: new Date().getFullYear()
   });
   
   const handleChangeAmount = (event) => {
@@ -39,6 +39,13 @@ export function useApplicationData() {
       message
     });
   }
+
+  const handleYearChange = (event, newValue) => {
+    setState({
+      ...state,
+      year: newValue
+    })
+  };
 
   const calculateMonthlyACPower = function(address, systemCapacity = 8.3, moduleType = 1, losses = 10.2, arrayType = 1, dataset = 'intl', invEff = 99, tilt=20, azimuth = 180){
     const apiKey = 'le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg';
@@ -69,6 +76,7 @@ export function useApplicationData() {
     state,
     handleChangeAmount,
     calculateMonthlyACPower,
+    handleYearChange
   }; 
 
 }

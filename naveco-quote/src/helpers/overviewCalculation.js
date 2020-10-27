@@ -10,11 +10,31 @@ export function calculateAcAnnualForManyYears (acAnnual, lifespan = 25, rate = 0
       // Amount is calculated based on newly calculated power factoring escalation rate
       let newRate = rate * ( 1 + escalationRate );
       dataPerYear[currentYear + 1] = {acAnnual: newPower, amount: (newPower  * newRate)};
-      currentYear++;
+      currentYear ++;
       rate = newRate;
     }
 
     return dataPerYear;
+}
+
+export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, lifespan = 25, rate = 0.12, degradationRate = 0.005, escalationRate = 0.029) {
+  let currentYear = new Date().getFullYear();
+  const monthlyDataPerYear = {};
+  const powerConsumption = monthlyAmount / 0.12;
+  //calculate the acMontly produced by the solar system and its value and the remaining grid bill
+  //first element in monthlyDataPerYear object is the first year values based on these value the next years will be calculate
+  monthlyDataPerYear[currentYear] = {acMonthly, acMonthlyValue: acMonthly.map(e => e * rate)  , grid: acMonthly.map(e => (e - powerConsumption) * rate)}
+  let newRate = rate * ( 1 + escalationRate );
+  for (let i = 1; i < lifespan; i++) {
+    let acMontlyAfterDegredation = monthlyDataPerYear[currentYear].acMonthly.map(e => e - (e * degradationRate ));
+    let acMontlyAfterDegredationValue = acMontlyAfterDegredation.map(e => e * newRate);
+    let restOfGridAfterDegredation = acMontlyAfterDegredation.map(e => (e - powerConsumption) * newRate)
+    
+    monthlyDataPerYear[currentYear + 1] = {acMonthly: acMontlyAfterDegredation, acMonthlyValue: acMontlyAfterDegredationValue, grid : restOfGridAfterDegredation }
+    currentYear ++;
+    rate = newRate;
+  }
+  return monthlyDataPerYear;
 }
 
 
@@ -59,7 +79,7 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
     //the average value of power produced for the system's lifespan.
     let sum = 0;
     for  (let year in dataPerYear) {
-      console.log('aa ', dataPerYear[year].amount);
+      // console.log('aa ', dataPerYear[year].amount);
       sum += dataPerYear[year].amount;
     }
     return sum;

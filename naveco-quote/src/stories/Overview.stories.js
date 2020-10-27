@@ -9,6 +9,7 @@ import SavingSummery from "../components/Overview/SavingSummery";
 import OverviewHeader from "../components/Overview/OverviewHeader";
 import FirstYear from "../components/Overview/FirstYear";
 import FinancingForm from "../components/Overview/FinancingForm";
+import Slide from "../components/Overview/Slide";
 
 storiesOf("Overview", module)
   .addParameters({
@@ -34,7 +35,8 @@ storiesOf("Overview", module)
     loanTermInYears={10}
     loanAmount={19876}
   />
-);
+).add("Slide", ()=> <Slide/>)
+;
 
 
 
