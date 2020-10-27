@@ -42,7 +42,7 @@ export default function Overview (props) {
     </div>
    
     <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
-    <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} />
+    <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} year={props.year} />
   </>
 
 

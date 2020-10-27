@@ -25,7 +25,6 @@ export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, lifesp
   //first element in monthlyDataPerYear object is the first year values based on these value the next years will be calculate
   monthlyDataPerYear[currentYear] = {acMonthly, acMonthlyValue: acMonthly.map(e => e * rate)  , grid: acMonthly.map(e => (e - powerConsumption) * rate)}
   let newRate = rate * ( 1 + escalationRate );
-  console.log(monthlyDataPerYear[currentYear].acMonthly);
   for (let i = 1; i < lifespan; i++) {
     let acMontlyAfterDegredation = monthlyDataPerYear[currentYear].acMonthly.map(e => e - (e * degradationRate ));
     let acMontlyAfterDegredationValue = acMontlyAfterDegredation.map(e => e * newRate);
@@ -80,7 +79,7 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
     //the average value of power produced for the system's lifespan.
     let sum = 0;
     for  (let year in dataPerYear) {
-      console.log('aa ', dataPerYear[year].amount);
+      // console.log('aa ', dataPerYear[year].amount);
       sum += dataPerYear[year].amount;
     }
     return sum;

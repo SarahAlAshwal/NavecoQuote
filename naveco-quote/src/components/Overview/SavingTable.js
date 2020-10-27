@@ -46,11 +46,14 @@ export default function CustomizedTables(props) {
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const rate = 0.12;
 
-  console.log(calculateAcMonthlyForManyYears(props.acMonthly, props.monthlyAmount));
+ // console.log('inside table', calculateAcMonthlyForManyYears(props.acMonthly, props.monthlyAmount));
+  const tableData = calculateAcMonthlyForManyYears(props.acMonthly, props.monthlyAmount);
 
   const rows = []
+
   for (let i = 0; i < months.length; i++) {
-    rows.push(createData(months[i], props.acMonthly[i], props.acMonthly[i] * rate , props.acMonthly[i] * rate -props.monthlyAmount));
+    //rows.push(createData(months[i], props.acMonthly[i], props.acMonthly[i] * rate , props.acMonthly[i] * rate -props.monthlyAmount));
+    rows.push(createData(months[i], tableData[props.year].acMonthly[i],tableData[props.year].acMonthlyValue[i], tableData[props.year].grid[i]));
   }
 
   return (
