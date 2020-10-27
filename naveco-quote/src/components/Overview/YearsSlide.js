@@ -21,23 +21,22 @@ const useStyles = makeStyles(theme => ({
 const YearSlider = withStyles(style)(Slider);
 
 export default function YearsSlide(props) {
-  const [year, setYear] = useState(new Date().getFullYear());
 
-  const handleSliderChange = (event, newValue) => {
-    setYear(newValue);
-  };
+
+  
   const classes = useStyles();
   
 
   return (
     <Paper className={classes.root}>
       <div className={classes.margin} />
-      <Typography gutterBottom>{`Year: ${year}`}</Typography>
-      <YearSlider valueLabelDisplay="auto" aria-label="year slider" defaultValue={year} min={2020} max={2044} onChange={handleSliderChange} />
+      <Typography gutterBottom>{`Year: ${props.year}`}</Typography>
+      <YearSlider valueLabelDisplay="auto" aria-label="year slider" defaultValue={props.year} min={2020} max={2044} onChange={props.handleYearChange} />
       <div className={classes.margin} />
     </Paper>
   );
 }
+
 
 
 
