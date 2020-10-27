@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import style from '../../styles/SavingTableStyle';
 import {formatNumbers} from '../../helpers/formatNumbers';
+import {calculateAcMonthlyForManyYears} from '../../helpers/overviewCalculation';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -45,10 +46,11 @@ export default function CustomizedTables(props) {
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const rate = 0.12;
 
+  console.log(calculateAcMonthlyForManyYears(props.acMonthly, props.monthlyAmount));
 
   const rows = []
   for (let i = 0; i < months.length; i++) {
-    rows.push(createData(months[i], props.acMontly[i], props.acMontly[i] * rate , props.acMontly[i] * rate -props.monthlyAmount));
+    rows.push(createData(months[i], props.acMonthly[i], props.acMonthly[i] * rate , props.acMonthly[i] * rate -props.monthlyAmount));
   }
 
   return (
