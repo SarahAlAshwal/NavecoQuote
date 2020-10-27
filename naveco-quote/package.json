@@ -3,19 +3,42 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "@devexpress/dx-react-chart": "^2.7.2",
+    "@devexpress/dx-react-chart-material-ui": "^2.7.2",
+    "@devexpress/dx-react-core": "^2.7.2",
+=======
+>>>>>>> ca71077b80a93c2d6291633ccde14b41cb510470
+>>>>>>> mapComponent
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
+    "d3-scale": "^3.2.3",
+    "google-maps-react": "^2.0.6",
     "react": "^16.14.0",
     "react-circular-input": "^0.2.1",
     "react-dom": "^16.14.0",
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "react-iframe": "^1.8.0",
+    "react-native-maps": "^0.27.1",
+    "react-scripts": "3.4.3"
+=======
+>>>>>>> mapComponent
     "react-minimal-pie-chart": "^8.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-spring": "^8.0.27"
+<<<<<<< HEAD
+=======
+>>>>>>> ca71077b80a93c2d6291633ccde14b41cb510470
+>>>>>>> mapComponent
   },
   "scripts": {
     "start": "react-scripts start",
