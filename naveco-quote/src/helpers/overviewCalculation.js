@@ -20,12 +20,13 @@ export function calculateAcAnnualForManyYears (acAnnual, lifespan = 25, rate = 0
 
 
 export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
-    const rebate = (systemBaseCost * (1 - 0.25)) < 6000 ? systemBaseCost * (1 - 0.25) : 6000;
+  
+    const rebate = (systemBaseCost * 0.25) < 6000 ? systemBaseCost * 0.25 : 6000;
     return systemBaseCost * (1 + 0.13) - rebate;
   }
 
   export function calculateSystemNetCostAfterRebate(systemBaseCost) {
-    const rebate = (systemBaseCost * (1 - 0.25)) < 6000 ? systemBaseCost * (1 - 0.25) : 6000;
+    const rebate = (systemBaseCost * 0.25) < 6000 ? systemBaseCost * 0.25 : 6000;
     return systemBaseCost - rebate;
   }
 

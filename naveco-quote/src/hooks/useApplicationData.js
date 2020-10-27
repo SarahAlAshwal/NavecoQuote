@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
-import { calculateMonthlyPaiment } from '../helpers/overviewCalculation';
+import { calculateROI, calculatePayback, calculateMonthlyPaiment } from '../helpers/overviewCalculation';
 
 export function useApplicationData() {
   const rate = 0.12;
@@ -15,14 +15,16 @@ export function useApplicationData() {
     message: "This is fairly average. It is likely that we can offset this entirely. 😃",
     acMonthly:[],
     acAnnual:0,
-    loan: 19745,
     interestRate: 4.75,
     loanTermInYears: 10,
-    monthlyPayments: calculateMonthlyPaiment(19745, 4.75, 10)
+    //monthlyPayments: calculateMonthlyPaiment(19745, 4.75, 10),
+    monthlyPayments: 0,
+    systemBaseCost:0,
+    newSystemBaseCost: 0
   });
 
   const handleChangeAmount = (event) => {
-    const input = event.target.value.replace(/[^0-9]/gi, '')
+    const input = parseFloat(event.target.value);
     const monthlyAmount = input;
     const powerPerMonth = input / rate;
     const powerPerYear = (input / rate) * 12;
@@ -50,20 +52,34 @@ export function useApplicationData() {
 
   const handleLoanChange = (evt) => {
     const value = evt.target.value;
+    const systemBaseCost = document.getElementById('loan').value;
 
     setState({
       ...state,
-      [evt.target.name]: value,
+      [evt.target.name]: parseFloat(value),
+      systemBaseCost
     });
   }
 
   useEffect(() => {
-    const monthlyPayments = calculateMonthlyPaiment(state.loan, state.interestRate, state.loanTermInYears);
+    const monthlyPayments = calculateMonthlyPaiment(state.systemBaseCost, state.interestRate, state.loanTermInYears);
+    
+    const newSystemBaseCost = monthlyPayments * state.loanTermInYears * 12;
+
+    console.log("newSystemBaseCost ", newSystemBaseCost);
+
+    //const roi = calculateROI(totalSaving(props.acAnnual), newSystemBaseCost);
+    //const payback = calculatePayback();
+    
     setState({
       ...state,
       monthlyPayments,
+      newSystemBaseCost,
+      //roi,
+      //payback
     });
-  }, [state.interestRate, state.loanTermInYears]);
+
+  }, [state.interestRate, state.loanTermInYears,state.newSystemBaseCost]);
 
 
   const calculateMonthlyACPower = function(address, systemCapacity = 8.3, moduleType = 1, losses = 10.2, arrayType = 1, dataset = 'intl', invEff = 99, tilt=20, azimuth = 180){

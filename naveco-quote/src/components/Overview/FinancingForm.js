@@ -18,8 +18,9 @@ export default function FinancingForm(props) {
       <CardContent className={classes.cardContent}>
         <div>
           <TextField
+            id="loan"
             label="Loan Amount"
-            defaultValue={props.loan}
+            defaultValue={props.cost}
             disabled
           />
           <br />
@@ -29,6 +30,8 @@ export default function FinancingForm(props) {
             onChange={props.handleLoanChange}
             defaultValue={props.loanTermInYears}
           />
+         
+          
           <br />
           <TextField
             label="Interest Rate"
