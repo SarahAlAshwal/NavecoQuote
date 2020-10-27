@@ -1,11 +1,7 @@
 import React from 'react';
 import {
   calculatePayback,
-  calculateSystemNetCostAfterRebate,
-  calculateROI,
-  calculateSystemGrossCostAfterRebate,
-  totalSaving, newBill, totalOriginal,
-  calculateMonthlyPaiment
+  totalSaving, newBill, totalOriginal, calculateROI
 } from '../../helpers/overviewCalculation';
 import OverviewHeader from './OverviewHeader';
 import SavingSummery from './SavingSummery';
@@ -19,7 +15,6 @@ import Button from '@material-ui/core/Button';
 import  '../../styles/OverviewStyle.css';
 
 import { useVisualMode } from "../../hooks/useVisualMode";
-import {useApplicationData} from "../../hooks/useApplicationData";
 
 const FINANCING = "FINANCING";
 const WITHOUT_FINANCING = "WITHOUT_FINANCING";
@@ -31,29 +26,19 @@ export default function Overview (props) {
 
   const rate = 0.12;
 
-  //totalGross is the Gross cost (Hardware (nb panel) + installation) after rebate
-  const totalHardware = 20 * 925;
-  const installation = 3000;
-  const totalNet = calculateSystemNetCostAfterRebate(totalHardware + installation);
-  const totalGross = calculateSystemGrossCostAfterRebate(totalHardware + installation);
-  const monthlyPayments = calculateMonthlyPaiment(totalGross, props.state.interestRate, props.state.loanTermInYears);
-
-  const {
-    state,
-    handleLoanChange
-  } = useApplicationData();
+ 
 
   return (
   <>
     <OverviewHeader/>
-    <SavingSummery saved = {totalSaving(props.acAnnual)}/>
-    <FirstYear kwhs = {props.acAnnual} amount = {props.acAnnual * rate}/>
+    <SavingSummery saved = {totalSaving(props.state.acAnnual)}/>
+    <FirstYear kwhs = {props.state.acAnnual} amount = {props.state.acAnnual * rate}/>
     <div className="cards">
-      <PriceCard cost = {totalGross} newBill = {newBill(props.monthlyAmount, props.acAnnual)}/>
-      <OffsetBill solar = {totalSaving(props.acAnnual)/totalOriginal(props.monthlyAmount)} />
+      <PriceCard cost = {props.state.totalGross} newBill = {newBill(props.state.monthlyAmount, props.state.acAnnual)}/>
+      <OffsetBill solar = {totalSaving(props.state.acAnnual)/totalOriginal(props.monthlyAmount)} />
       <PaybackCard
-        paybackPeriod = {state.payback ? state.payback : calculatePayback(props.acAnnual, totalNet)}
-        roi = {state.roi ? state.roi : calculateROI(totalSaving(props.acAnnual), totalNet)}> 
+        paybackPeriod = {props.state.payback? props.state.payback : calculatePayback(props.state.acAnnual, props.state.totalNet)}
+        roi = {props.state.roi ? props.state.roi : calculateROI(totalSaving(props.state.acAnnual), props.state.totalGross)}> 
       </PaybackCard>
       
 
@@ -71,11 +56,11 @@ export default function Overview (props) {
     {mode === FINANCING  && (
       <FinancingForm
         newBill={newBill(props.monthlyAmount, props.acAnnual)}
-        cost={totalGross}
-        interestRate={state.interestRate}
-        loanTermInYears={state.loanTermInYears}
-        monthlyPayments={state.monthlyPayments ? state.monthlyPayments : monthlyPayments}
-        handleLoanChange={handleLoanChange}
+        cost={props.state.totalGross}
+        interestRate={props.state.interestRate}
+        loanTermInYears={props.state.loanTermInYears}
+        monthlyPayments={props.state.monthlyPayments}
+        handleLoanChange={props.handleLoanChange}
     />
     )}
       

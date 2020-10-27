@@ -11,7 +11,8 @@ function App() {
   const {
     state,
     handleChangeAmount,
-    calculateMonthlyACPower
+    calculateMonthlyACPower,
+    handleLoanChange
   } = useApplicationData();
 
 
@@ -35,6 +36,7 @@ function App() {
                 acAnnual= {state.acAnnual}
                 acMonthly={state.acMonthly}
                 monthlyAmount={state.monthlyAmount}
+                handleLoanChange={handleLoanChange}
                 state={state}/>}
              
               
