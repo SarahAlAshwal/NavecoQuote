@@ -38,7 +38,7 @@ export default function PriceCard(props) {
         </div>
         <div className={classes.inlineClass}>
           <Typography variant="h6" component="h2" className={classes.priceCardValue}>
-            {`$${formatNumbers(props.newBill)}`}
+          ${formatNumbers(props.newBill)}
           </Typography>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
             /month

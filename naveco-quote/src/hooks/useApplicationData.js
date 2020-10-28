@@ -1,9 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
+
+
+import { calculateMonthlyPaiment,
+  calculatePayback,
+  calculateSystemNetCostAfterRebate,
+  calculateROI,
+  calculateSystemGrossCostAfterRebate,
+  totalSaving
+} from '../helpers/overviewCalculation';
 
 export function useApplicationData() {
   const rate = 0.12;
 
+   
+  const totalHardware = 20 * 925;
+  const installation = 3000;
+  const totalNet = calculateSystemNetCostAfterRebate(totalHardware + installation);
+  //totalGross is the Gross cost (Hardware (nb panel) + installation) after rebate
+  const totalGross = calculateSystemGrossCostAfterRebate(totalHardware + installation);
   const [state, setState] = useState({
     monthlyAmount: 175,
     powerPerMonth: 1094,
@@ -12,11 +27,22 @@ export function useApplicationData() {
     message: "This is fairly average. It is likely that we can offset this entirely. 😃",
     acMonthly:[],
     acAnnual:0,
-    year: new Date().getFullYear()
+    year: new Date().getFullYear(),
+    interestRate: 4.75,
+    loanTermInYears: 10,
+    monthlyPayments: calculateMonthlyPaiment(totalGross, 4.75, 10),
+    totalGross,
+    totalNet,
+    newSystemBaseCost: 0,
+    payback: 0,
+    roi: 0
   });
-  
+
+  console.log('state.payback', state.payback);
+  //console.log(state.roi);
+
   const handleChangeAmount = (event) => {
-    const input = event.target.value.replace(/[^0-9]/gi, '')
+    const input = parseFloat(event.target.value);
     const monthlyAmount = input;
     const powerPerMonth = input / rate;
     const powerPerYear = (input / rate) * 12;
@@ -45,7 +71,42 @@ export function useApplicationData() {
       ...state,
       year: newValue
     })
-  };
+  };  
+
+  const handleLoanChange = (evt) => {
+    const value = evt.target.value;
+    setState({
+      ...state,
+      [evt.target.name]: parseFloat(value)
+    });
+  }
+
+  useEffect(() => {
+    const monthlyPayments = calculateMonthlyPaiment(state.totalGross, state.interestRate, state.loanTermInYears);
+    
+    const newSystemBaseCost = monthlyPayments * state.loanTermInYears * 12;
+
+    const roi = calculateROI(totalSaving(state.acAnnual), newSystemBaseCost);
+    const payback = calculatePayback(state.acAnnual, state.totalNet + (newSystemBaseCost - state.totalGross));
+    console.log('inside useEffect', payback);
+    
+    setState({
+      ...state,
+      monthlyPayments,
+      newSystemBaseCost,
+      roi,
+      payback
+    });
+
+  }, [
+    state.interestRate,
+    state.loanTermInYears,
+    state.newSystemBaseCost,
+    state.acAnnual,
+    state.totalNet,
+    state.totalGross
+  ]);
+
 
   const calculateMonthlyACPower = function(address, systemCapacity = 8.3, moduleType = 1, losses = 10.2, arrayType = 1, dataset = 'intl', invEff = 99, tilt=20, azimuth = 180){
     const apiKey = 'le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg';
@@ -76,7 +137,8 @@ export function useApplicationData() {
     state,
     handleChangeAmount,
     calculateMonthlyACPower,
-    handleYearChange
+    handleYearChange,
+    handleLoanChange
   }; 
 
 }

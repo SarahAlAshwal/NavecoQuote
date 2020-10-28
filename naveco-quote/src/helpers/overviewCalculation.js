@@ -40,12 +40,13 @@ export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, lifesp
 
 
 export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
-    const rebate = (systemBaseCost * (1 - 0.25)) < 6000 ? systemBaseCost * (1 - 0.25) : 6000;
+  
+    const rebate = (systemBaseCost * 0.25) < 6000 ? systemBaseCost * 0.25 : 6000;
     return systemBaseCost * (1 + 0.13) - rebate;
   }
 
   export function calculateSystemNetCostAfterRebate(systemBaseCost) {
-    const rebate = (systemBaseCost * (1 - 0.25)) < 6000 ? systemBaseCost * (1 - 0.25) : 6000;
+    const rebate = (systemBaseCost * 0.25) < 6000 ? systemBaseCost * 0.25 : 6000;
     return systemBaseCost - rebate;
   }
 
@@ -79,7 +80,6 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
     //the average value of power produced for the system's lifespan.
     let sum = 0;
     for  (let year in dataPerYear) {
-      // console.log('aa ', dataPerYear[year].amount);
       sum += dataPerYear[year].amount;
     }
     return sum;
@@ -110,8 +110,13 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
     const sum = totalSaving(acAnnual);
    
     const avg = sum / lifespan;
+console.log(avg, sum);
+
     return netCost / avg;
   };
 
-
-  
+  export function calculateMonthlyPaiment(principal, percentageRate, term) {
+    const lengthOfLoan = term * 12;
+    const rate = percentageRate / 100 / 12;
+    return (principal * rate) / (1 - (Math.pow((1 + rate), lengthOfLoan * -1)));
+  }

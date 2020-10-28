@@ -12,6 +12,7 @@ function App() {
     state,
     handleChangeAmount,
     calculateMonthlyACPower,
+    handleLoanChange,
     handleYearChange
   } = useApplicationData();
 
@@ -32,7 +33,15 @@ function App() {
                 state={state}
                 calculate={onCalculate}
               />}
-              {state.acMonthly[0] && <Overview acAnnual= {state.acAnnual} acMonthly={state.acMonthly} monthlyAmount = {state.monthlyAmount} handleYearChange =  {handleYearChange} year = {state.year} />}
+              {state.acMonthly[0] && <Overview 
+                acAnnual= {state.acAnnual}
+                acMonthly={state.acMonthly}
+                monthlyAmount={state.monthlyAmount}
+                handleLoanChange={handleLoanChange}
+                state={state}
+                handleYearChange = {handleYearChange}
+                year = {state.year}
+                />}
              
               
             </div>
