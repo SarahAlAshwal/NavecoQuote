@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import {formatAddress} from './../helpers/formatAddress';
 
 
 import { calculateMonthlyPaiment,
@@ -35,7 +36,8 @@ export function useApplicationData() {
     totalNet,
     newSystemBaseCost: 0,
     payback: 0,
-    roi: 0
+    roi: 0,
+    address:""
   });
 
   console.log('state.payback', state.payback);
@@ -72,6 +74,14 @@ export function useApplicationData() {
       year: newValue
     })
   };  
+
+  //updates the address
+  const UpdateAddress = (event) => {
+    setState({
+      ...state,
+      address: event.target.value});
+    console.log(state.address);
+  }
 
   const handleLoanChange = (evt) => {
     const value = evt.target.value;
@@ -110,7 +120,10 @@ export function useApplicationData() {
 
   const calculateMonthlyACPower = function(address, systemCapacity = 8.3, moduleType = 1, losses = 10.2, arrayType = 1, dataset = 'intl', invEff = 99, tilt=20, azimuth = 180){
     const apiKey = 'le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg';
-    address= "14446+Evangeline+Trail+Wilmot+NS";
+    //address= "14446+Evangeline+Trail+Wilmot+NS";
+    //address= "14446+Evangeline+Trail";
+    address = formatAddress(state.address);
+    console.log(address);
   
 
       //const url = `https://developer.nrel.gov/api/pvwatts/v6.json?api_key=${apiKey}&addresss=${address}&system_capacity=${systemCapacity}&azimuth=${azimuth}&tilt=${tilt}&array_type=${arrayType}&module_type=${moduleType}&losses=${losses}&dataset=${dataset}&inv_eff=${invEff}`;
@@ -138,7 +151,8 @@ export function useApplicationData() {
     handleChangeAmount,
     calculateMonthlyACPower,
     handleYearChange,
-    handleLoanChange
+    handleLoanChange,
+    UpdateAddress
   }; 
 
 }

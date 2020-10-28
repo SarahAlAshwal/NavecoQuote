@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Overview from './components/Overview'
 
 import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import GoogleMaps from './components/map';
 
 function App() {
   const {
@@ -13,7 +14,8 @@ function App() {
     handleChangeAmount,
     calculateMonthlyACPower,
     handleLoanChange,
-    handleYearChange
+    handleYearChange,
+    UpdateAddress
   } = useApplicationData();
 
 
@@ -28,6 +30,7 @@ function App() {
         <Switch>
           <Route exact path = '/'>
             <div className='userInput'>
+              {!state.acMonthly[0] && <GoogleMaps address= {state.address} UpdateAddress={UpdateAddress}/>}
               {!state.acMonthly[0]  && <MonthlyForm
                 handleChangeAmount={handleChangeAmount}
                 state={state}
@@ -47,7 +50,7 @@ function App() {
             </div>
           </Route>
           <Route path='/how'>
-            <p>How it works explanation</p>
+            <GoogleMaps address= {state.address} UpdateAddress={UpdateAddress}/>
           </Route>
           
         </Switch>

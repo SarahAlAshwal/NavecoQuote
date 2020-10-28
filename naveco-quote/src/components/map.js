@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Button,TextField , Typography, Box } from '@material-ui/core';
 import './frontPage.css';
 
@@ -7,31 +7,31 @@ const webaddress = "https://maps.google.com/maps?width=520&height=400&hl=en&t=h&
 
 export default function GoogleMaps(props) {
 
+  const [residential, setResidential] = useState(true);
+  let finalAddr = "https://maps.google.com/maps?width=520&height=400&hl=en&t=h&z=19&ie=UTF8&iwloc=B&output=embed&q=%20Ottawa";
+
   //adds user input to the webaddress and diplays the map on click
   const handleAddress = () => {
-    props.state.finaladdr = webaddress + props.state.address;
-
+    finalAddr = webaddress + props.address;
     //to diplay the hidden map
     document.getElementById('gmap_canvas').style.visibility = 'visible';
     // to reload
-    document.getElementById('gmap_canvas').src = props.state.finaladdr;
-    document.getElementById('gmap_canvas').contentWindow.location.reload();
+    document.getElementById('gmap_canvas').src = finalAddr;
+    
   }
 
-  //updates the address
-  const UpdateAddress = (event) => {
-    props.state.address = event.target.value;
-  }
+  
+ 
 
 //residential
   const handleAreatypeRes = () => {
-        props.state.isresidential = true;
+        setResidential(true);
         document.getElementById("res").style.color = "blue"
         document.getElementById("com").style.color = "black"
   }
 //commercial
   const handleAreatypeCom = () => {
-        props.state.isresidential =  false;
+        setResidential(false);
         document.getElementById("res").style.color = "black"
         document.getElementById("com").style.color = "blue"
   }
@@ -54,7 +54,7 @@ export default function GoogleMaps(props) {
           /*helperText="Full width!"*/
           fullWidth
           margin="normal"
-          onChange={UpdateAddress}
+          onChange={props.UpdateAddress}
           InputLabelProps={{
             shrink: true,
           }}
@@ -65,10 +65,10 @@ export default function GoogleMaps(props) {
           <Button variant="contained" color="primary" onClick={handleAddress}>Enter</Button>
         </form>
         <div className=""></div>
-        <section className="">
-        <iframe width="520" height="400" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" id="gmap_canvas" className="responsive-iframe"
-          src={props.state.finaladdr}>
-        </iframe> 
+        <section className=""> 
+         <iframe width="520" height="400" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" id="gmap_canvas" className="responsive-iframe"
+          src={finalAddr}>
+        </iframe>
         </section>
       </section>
       </Box>
