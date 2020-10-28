@@ -38,8 +38,8 @@ export default function Overview (props) {
       <PriceCard cost = {props.state.totalGross} newBill = {newBill(props.state.monthlyAmount, props.state.acAnnual)}/>
       <OffsetBill solar = {totalSaving(props.state.acAnnual)/totalOriginal(props.monthlyAmount)} />
       <PaybackCard
-        paybackPeriod = {props.state.payback? props.state.payback : calculatePayback(props.state.acAnnual, props.state.totalNet)}
-        roi = {props.state.roi ? props.state.roi : calculateROI(totalSaving(props.state.acAnnual), props.state.totalGross)}> 
+        paybackPeriod = {props.state.payback && mode === FINANCING ? props.state.payback : calculatePayback(props.state.acAnnual, props.state.totalNet)}
+        roi = {props.state.roi && mode === FINANCING ? props.state.roi : calculateROI(totalSaving(props.state.acAnnual), props.state.totalGross)}> 
       </PaybackCard>
       
 

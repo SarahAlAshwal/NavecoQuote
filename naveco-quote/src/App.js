@@ -13,12 +13,13 @@ function App() {
     handleChangeAmount,
     calculateMonthlyACPower,
     handleLoanChange,
-    handleYearChange
+    handleYearChange,
+    handleInputs,
   } = useApplicationData();
 
 
   function onCalculate () {
-    calculateMonthlyACPower();
+    calculateMonthlyACPower(state.address, state.systemCapacity);
   }
  
   return (
@@ -31,6 +32,7 @@ function App() {
               {!state.acMonthly[0]  && <MonthlyForm
                 handleChangeAmount={handleChangeAmount}
                 state={state}
+                handleInputs={handleInputs}
                 calculate={onCalculate}
               />}
               {state.acMonthly[0] && <Overview 
