@@ -44,10 +44,7 @@ export default function Overview (props) {
       
 
     </div>
-   
-    <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
-    <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} year={props.year} />
-      <Button size="small" variant="contained" color="primary" onClick={()=>{
+    <Button size="small" variant="contained" color="primary" onClick={()=>{
         transition(FINANCING);
       }}>
         Financing
@@ -67,6 +64,9 @@ export default function Overview (props) {
         handleLoanChange={props.handleLoanChange}
     />
     )}
+    <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
+    <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} year={props.year} />
+    
       
 
   </>
