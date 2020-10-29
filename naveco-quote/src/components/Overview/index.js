@@ -24,7 +24,8 @@ const WITHOUT_FINANCING = "WITHOUT_FINANCING";
 
 export default function Overview (props) {
   const { mode, transition, back } = useVisualMode(
-    props.financing ? FINANCING : WITHOUT_FINANCING
+    //props.financing ? FINANCING : WITHOUT_FINANCING
+    FINANCING
   );
 
   const rate = 0.12;
@@ -46,6 +47,7 @@ export default function Overview (props) {
       
 
     </div>
+    {/*
     <Button size="small" variant="contained" color="primary" onClick={()=>{
         transition(FINANCING);
       }}>
@@ -56,6 +58,9 @@ export default function Overview (props) {
       }}>
         Without Financing
       </Button>
+
+
+    */}
     {mode === FINANCING  && (
       <FinancingForm
         newBill={newBill(props.acMonthly, props.monthlyAmount, props.year)}
@@ -66,7 +71,6 @@ export default function Overview (props) {
         handleLoanChange={props.handleLoanChange}
     />
     )}
-    
     <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
     <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} year={props.year} />
     

@@ -39,14 +39,13 @@ export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, lifesp
 
 
 
-export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
-  
-    const rebate = (systemBaseCost * 0.25) < 6000 ? systemBaseCost * 0.25 : 6000;
+export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0, rebateLimit=0) {
+    const rebate = (systemBaseCost * rebatePrc) < rebateLimit ? systemBaseCost * rebatePrc : rebateLimit;
     return systemBaseCost * (1 + 0.13) - rebate;
   }
 
-  export function calculateSystemNetCostAfterRebate(systemBaseCost) {
-    const rebate = (systemBaseCost * 0.25) < 6000 ? systemBaseCost * 0.25 : 6000;
+  export function calculateSystemNetCostAfterRebate(systemBaseCost, rebatePrc=0, rebateLimit=0) {
+    const rebate = (systemBaseCost * rebatePrc) < rebateLimit ? systemBaseCost * rebatePrc : rebateLimit;
     return systemBaseCost - rebate;
   }
 

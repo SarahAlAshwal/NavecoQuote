@@ -33,7 +33,6 @@ export default function MonthlyForm(props) {
                 data-testid="amount-input"
               />
             </form>
-
           </div>
           <div>
             <Typography className={classes.typography} variant="body2" color="textSecondary" component="p">
