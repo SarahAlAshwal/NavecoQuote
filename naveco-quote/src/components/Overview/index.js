@@ -35,7 +35,7 @@ export default function Overview (props) {
     <SavingSummery saved = {totalSaving(props.state.acAnnual)}/>
     <FirstYear kwhs = {props.state.acAnnual} amount = {props.state.acAnnual * rate}/>
     <div className="cards">
-      <PriceCard cost = {props.state.totalGross} newBill = {newBill(props.state.monthlyAmount, props.state.acAnnual)}/>
+      <PriceCard cost = {props.state.totalGross} newBill = {newBill(props.acMonthly, props.monthlyAmount, props.year)}/>
       <OffsetBill solar = {totalSaving(props.state.acAnnual)/totalOriginal(props.monthlyAmount)} />
       <PaybackCard
         paybackPeriod = {props.state.payback && mode === FINANCING ? props.state.payback : calculatePayback(props.state.acAnnual, props.state.totalNet)}

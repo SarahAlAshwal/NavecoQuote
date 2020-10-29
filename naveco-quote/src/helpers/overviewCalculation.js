@@ -101,8 +101,11 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
     return sum;
   }
 
-  export function newBill (monthlyBill, acAnnual) {
-    return (totalOriginal(monthlyBill) - totalSaving(acAnnual)) / (12 * 25);
+  export function newBill (acMonthly, monthlyAmount, year) {
+    //return (totalOriginal(monthlyBill) - totalSaving(acAnnual)) / (12 * 25);
+    const yearsData = calculateAcMonthlyForManyYears(acMonthly, monthlyAmount);
+    const grid = yearsData[year].grid.reduce((total,value)=> total + value);
+    return -1 * grid / 12;
   }
 
   export function calculatePayback(acAnnual, netCost, lifespan = 25 ) {
