@@ -13,7 +13,6 @@ export function calculateAcAnnualForManyYears (acAnnual, lifespan = 25, rate = 0
       currentYear ++;
       rate = newRate;
     }
-
     return dataPerYear;
 }
 
@@ -34,6 +33,8 @@ export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, lifesp
     currentYear ++;
     rate = newRate;
   }
+
+  console.log(monthlyDataPerYear);
   return monthlyDataPerYear;
 }
 

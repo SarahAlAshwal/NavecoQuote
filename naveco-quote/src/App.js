@@ -59,6 +59,7 @@ function App() {
                 state={state}
                 handleYearChange = {handleYearChange}
                 year = {state.year}
+                capacity={state.systemCapacity}
                 />}
              
               

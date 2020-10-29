@@ -29,14 +29,14 @@ export default function SavingSummery(props) {
           <SettingsIcon fontSize="large"/>
           <div>
           <Typography gutterBottom variant="h5" component="h2">
-            {`Size: ${props.capactity} KW System`}
+            {`Size: ${props.capacity} KW System`}
           </Typography>
           {/* <Typography gutterBottom variant="h5" component="h2">
             {`Pitch: 25
           </Typography> */}
-          <Typography gutterBottom variant="h5" component="h2">
+          {/* <Typography gutterBottom variant="h5" component="h2">
             {`Address: ${props.city}`}
-          </Typography>
+          </Typography> */}
           </div>
         </div>
         

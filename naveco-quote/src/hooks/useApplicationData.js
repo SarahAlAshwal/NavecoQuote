@@ -147,15 +147,15 @@ export function useApplicationData() {
 
   const calculateMonthlyACPower = function(address, systemCapacity , moduleType = 1, losses = 10.2, arrayType = 1, dataset = 'intl', invEff = 99, tilt=20, azimuth = 180){
     const apiKey = 'le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg';
-    address= "14446+Evangeline+Trail+Wilmot+NS";
+    //address= "14446+Evangeline+Trail+Wilmot+NS";
     systemCapacity = state.systemCapacity;
-    console.log(systemCapacity);
+   
     //address= "14446+Evangeline+Trail+Wilmot+NS";
     //address= "14446+Evangeline+Trail";
     address = formatAddress(state.address);
-    console.log(address);
+   
   
-
+    //https://developer.nrel.gov/api/pvwatts/v6.json?api_key=le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg&address=243+Monterey+Drive&system_capacity=8.3&azimuth=180&tilt=20&array_type=1&module_type=1&losses=10.2&inv_eff=99
       //const url = `https://developer.nrel.gov/api/pvwatts/v6.json?api_key=${apiKey}&addresss=${address}&system_capacity=${systemCapacity}&azimuth=${azimuth}&tilt=${tilt}&array_type=${arrayType}&module_type=${moduleType}&losses=${losses}&dataset=${dataset}&inv_eff=${invEff}`;
       //const url=' https://developer.nrel.gov/api/pvwatts/v6.json?api_key=DEMO_KEY&lat=40&lon=-105&system_capacity=4&azimuth=180&tilt=40&array_type=1&module_type=1&losses=10'
       //const url = 'https://developer.nrel.gov/api/pvwatts/v6.json?api_key=le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg&address=14446+Evangeline+Trail+Wilmot+NS&system_capacity=4&azimuth=180&tilt=40&array_type=1&module_type=1&losses=10'
