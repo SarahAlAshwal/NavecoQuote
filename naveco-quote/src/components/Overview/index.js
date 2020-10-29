@@ -34,8 +34,14 @@ export default function Overview (props) {
   return (
   <>
     <OverviewHeader/>
-    <SavingSummery saved = {totalSaving(props.state.acAnnual)} capacity={props.capacity}/>
-    <FirstYear kwhs = {props.state.acAnnual} amount = {props.state.acAnnual * rate}/>
+    <div className="summery">
+      <div>
+        <SavingSummery saved = {totalSaving(props.state.acAnnual)} capacity={props.capacity}/>
+      </div>
+      
+      <FirstYear kwhs = {props.state.acAnnual} amount = {props.state.acAnnual * rate}/>
+    </div>
+    
     <div className="cards">
       <PriceCard cost = {props.state.totalGross} newBill = {newBill(props.acMonthly, props.monthlyAmount, props.year)}/>
       <OffsetBill solar = {totalSaving(props.state.acAnnual)/totalOriginal(props.monthlyAmount)} />

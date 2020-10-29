@@ -35,6 +35,7 @@ export default theme => ({
   saving:{
   display:'flex',
   flexDirection: 'row',
+  margin: '10px'
   },
   Button: {
     marginRight: theme.spacing(6),
