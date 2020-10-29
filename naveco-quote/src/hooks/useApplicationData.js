@@ -14,11 +14,15 @@ export function useApplicationData() {
   const rate = 0.12;
 
    
-  const totalHardware = 20 * 925;
+  
   const installation = 3000;
+  const panelCost = 925;
+  const panelCapacity = 415;
+  let totalHardware = 20 * panelCost;
   const totalNet = calculateSystemNetCostAfterRebate(totalHardware + installation);
   //totalGross is the Gross cost (Hardware (nb panel) + installation) after rebate
   const totalGross = calculateSystemGrossCostAfterRebate(totalHardware + installation);
+  
   const [state, setState] = useState({
     monthlyAmount: 175,
     powerPerMonth: 1094,
@@ -35,12 +39,16 @@ export function useApplicationData() {
     totalNet,
     newSystemBaseCost: 0,
     payback: 0,
-    roi: 0
+    roi: 0,
+    numberOfPanels: 20,
+    address: '14446+Evangeline+Trail+Wilmot+NS',
+    systemCapacity: 8.3,
+
   });
 
-  console.log('state.payback', state.payback);
-  //console.log(state.roi);
+  totalHardware = state.numberOfPanels * panelCost;
 
+  
   const handleChangeAmount = (event) => {
     const input = parseFloat(event.target.value);
     const monthlyAmount = input;
@@ -55,7 +63,6 @@ export function useApplicationData() {
       message = "Not bad, shouldn't be hard to offset this entirely. 😀";
     }
 
-
     setState({
       ...state,
       monthlyAmount,
@@ -65,6 +72,27 @@ export function useApplicationData() {
       message
     });
   }
+
+  const handleInputs = (evt) => {
+    const value = evt.target.value;
+    const totalHardware = value * panelCost;
+    const baseCost = totalHardware + installation;
+
+    const totalGross = calculateSystemGrossCostAfterRebate(baseCost);
+    const totalNet = calculateSystemNetCostAfterRebate(baseCost);
+
+    const systemCapacity = value * panelCapacity / 1000;
+
+    console.log (totalGross);
+
+    setState({
+      ...state,
+      numberOfPanels: parseInt(value),
+      totalGross,
+      totalNet,
+      systemCapacity,
+    });
+  };
 
   const handleYearChange = (event, newValue) => {
     setState({
@@ -88,7 +116,6 @@ export function useApplicationData() {
 
     const roi = calculateROI(totalSaving(state.acAnnual), newSystemBaseCost);
     const payback = calculatePayback(state.acAnnual, state.totalNet + (newSystemBaseCost - state.totalGross));
-    console.log('inside useEffect', payback);
     
     setState({
       ...state,
@@ -138,7 +165,8 @@ export function useApplicationData() {
     handleChangeAmount,
     calculateMonthlyACPower,
     handleYearChange,
-    handleLoanChange
+    handleLoanChange,
+    handleInputs,
   }; 
 
 }
