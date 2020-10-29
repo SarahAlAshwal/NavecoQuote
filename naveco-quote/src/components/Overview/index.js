@@ -11,10 +11,31 @@ import PaybackCard from './PaybackCard';
 import SavingTable from './SavingTable';
 import OffsetBill from './OffsetBill';
 import FinancingForm from './FinancingForm';
-import Button from '@material-ui/core/Button';
 import  '../../styles/OverviewStyle.css';
 import YearsSlide from './YearsSlide';
 import ProductBar from './ProductBar'
+
+import "tabler-react/dist/Tabler.css";
+import C3Chart from "react-c3js";
+
+import {
+  Page,
+  Avatar,
+  Icon,
+  Grid,
+  Card,
+  Text,
+  Table,
+  Alert,
+  Progress,
+  colors,
+  Dropdown,
+  Button,
+  StampCard,
+  StatsCard,
+  ProgressCard,
+  Badge,
+} from "tabler-react";
 
 import { useVisualMode } from "../../hooks/useVisualMode";
 
@@ -33,51 +54,73 @@ export default function Overview (props) {
  
 
   return (
-  <>
+    <>
+    
     <OverviewHeader/>
     <SavingSummery saved = {totalSaving(props.state.acAnnual)}/>
+
     <FirstYear kwhs = {props.state.acAnnual} amount = {props.state.acAnnual * rate}/>
     <div className="cards">
-      <PriceCard cost = {props.state.totalGross} newBill = {newBill(props.acMonthly, props.monthlyAmount, props.year)}/>
-      <OffsetBill solar = {totalSaving(props.state.acAnnual)/totalOriginal(props.monthlyAmount)} />
-      <PaybackCard
-        paybackPeriod = {props.state.payback && mode === FINANCING ? props.state.payback : calculatePayback(props.state.acAnnual, props.state.totalNet)}
-        roi = {props.state.roi && mode === FINANCING ? props.state.roi : calculateROI(totalSaving(props.state.acAnnual), props.state.totalGross)}> 
-      </PaybackCard>
+
+      
       
 
     </div>
-    {/*
-    <Button size="small" variant="contained" color="primary" onClick={()=>{
-        transition(FINANCING);
-      }}>
-        Financing
-      </Button>
-      <Button size="small" variant="contained" color="primary" onClick={()=>{
-        transition(WITHOUT_FINANCING);
-      }}>
-        Without Financing
-      </Button>
+    <Page.Content title="">
+      <Grid.Row cards={true}>
+        <Grid.Col width={20} sm={20} lg={20}>
+          <Card>
+            <PriceCard cost={props.state.totalGross} newBill={newBill(props.acMonthly, props.monthlyAmount, props.year)} />
+          </Card>
+        </Grid.Col>
+        <Grid.Col width={20} sm={20} lg={20}>
+          <Card>
+            <OffsetBill solar={totalSaving(props.state.acAnnual) / totalOriginal(props.monthlyAmount)} />
+          </Card>
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row cards={true}>
+        <Grid.Col width={20} sm={20} lg={20}>
+          <Card>
+          <PaybackCard
+            paybackPeriod = {props.state.payback && mode === FINANCING ? props.state.payback : calculatePayback(props.state.acAnnual, props.state.totalNet)}
+            roi = {props.state.roi && mode === FINANCING ? props.state.roi : calculateROI(totalSaving(props.state.acAnnual), props.state.totalGross)}> 
+          </PaybackCard>
+
+          </Card>
+        </Grid.Col>
+        <Grid.Col width={20} sm={20} lg={20}>
+          <Card>
+            {mode === FINANCING  && (
+            <FinancingForm
+              newBill={newBill(props.acMonthly, props.monthlyAmount, props.year)}
+              cost={props.state.totalGross}
+              interestRate={props.state.interestRate}
+              loanTermInYears={props.state.loanTermInYears}
+              monthlyPayments={props.state.monthlyPayments}
+              handleLoanChange={props.handleLoanChange}
+            />
+            )}
+          </Card>
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row cards={false}>
+        <Grid.Col width={20} sm={20} lg={20}>
+          <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
+        </Grid.Col>
+        <Grid.Col width={20} sm={20} lg={20}>
+          <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} year={props.year} />
+        </Grid.Col>
+      </Grid.Row>
 
 
-    */}
-    {mode === FINANCING  && (
-      <FinancingForm
-        newBill={newBill(props.acMonthly, props.monthlyAmount, props.year)}
-        cost={props.state.totalGross}
-        interestRate={props.state.interestRate}
-        loanTermInYears={props.state.loanTermInYears}
-        monthlyPayments={props.state.monthlyPayments}
-        handleLoanChange={props.handleLoanChange}
-    />
-    )}
-    <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
-    <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} year={props.year} />
+      
+      
+    </Page.Content>
+    
     
       
-
-  </>
-
+</>
 
   );
 }
