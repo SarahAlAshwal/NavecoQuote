@@ -38,6 +38,23 @@ export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, lifesp
   return monthlyDataPerYear;
 }
 
+export function calculteProduct(acMonthly, monthlyAmount){
+  const data = calculateAcMonthlyForManyYears (acMonthly, monthlyAmount);
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const chartData = {};
+  let monthPower = [];
+
+  for (const year in data) {
+    for(let i=0; i< 12; i++){
+      monthPower.push({month:months[i], power: data[year].acMonthly[i]})
+    }
+    chartData[year] = monthPower;
+    monthPower =[];
+  }
+  return chartData;
+
+}
+
 
 
 export function calculateSystemGrossCostAfterRebate(systemBaseCost) {

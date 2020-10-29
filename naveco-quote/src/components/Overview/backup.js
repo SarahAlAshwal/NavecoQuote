@@ -16,8 +16,6 @@ import { withStyles,makeStyles  } from '@material-ui/core/styles';
 
 export default function ProductBar(props) {
 
-  console.log('inside ', props);
-
   const [state, setState] = useState({
     2020: [
       { month: 'Jan', power: 626 },
@@ -75,7 +73,7 @@ const TitleText = withStyles({ title: { background: "orange", marginBottom: '30p
   <Title.Text {...restProps} className={classes.title} />
 ));
 
-//returns each month inside tooltip
+//returns each montgh inside tooltip
 const returnMonth = (month) => {
   return "KWhs in "+ props.state[2020][month].month;
 }

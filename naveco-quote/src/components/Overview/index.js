@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   calculatePayback,
-  totalSaving, newBill, totalOriginal, calculateROI
+  totalSaving, newBill, totalOriginal, calculateROI, calculteProduct
 } from '../../helpers/overviewCalculation';
 import OverviewHeader from './OverviewHeader';
 import SavingSummery from './SavingSummery';
@@ -66,7 +66,7 @@ export default function Overview (props) {
         handleLoanChange={props.handleLoanChange}
     />
     )}
-    {/* <ProductBar/> */}
+    <ProductBar state={calculteProduct(props.acMonthly, props.monthlyAmount)}/>
     <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
     <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} year={props.year} />
     
