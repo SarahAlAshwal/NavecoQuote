@@ -14,8 +14,10 @@ import FinancingForm from './FinancingForm';
 import Button from '@material-ui/core/Button';
 import  '../../styles/OverviewStyle.css';
 import YearsSlide from './YearsSlide';
+import ProductBar from './ProductBar'
 
 import { useVisualMode } from "../../hooks/useVisualMode";
+
 
 const FINANCING = "FINANCING";
 const WITHOUT_FINANCING = "WITHOUT_FINANCING";
@@ -64,6 +66,7 @@ export default function Overview (props) {
         handleLoanChange={props.handleLoanChange}
     />
     )}
+    
     <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
     <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} year={props.year} />
     
