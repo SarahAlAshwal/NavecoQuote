@@ -75,7 +75,7 @@ const TitleText = withStyles({ title: { background: "orange", marginBottom: '30p
 
 //returns each montgh inside tooltip
 const returnMonth = (month) => {
-  return "KWhs in "+ state[2020][month].month;
+  return "KWhs in "+ props.state[2020][month].month;
 }
 
 //entire content of tooltip
@@ -113,7 +113,7 @@ const classes = useStyles();
     <div className={classes.root}>
     <Paper >
           <Chart
-          data={state[2020]}
+          data={props.state[2020]}
             //data={data[2020]}
           >
             <ValueScale name="power" modifyDomain={modifyDomain} />

@@ -58,7 +58,7 @@ export default function Overview (props) {
       </Button>
     {mode === FINANCING  && (
       <FinancingForm
-        newBill={newBill(props.monthlyAmount, props.acAnnual)}
+        newBill={newBill(props.acMonthly, props.monthlyAmount, props.year)}
         cost={props.state.totalGross}
         interestRate={props.state.interestRate}
         loanTermInYears={props.state.loanTermInYears}
@@ -66,7 +66,7 @@ export default function Overview (props) {
         handleLoanChange={props.handleLoanChange}
     />
     )}
-    <ProductBar/>
+    {/* <ProductBar/> */}
     <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
     <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} year={props.year} />
     
