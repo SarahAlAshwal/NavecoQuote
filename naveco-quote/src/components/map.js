@@ -18,6 +18,7 @@ export default function GoogleMaps(props) {
     // to reload
     document.getElementById('gmap_canvas').src = finalAddr;
     
+    
   }
 
   
@@ -64,11 +65,14 @@ export default function GoogleMaps(props) {
           <Button color="default" id="com" onClick={handleAreatypeCom}>commercial</Button> 
           <Button variant="contained" color="primary" onClick={handleAddress}>Enter</Button>
         </form>
-        <div className=""></div>
+        
         <section className=""> 
          <iframe width="520" height="400" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" id="gmap_canvas" className="responsive-iframe"
           src={finalAddr}>
         </iframe>
+        <div className="">
+        <Button variant="contained" color="primary" id="next" onClick = {props.changeMode}>Next</Button>
+        </div>
         </section>
       </section>
       </Box>
