@@ -58,7 +58,7 @@ export default function Overview (props) {
       </Button>
     {mode === FINANCING  && (
       <FinancingForm
-        newBill={newBill(props.monthlyAmount, props.acAnnual)}
+        newBill={newBill(props.acMonthly, props.monthlyAmount, props.year)}
         cost={props.state.totalGross}
         interestRate={props.state.interestRate}
         loanTermInYears={props.state.loanTermInYears}

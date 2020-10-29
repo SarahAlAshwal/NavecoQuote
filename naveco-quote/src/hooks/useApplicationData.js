@@ -42,9 +42,7 @@ export function useApplicationData() {
     payback: 0,
     roi: 0,
     numberOfPanels: 20,
-    address: '14446+Evangeline+Trail+Wilmot+NS',
     systemCapacity: 8.3,
-
     address:""
   });
 
@@ -126,7 +124,7 @@ export function useApplicationData() {
 
     const roi = calculateROI(totalSaving(state.acAnnual), newSystemBaseCost);
     const payback = calculatePayback(state.acAnnual, state.totalNet + (newSystemBaseCost - state.totalGross));
-    
+    console.log('payback', payback, state.acAnnual);
     setState({
       ...state,
       monthlyPayments,

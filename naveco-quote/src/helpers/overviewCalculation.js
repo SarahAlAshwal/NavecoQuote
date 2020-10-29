@@ -114,6 +114,8 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost) {
    
     const avg = sum / lifespan;
 
+    console.log(avg);
+
     return netCost / avg;
   };
 
