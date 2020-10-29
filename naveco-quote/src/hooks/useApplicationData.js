@@ -151,7 +151,7 @@ export function useApplicationData() {
     //address= "14446+Evangeline+Trail+Wilmot+NS";
     //address= "14446+Evangeline+Trail";
     address = formatAddress(state.address);
-    console.log(address);
+   
   
 
       //const url = `https://developer.nrel.gov/api/pvwatts/v6.json?api_key=${apiKey}&addresss=${address}&system_capacity=${systemCapacity}&azimuth=${azimuth}&tilt=${tilt}&array_type=${arrayType}&module_type=${moduleType}&losses=${losses}&dataset=${dataset}&inv_eff=${invEff}`;
@@ -162,7 +162,7 @@ export function useApplicationData() {
       .then((res)=>{
 
         //setState(prev => ({ ...prev, acMonthly: res.data.outputs.ac_monthly, acAnnual: res.data.outputs.ac_annual}));
-
+        console.log(address,res.data.outputs.ac_monthly);
         setState({
           ...state,
           acMonthly:res.data.outputs.ac_monthly,
