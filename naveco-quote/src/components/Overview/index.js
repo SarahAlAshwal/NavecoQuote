@@ -11,6 +11,7 @@ import PaybackCard from './PaybackCard';
 import SavingTable from './SavingTable';
 import OffsetBill from './OffsetBill';
 import FinancingForm from './FinancingForm';
+import FinancingResults from './FinancingResults';
 import '../../styles/OverviewStyle.css';
 import YearsSlide from './YearsSlide';
 import ProductBar from './ProductBar'
@@ -80,6 +81,14 @@ export default function Overview(props) {
                     loanTermInYears={props.state.loanTermInYears}
                     monthlyPayments={props.state.monthlyPayments}
                     handleLoanChange={props.handleLoanChange}
+                  />
+                )}
+            </Grid.Col>
+            <Grid.Col>
+            {mode === FINANCING && (
+                  <FinancingResults
+                    newBill={newBill(props.acMonthly, props.monthlyAmount, props.year)}
+                    monthlyPayments={props.state.monthlyPayments}
                   />
                 )}
             </Grid.Col>
