@@ -118,16 +118,23 @@ export default function Overview (props) {
        </Tab>
     </TabbedCard>
 
-    <Grid.Row cards={false}>
-        <Grid.Col width={20} sm={20} lg={20}>
+    <TabbedCard initialTab = 'Production'>
+      <Tab title={"Production"}>
+      <Grid.Row cards={true}>
+        <Grid.Col width={20} sm={20} lg={20}  >
           <ProductBar state={calculteProduct(props.acMonthly,props.monthlyAmount)} changedYear={props.year}/>
         </Grid.Col>
-        <Grid.Col width={20} sm={20} lg={20}>
+    </Grid.Row>
+      </Tab>
+    </TabbedCard>
+    
+    <Grid.Row cards={false}>
+        <Grid.Col width={20} sm={20} lg={20} >
           <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
         </Grid.Col>
-        <Grid.Col width={20} sm={20} lg={20}>
+      </Grid.Row>
+      <Grid.Row cards={false}>
           <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} year={props.year} />
-        </Grid.Col>
       </Grid.Row>
       
 </>

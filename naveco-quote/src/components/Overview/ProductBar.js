@@ -10,11 +10,14 @@ import {
   Tooltip,
   Title,
 } from '@devexpress/dx-react-chart-material-ui';
+import {Card} from "tabler-react";
 
 import { ValueScale, Animation, EventTracker } from '@devexpress/dx-react-chart';
 import { withStyles,makeStyles  } from '@material-ui/core/styles';
 
 export default function ProductBar(props) {
+
+  console.log('max value: ' , (props.state[props.changedYear]));
 
   const [state, setState] = useState({
     2020: [
@@ -109,38 +112,36 @@ const getData = () => {
 }
 
 //chart x axis data from 200 to 1400
-const modifyDomain = domain => [0, 400];
+const modifyDomain = domain => [0, 1500];
 
 const classes = useStyles();
 
    return (
     <div className={classes.root}>
-    <Paper >
-          <Chart
-          data={getData()}
-          >
-            <ValueScale name="power" modifyDomain={modifyDomain}/>
-            <ArgumentAxis />
-            <ValueAxis scaleName="power" showGrid={false} showLine showTicks  />
-            <BarSeries
-              name="Power in kwph"
-              valueField="power"
-              argumentField="month"
-              scaleName="power"
-            />
-             <Title
-            text="Production"
-            textComponent={TitleText}
-             />
-            <Animation />
-            <EventTracker />
-            <Tooltip
-             contentComponent={TooltipContent} 
-             sheetComponent={Sheet}
-             arrowComponent={Arrow}
-            />
-          </Chart>
-        </Paper>
+    <Card body = {
+       <Chart data={getData()}>
+       <ValueScale name="power" modifyDomain={modifyDomain}/>
+       <ArgumentAxis />
+       <ValueAxis scaleName="power" showGrid={false} showLine showTicks  />
+       <BarSeries
+         name="Power in KWh"
+         valueField="power"
+         argumentField="month"
+         scaleName="power"
+       />
+        <Title
+       text="Production"
+       textComponent={TitleText}
+        />
+       <Animation />
+       <EventTracker />
+       <Tooltip
+        contentComponent={TooltipContent} 
+        sheetComponent={Sheet}
+        arrowComponent={Arrow}
+       />
+     </Chart>
+    }/>
         </div>
   );
 }
