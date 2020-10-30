@@ -23,7 +23,7 @@ export default function OverviewHeader() {
       <AppBar >
         <Toolbar variant="dense" className={classes.OverviewHeader}>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <PrintIcon />
+            <PrintIcon  onClick={() => window.print()} />
             <MonetizationOnIcon />
             <PermDataSettingIcon />
           </IconButton>
