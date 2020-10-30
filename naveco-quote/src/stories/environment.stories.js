@@ -1,16 +1,17 @@
 import React from "react";
 
 import { storiesOf } from "@storybook/react";
-//mport { action } from "@storybook/addon-actions";
-
+import { action } from "@storybook/addon-actions";
 
 import Environment from "../components/environment"
 
+const saving = 43298.28;
 
-
-storiesOf("Environment", module)
+storiesOf("envi", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }]
   })
-  .add("Environment", () => <Environment />);
-
+  .add("environment", () => <Environment
+  state={saving}
+/>
+  );
