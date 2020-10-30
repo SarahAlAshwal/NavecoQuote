@@ -8,7 +8,7 @@ const webaddress = "https://maps.google.com/maps?width=520&height=400&hl=en&t=h&
 
 export default function GoogleMaps(props) {
 
-  let finalAddr = "https://maps.google.com/maps?width=520&height=400&hl=en&t=h&z=19&ie=UTF8&iwloc=B&output=embed&q=%20Ottawa";
+  let finalAddr = "";
 
   //adds user input to the webaddress and diplays the map on click
   const handleAddress = () => {
@@ -17,12 +17,8 @@ export default function GoogleMaps(props) {
     document.getElementById('gmap_canvas').style.visibility = 'visible';
     // to reload
     document.getElementById('gmap_canvas').src = finalAddr;
-    
-    
   }
-
   
-
   return (
     <Card body = {
       <>

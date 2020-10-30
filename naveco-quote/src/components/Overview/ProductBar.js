@@ -16,8 +16,6 @@ import { withStyles,makeStyles  } from '@material-ui/core/styles';
 
 export default function ProductBar(props) {
 
-  console.log('inside ', props);
-
   const [state, setState] = useState({
     2020: [
       { month: 'Jan', power: 626 },
@@ -77,7 +75,7 @@ const TitleText = withStyles({ title: { background: "orange", marginBottom: '30p
 
 //returns each month inside tooltip
 const returnMonth = (month) => {
-  return "KWhs in "+ props.state[2020][month].month;
+  return "KWhs in "+ props.state[props.changedYear][month].month;
 }
 
 //entire content of tooltip
@@ -106,8 +104,12 @@ const TooltipContent = (props) => {
   );
 };
 
+const getData = () => {
+  return props.state[props.changedYear];
+}
+
 //chart x axis data from 200 to 1400
-const modifyDomain = domain => [200, 1400];
+const modifyDomain = domain => [0, 400];
 
 const classes = useStyles();
 
@@ -115,10 +117,9 @@ const classes = useStyles();
     <div className={classes.root}>
     <Paper >
           <Chart
-          data={props.state[2020]}
-            //data={data[2020]}
+          data={getData()}
           >
-            <ValueScale name="power" modifyDomain={modifyDomain} />
+            <ValueScale name="power" modifyDomain={modifyDomain}/>
             <ArgumentAxis />
             <ValueAxis scaleName="power" showGrid={false} showLine showTicks  />
             <BarSeries
@@ -132,7 +133,6 @@ const classes = useStyles();
             textComponent={TitleText}
              />
             <Animation />
-            <Legend />
             <EventTracker />
             <Tooltip
              contentComponent={TooltipContent} 

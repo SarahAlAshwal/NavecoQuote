@@ -13,7 +13,8 @@ import OffsetBill from './OffsetBill';
 import FinancingForm from './FinancingForm';
 import  '../../styles/OverviewStyle.css';
 import YearsSlide from './YearsSlide';
-import ProductBar from './ProductBar'
+import ProductBar from './ProductBar';
+import Environment from '../environment';
 
 import "tabler-react/dist/Tabler.css";
 import C3Chart from "react-c3js";
@@ -112,9 +113,15 @@ export default function Overview (props) {
           </Grid.Col>
         </Grid.Row>
       </Tab>
+      <Tab title="Environment">
+          <Environment state={Math.round(totalSaving(props.state.acAnnual))}/>
+       </Tab>
     </TabbedCard>
 
     <Grid.Row cards={false}>
+        <Grid.Col width={20} sm={20} lg={20}>
+          <ProductBar state={calculteProduct(props.acMonthly,props.monthlyAmount)} changedYear={props.year}/>
+        </Grid.Col>
         <Grid.Col width={20} sm={20} lg={20}>
           <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
         </Grid.Col>

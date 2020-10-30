@@ -46,7 +46,7 @@ export function calculteProduct(acMonthly, monthlyAmount){
 
   for (const year in data) {
     for(let i=0; i< 12; i++){
-      monthPower.push({month:months[i], power: data[year].acMonthly[i]})
+      monthPower.push({month:months[i], power: Math.round(data[year].acMonthly[i])})
     }
     chartData[year] = monthPower;
     monthPower =[];

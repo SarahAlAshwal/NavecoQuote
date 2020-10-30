@@ -27,4 +27,4 @@ storiesOf("ProductBar", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }]
   })
-  .add("BarChart", () => <ProductBar state={data}/>);
+  .add("BarChart", () => <ProductBar state={data} changedYear={"2020"}/>);
