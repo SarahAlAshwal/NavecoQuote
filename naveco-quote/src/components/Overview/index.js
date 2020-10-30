@@ -72,7 +72,6 @@ export default function Overview(props) {
         <Tab title={"Finance"}>
           <Grid.Row cards={true}>
             <Grid.Col width={20} sm={20} lg={20}>
-              <Card>
                 {mode === FINANCING && (
                   <FinancingForm
                     newBill={newBill(props.acMonthly, props.monthlyAmount, props.year)}
@@ -83,15 +82,12 @@ export default function Overview(props) {
                     handleLoanChange={props.handleLoanChange}
                   />
                 )}
-              </Card>
             </Grid.Col>
-            <Grid.Col width={20} sm={20} lg={20}>
-              <Card>
+            <Grid.Col>
                 <PaybackCard
                   paybackPeriod={props.state.payback && mode === FINANCING ? props.state.payback : calculatePayback(props.state.acAnnual, props.state.totalNet)}
                   roi={props.state.roi && mode === FINANCING ? props.state.roi : calculateROI(totalSaving(props.state.acAnnual), props.state.totalGross)}>
                 </PaybackCard>
-              </Card>
             </Grid.Col>
           </Grid.Row>
         </Tab>
