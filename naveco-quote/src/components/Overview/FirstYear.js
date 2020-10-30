@@ -12,10 +12,10 @@ export default function FirstYear(props) {
   return (
     <div className={classes.cardContent}>
       <Typography variant="h5" component="h2">
-        {formatNumbers(props.kwhs)} kWhs in first year
+        {formatNumbers(props.kwhs)} kWhs
       </Typography>
       <Typography variant="h6" component="h2">
-        {formatNumbers(props.amount)} value
+        {`$${formatNumbers(props.amount)} value`}
       </Typography>
     </div>
   );

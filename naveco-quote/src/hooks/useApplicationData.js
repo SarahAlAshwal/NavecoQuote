@@ -42,9 +42,7 @@ export function useApplicationData() {
     payback: 0,
     roi: 0,
     numberOfPanels: 20,
-    address: '14446+Evangeline+Trail+Wilmot+NS',
     systemCapacity: 8.3,
-
     address:""
   });
 
@@ -119,14 +117,23 @@ export function useApplicationData() {
     });
   }
 
+  //console.log ('payback outside', state.payback, state.acAnnual);
+
   useEffect(() => {
-    const monthlyPayments = calculateMonthlyPaiment(state.totalGross, state.interestRate, state.loanTermInYears);
+    let monthlyPayments = 0;
+    let newSystemBaseCost = state.totalGross;
+
+    if (state.loanTermInYears && state.interestRate) {
+      monthlyPayments = calculateMonthlyPaiment(state.totalGross, state.interestRate, state.loanTermInYears);
+      newSystemBaseCost = monthlyPayments * state.loanTermInYears * 12;
+    }
     
-    const newSystemBaseCost = monthlyPayments * state.loanTermInYears * 12;
+    
+    
 
     const roi = calculateROI(totalSaving(state.acAnnual), newSystemBaseCost);
     const payback = calculatePayback(state.acAnnual, state.totalNet + (newSystemBaseCost - state.totalGross));
-    
+    console.log('payback inside', payback, state.acAnnual);
     setState({
       ...state,
       monthlyPayments,
@@ -141,7 +148,9 @@ export function useApplicationData() {
     state.newSystemBaseCost,
     state.acAnnual,
     state.totalNet,
-    state.totalGross
+    state.totalGross,
+    state.payback,
+    state.roi,
   ]);
 
 

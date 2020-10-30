@@ -15,7 +15,7 @@ export default function PriceCard(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.rootPrice}>
+    <Card  className={classes.rootPrice}>
       <CardContent className={classes.cardContent}>
         <div className={classes.cardDiv}>
           <Typography variant="h5" component="h2">
