@@ -17,25 +17,6 @@ import { withStyles,makeStyles  } from '@material-ui/core/styles';
 
 export default function ProductBar(props) {
 
-  console.log('max value: ' , (props.state[props.changedYear]));
-
-  const [state, setState] = useState({
-    2020: [
-      { month: 'Jan', power: 626 },
-      { month: 'Feb', power: 702 },
-      { month: 'Mar', power: 1044 },
-      { month: 'Apr', power: 1005 },
-      { month: 'May', power: 1141 },
-      { month: 'Jun', power: 1152 },
-      { month: 'Jul', power: 1137 },
-      { month: 'Aug', power: 1159 },
-      { month: 'Sep', power: 1037 },
-      { month: 'Oct', power: 751 },
-      { month: 'Nov', power: 502 },
-      { month: 'Dec', power: 483 },
-    ]
-  });
-
 //styles for toolpit content and colors and to adjust the charts root margin
 const useStyles = makeStyles({
   arrow: {
