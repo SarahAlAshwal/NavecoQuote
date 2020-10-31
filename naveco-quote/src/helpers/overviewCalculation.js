@@ -72,7 +72,7 @@ export function calculatePowerBillWithoutSolar(monthlyAmount, escalationRate = 0
 
 }
 
-export function calculateAcPowerValue(acAnnual, lifespan = 25, rate) {
+export function calculateAcPowerValue(acAnnual,rate, lifespan = 25) {
   const data = calculateAcAnnualForManyYears (acAnnual,rate);
   const currentYear =  new Date().getFullYear();
   let year = currentYear;
