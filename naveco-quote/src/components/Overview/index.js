@@ -137,7 +137,7 @@ export default function Overview(props) {
           <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
         </Grid.Col>
       </Grid.Row>
-      <Grid.Row cards={false}>
+      <Grid.Row cards={true}>
           <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} year={props.year} />
       </Grid.Row>
       

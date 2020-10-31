@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import style from '../../styles/SavingTableStyle';
 import {formatNumbers} from '../../helpers/formatNumbers';
 import {calculateAcMonthlyForManyYears} from '../../helpers/overviewCalculation';
+import {Card} from "tabler-react";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -57,7 +58,8 @@ export default function CustomizedTables(props) {
   }
 
   return (
-    <TableContainer component={Paper}>
+    <Card body = {
+      <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -82,5 +84,7 @@ export default function CustomizedTables(props) {
         </TableBody>
       </Table>
     </TableContainer>
+    }/>
+    
   );
 }
