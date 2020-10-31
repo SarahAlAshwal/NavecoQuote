@@ -16,8 +16,8 @@ export default function OffsetBill (props) {
   const classes = useStyles();
   
   const dataMock=[
-    { title: 'Solar', value: (props.solar) * 100 , color: '#ffd700', },
-    { title: 'Grid', value: (1 - (props.solar)) * 100 , color: '#FF0000' },
+    { title: 'Solar', value: (props.solar) * 100 , color: 'orange', },
+    { title: 'Grid', value: (1 - (props.solar)) * 100 , color: 'blue' },
     ];
 
     

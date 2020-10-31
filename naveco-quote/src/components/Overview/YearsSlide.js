@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import style from '../../styles/SlideStyle';
+import {Card} from "tabler-react";
 
 
 const useStyles = makeStyles(theme => ({
@@ -28,15 +29,22 @@ export default function YearsSlide(props) {
   
 
   return (
-    <Paper className={classes.root}>
+    <Card body = {
+      <Paper className={classes.root}>
+      <Typography gutterBottom>{`Year: ${props.year}`}</Typography>
+      <YearSlider valueLabelDisplay="auto" aria-label="year slider" defaultValue={props.year} min={2020} max={2044} onChange={props.handleYearChange} />
+      </Paper>
+    }/>
+      
+  );
+}
+
+{/* <Paper className={classes.root}>
       <div className={classes.margin} />
       <Typography gutterBottom>{`Year: ${props.year}`}</Typography>
       <YearSlider valueLabelDisplay="auto" aria-label="year slider" defaultValue={props.year} min={2020} max={2044} onChange={props.handleYearChange} />
       <div className={classes.margin} />
-    </Paper>
-  );
-}
-
+    </Paper> */}
 
 
 
