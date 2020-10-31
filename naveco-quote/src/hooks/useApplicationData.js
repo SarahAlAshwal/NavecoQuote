@@ -12,7 +12,7 @@ import { calculateMonthlyPaiment,
 } from '../helpers/overviewCalculation';
 
 export function useApplicationData() {
-  const rate = 0.12;
+  //const rate = 0.12;
 
    
   
@@ -26,9 +26,9 @@ export function useApplicationData() {
   
   const [state, setState] = useState({
     monthlyAmount: 175,
-    powerPerMonth: 1094,
+    powerPerMonth: 175 / 0.12,
     yearlyAmount: 175 * 12,
-    powerPerYear: 1094 * 12,
+    powerPerYear: (175 / 0.12) * 12,
     message: "This is fairly average. It is likely that we can offset this entirely. 😃",
     acMonthly:[],
     acAnnual:0,
@@ -43,18 +43,61 @@ export function useApplicationData() {
     roi: 0,
     numberOfPanels: 20,
     systemCapacity: 8.3,
-    address:""
+    address:"",
+    rate: 0.12,
+    monthlyAmountError:'',
+    rateAmountError:'',
+    npFotmaError: '',
+    loanFotmaError: '',
+    addressFotmaError: '',
   });
 
   totalHardware = state.numberOfPanels * panelCost;
 
   
   const handleChangeAmount = (event) => {
-    const input = parseFloat(event.target.value);
+    const input = event.target.value;
+    let monthlyAmountError = '';
+    if(isNaN(input)  || input === ''){  
+      monthlyAmountError = 'Monthly amount sould be Number';
+    }
     const monthlyAmount = input;
-    const powerPerMonth = input / rate;
-    const powerPerYear = (input / rate) * 12;
-    const yearlyAmount = input * 12;
+    let powerPerMonth = input / state.rate;
+    let powerPerYear = (input / state.rate) * 12;
+    let yearlyAmount = input * 12;
+    let message = "This is fairly average. It is likely that we can offset this entirely. 😃";
+
+    if (yearlyAmount > 3000) {
+      message = "Above average. We'll do our best. 😅";
+    } else if (yearlyAmount <= 1800) {
+      message = "Not bad, shouldn't be hard to offset this entirely. 😀";
+    }
+    if(isNaN(input)  || input === ''){  
+      monthlyAmountError = 'Monthly amount sould be Number';
+      powerPerMonth = 0;
+      powerPerYear = 0;
+      yearlyAmount = 0;
+    }
+    
+
+    setState({
+      ...state,
+      monthlyAmount,
+      powerPerMonth,
+      powerPerYear,
+      yearlyAmount,
+      message,
+      monthlyAmountError,
+    });
+  }
+
+  const handleRateInput = (evt) => {
+    const rate = evt.target.value;
+    let rateFotmaError = '';
+    
+    let powerPerMonth = state.monthlyAmount / rate;
+    let powerPerYear = (state.monthlyAmount / rate) * 12;
+    let yearlyAmount = state.monthlyAmount * 12;
     let message = "This is fairly average. It is likely that we can offset this entirely. 😃";
 
     if (yearlyAmount > 3000) {
@@ -63,34 +106,35 @@ export function useApplicationData() {
       message = "Not bad, shouldn't be hard to offset this entirely. 😀";
     }
 
+    if(isNaN(rate)  || rate === ''){  
+      rateFotmaError = 'Rate field sould be Number';
+      powerPerMonth = 0;
+      powerPerYear = 0;
+      yearlyAmount = 0;
+    }
+
     setState({
       ...state,
-      monthlyAmount,
       powerPerMonth,
       powerPerYear,
       yearlyAmount,
-      message
+      message,
+      rate,
+      rateFotmaError,
     });
+
   }
 
   const handleInputs = (evt) => {
-    const value = evt.target.value;
-    const totalHardware = value * panelCost;
-    const baseCost = totalHardware + installation;
-
-    const totalGross = calculateSystemGrossCostAfterRebate(baseCost);
-    const totalNet = calculateSystemNetCostAfterRebate(baseCost);
-
-    const systemCapacity = value * panelCapacity / 1000;
-
-    console.log (totalGross);
-
+    const numberOfPanels = evt.target.value;
+    let npFotmaError = '';
+    if(isNaN(numberOfPanels) || numberOfPanels === ''){  
+      npFotmaError = ' Number of pannels sould be Number';
+    }
     setState({
       ...state,
-      numberOfPanels: parseInt(value),
-      totalGross,
-      totalNet,
-      systemCapacity,
+      numberOfPanels,
+      npFotmaError,
     });
   };
 
@@ -103,21 +147,33 @@ export function useApplicationData() {
 
   //updates the address
   const UpdateAddress = (event) => {
+    let address = event.target.value;
+    let addressFotmaError = '';
+    if(isNaN(address) || address === ''){  
+      addressFotmaError = ' field sould be Number';
+    }
     setState({
       ...state,
-      address: event.target.value});
-    console.log(state.address);
-  }
-
-  const handleLoanChange = (evt) => {
-    const value = evt.target.value;
-    setState({
-      ...state,
-      [evt.target.name]: parseFloat(value)
+      address,
+      addressFotmaError,
     });
   }
 
-  //console.log ('payback outside', state.payback, state.acAnnual);
+  const handleLoanChange = (evt) => {
+    let value = evt.target.value;
+    let loanFotmaError = '';
+    if(isNaN(value) || value === ''){  
+      loanFotmaError = ' field sould be Number';
+      value = '';
+    }
+
+    setState({
+      ...state,
+      [evt.target.name]: value,
+      loanFotmaError,
+    });
+  }
+
 
   useEffect(() => {
     let monthlyPayments = 0;
@@ -127,19 +183,30 @@ export function useApplicationData() {
       monthlyPayments = calculateMonthlyPaiment(state.totalGross, state.interestRate, state.loanTermInYears);
       newSystemBaseCost = monthlyPayments * state.loanTermInYears * 12;
     }
-    
-    
-    
 
     const roi = calculateROI(totalSaving(state.acAnnual), newSystemBaseCost);
     const payback = calculatePayback(state.acAnnual, state.totalNet + (newSystemBaseCost - state.totalGross));
-    console.log('payback inside', payback, state.acAnnual);
+
+    const totalHardware = state.numberOfPanels * panelCost;
+    const baseCost = totalHardware + installation;
+
+    const totalGross = calculateSystemGrossCostAfterRebate(baseCost);
+    const totalNet = calculateSystemNetCostAfterRebate(baseCost);
+
+    const systemCapacity = state.numberOfPanels * panelCapacity / 1000;
+
+
+    console.log('inside useEffect, number of pannels',state.numberOfPanels);
+    
     setState({
       ...state,
       monthlyPayments,
       newSystemBaseCost,
       roi,
-      payback
+      payback,
+      totalGross,
+      totalNet,
+      systemCapacity,
     });
 
   }, [
@@ -151,6 +218,7 @@ export function useApplicationData() {
     state.totalGross,
     state.payback,
     state.roi,
+    state.numberOfPanels,
   ]);
 
 
@@ -173,7 +241,7 @@ export function useApplicationData() {
       .then((res)=>{
 
         //setState(prev => ({ ...prev, acMonthly: res.data.outputs.ac_monthly, acAnnual: res.data.outputs.ac_annual}));
-        console.log(address,res.data.outputs.ac_monthly);
+        
         setState({
           ...state,
           acMonthly:res.data.outputs.ac_monthly,
@@ -192,7 +260,8 @@ export function useApplicationData() {
     handleYearChange,
     handleLoanChange,
     handleInputs,
-    UpdateAddress
+    UpdateAddress,
+    handleRateInput,
   }; 
 
 }

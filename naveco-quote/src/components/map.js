@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Button,TextField , Typography, Box } from '@material-ui/core';
 import './frontPage.css';
-import {Card} from "tabler-react";
+import {Card, Alert} from "tabler-react";
 
 //initial web address
 const webaddress = "https://maps.google.com/maps?width=520&height=400&hl=en&t=h&z=19&ie=UTF8&iwloc=B&output=embed&q=%20";
@@ -20,8 +20,13 @@ export default function GoogleMaps(props) {
   }
   
   return (
+    
     <Card body = {
       <>
+      {(props.addressFotmaError) && <Alert type="danger" hasExtraSpace>
+          <div>{props.addressFotmaError}</div>
+        </Alert>
+      }
       <Typography variant="h4">
       Enter your Address
       </Typography>
