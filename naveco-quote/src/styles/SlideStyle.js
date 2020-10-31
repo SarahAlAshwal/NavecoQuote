@@ -1,7 +1,7 @@
 export default theme => (
   {
     root: {
-      color: '#52af77',
+      color: "orange",
       height: 8,
     },
     thumb: {

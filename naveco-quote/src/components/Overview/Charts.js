@@ -14,9 +14,8 @@ import {Card} from "tabler-react";
 import { ValueScale, Animation, EventTracker } from '@devexpress/dx-react-chart';
 import { withStyles,makeStyles  } from '@material-ui/core/styles';
 
-export default function ProductBar(props) {
+export default function Charts (props) {
 
-  console.log('product bar:', props);
 //styles for toolpit content and colors and to adjust the charts root margin
 const useStyles = makeStyles({
   arrow: {
@@ -52,17 +51,17 @@ const tooltipContentBodyStyle = {
   paddingTop: 0,
 };
 
-//css for title "Production"
+// //css for title "Production"
 const TitleText = withStyles({ title: { background: "orange", marginBottom: '30px' } })(({ classes, ...restProps }) => (
   <Title.Text {...restProps} className={classes.title} />
 ));
 
-//returns each month inside tooltip
-const returnMonth = (month) => {
-  return "KWhs in "+ props.data[props.changedYear][month].month;
+// //returns each month inside tooltip
+const returnYear = (year) => {
+  return props.data[year].year;
 }
 
-//entire content of tooltip
+// //entire content of tooltip
 const TooltipContent = (props) => {
   const { targetItem, ...restProps } = props;
 
@@ -73,7 +72,7 @@ const TooltipContent = (props) => {
         <Tooltip.Content
           {...restProps}
           style={tooltipContentTitleStyle}
-          text={returnMonth(props.targetItem.point)}
+          text={returnYear(props.targetItem.point)}
         />
       </div>
       <div>
@@ -88,37 +87,29 @@ const TooltipContent = (props) => {
   );
 };
 
-const getData = () => {
-  return props.data[props.changedYear];
-}
 
 //chart x axis data from 200 to 1400
-const modifyDomain = domain =>{
-  let values = [];
-  for (let i = 0; i < props.data[props.changedYear].length; i++) {
-    values.push(props.data[props.changedYear][i].power);
-  }
-  console.log('chart values: ', values, Math.min(...values) )
-  return [ 0, Math.max(...values) + 100]
-}// [0, 1500];
+const modifyDomain = domain => {
+  return [0, props.data[props.data.length - 1].value + 50 ]
+}
 
 const classes = useStyles();
 
    return (
     <div className={classes.root}>
     <Card body = {
-       <Chart data={getData()}>
-       <ValueScale name="power" modifyDomain={modifyDomain}/>
+       <Chart data={props.data}>
+       <ValueScale name="value" modifyDomain={modifyDomain}/>
        <ArgumentAxis />
-       <ValueAxis scaleName="power" showGrid={false} showLine showTicks  />
+       <ValueAxis scaleName="value" showGrid={false} showLine showTicks  />
        <BarSeries
-         name="Power in KWh"
-         valueField="power"
-         argumentField="month"
-         scaleName="power"
+         name="value in KWh"
+         valueField="value"
+         argumentField="year"
+         scaleName="value"
        />
         <Title
-       text="Production"
+       text="Power Value"
        textComponent={TitleText}
         />
        <Animation />
