@@ -127,12 +127,12 @@ export default function Overview (props) {
         </Grid.Col>
     </Grid.Row>
       </Tab>
-      <Tab title ={"Power Value"}>
+      <Tab title ={"Yearly Power Value Without Solar"}>
         <Grid.Col width={20} sm={20} lg={20}  >
           <Charts data={calculatePowerBillWithoutSolar(props.monthlyAmount) }/>
         </Grid.Col>
       </Tab>
-      <Tab title = {"AC Power Value"}>
+      <Tab title = {"Solar AC Power Value"}>
       <Grid.Col width={20} sm={20} lg={20}  >
         <Charts data = {calculateAcPowerValue(props.acAnnual)}/>
       </Grid.Col>

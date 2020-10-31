@@ -15,12 +15,12 @@ import { ValueScale, Animation, EventTracker } from '@devexpress/dx-react-chart'
 import { withStyles,makeStyles  } from '@material-ui/core/styles';
 
 export default function Charts (props) {
-console.log('inside chart', props)
+
 //styles for toolpit content and colors and to adjust the charts root margin
 const useStyles = makeStyles({
   arrow: {
     "&::after": {
-      background: "red"
+      background: "orange"
     }
   },
   sheet: {
@@ -87,20 +87,11 @@ const TooltipContent = (props) => {
   );
 };
 
-// const getData = () => {
-//   return props.data;
-// }
 
 //chart x axis data from 200 to 1400
 const modifyDomain = domain => {
-  // let values = [];
-  // for (let i = 0; i < props.data.length; i++) {
-  //   values.push(props.data[i].value);
-  // }
-  // console.log('chart values: ', values, Math.min(...values) )
-  // return [ Math.min(...values) - 50, Math.max(...values) + 50]
   return [0, props.data[props.data.length - 1].value + 50 ]
-}//[0, 300];
+}
 
 const classes = useStyles();
 

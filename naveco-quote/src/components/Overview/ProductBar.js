@@ -21,7 +21,7 @@ export default function ProductBar(props) {
 const useStyles = makeStyles({
   arrow: {
     "&::after": {
-      background: "red"
+      background: "orange"
     }
   },
   sheet: {
@@ -93,7 +93,14 @@ const getData = () => {
 }
 
 //chart x axis data from 200 to 1400
-const modifyDomain = domain => [0, 1500];
+const modifyDomain = domain =>{
+  let values = [];
+  for (let i = 0; i < props.data[props.changedYear].length; i++) {
+    values.push(props.data[props.changedYear][i].power);
+  }
+  console.log('chart values: ', values, Math.min(...values) )
+  return [ 0, Math.max(...values) + 100]
+}// [0, 1500];
 
 const classes = useStyles();
 
