@@ -149,8 +149,8 @@ export function useApplicationData() {
   const UpdateAddress = (event) => {
     let address = event.target.value;
     let addressFotmaError = '';
-    if(isNaN(address) || address === ''){  
-      addressFotmaError = ' field sould be Number';
+    if(address === ''){  
+      addressFotmaError = ' field sould not be empty';
     }
     setState({
       ...state,
