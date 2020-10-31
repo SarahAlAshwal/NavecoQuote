@@ -52,7 +52,7 @@ export default function Overview(props) {
       <Tab title="Saving">
         <Grid.Row card deck>
           <Grid.Col width={20} sm={20} lg={20} >
-            <SavingSummery saved = {totalSaving(props.state.acAnnual)}/>
+            <SavingSummery saved = {totalSaving(props.state.acAnnual)} capacity = {props.capacity}/>
           </Grid.Col>
           <Grid.Col width={20} sm={20} lg={20} >
            <Card title={"First Year Saving"}
