@@ -49,6 +49,7 @@ function App() {
               UpdateAddress={UpdateAddress}
               changeMode={changeMode}
               addressFotmaError={state.addressFotmaError}
+              addressButtonDisabled={state.addressButtonDisabled}
               />}
               {mode === BILLINFO  && <MonthlyForm
                 handleChangeAmount={handleChangeAmount}

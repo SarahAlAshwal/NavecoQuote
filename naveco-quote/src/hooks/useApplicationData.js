@@ -50,6 +50,7 @@ export function useApplicationData() {
     npFotmaError: '',
     loanFotmaError: '',
     addressFotmaError: '',
+    addressButtonDisabled: true,
   });
 
   totalHardware = state.numberOfPanels * panelCost;
@@ -149,13 +150,16 @@ export function useApplicationData() {
   const UpdateAddress = (event) => {
     let address = event.target.value;
     let addressFotmaError = '';
+    let addressButtonDisabled = false;
     if(address === ''){  
       addressFotmaError = ' field sould not be empty';
+      addressButtonDisabled = true;
     }
     setState({
       ...state,
       address,
       addressFotmaError,
+      addressButtonDisabled,
     });
   }
 

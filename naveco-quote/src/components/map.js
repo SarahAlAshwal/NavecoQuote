@@ -1,14 +1,26 @@
-import React, {useState} from "react";
-import { Button,TextField , Typography, Box } from '@material-ui/core';
+import React, { useState } from "react";
+import { Button, TextField, Typography, Box } from '@material-ui/core';
 import './frontPage.css';
-import {Card, Alert} from "tabler-react";
+import { makeStyles } from '@material-ui/core/styles';
+import { Card, Alert, Header, Form } from "tabler-react";
 
 //initial web address
 const webaddress = "https://maps.google.com/maps?width=520&height=400&hl=en&t=h&z=19&ie=UTF8&iwloc=B&output=embed&q=%20";
 
+const useStyles = makeStyles(theme => ({
+  cardClass: {
+    //display: 'flex',
+    //justifyContent: 'space-evenly',
+    padding: '10px'
+  },
+}));
+
 export default function GoogleMaps(props) {
 
   let finalAddr = "";
+  const classes = useStyles();
+
+
 
   //adds user input to the webaddress and diplays the map on click
   const handleAddress = () => {
@@ -18,46 +30,56 @@ export default function GoogleMaps(props) {
     // to reload
     document.getElementById('gmap_canvas').src = finalAddr;
   }
-  
-  return (
-    
-    <Card body = {
-      <>
-      {(props.addressFotmaError) && <Alert type="danger" hasExtraSpace>
-          <div>{props.addressFotmaError}</div>
-        </Alert>
-      }
-      <Typography variant="h4">
-      Enter your Address
-      </Typography>
-      <form autoComplete="off" onSubmit={event => event.preventDefault()}>
-      <TextField
-        id="add"
-        label="Address"
-        style={{ margin: 8 }}
-        placeholder="Enter your address"
-        /*helperText="Full width!"*/
-        fullWidth
-        margin="normal"
-        onChange={props.UpdateAddress}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        variant="outlined"
-      />
-        <Button type="submit" variant="contained" color="primary" onClick={handleAddress}>Enter</Button>
-      </form>
-      <div>
-       <iframe width="520" height="400" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" id="gmap_canvas" className="responsive-iframe"
-      src={finalAddr}>
-       </iframe>
-      </div>
-      
-    <Button variant="contained" color="primary" id="next" onClick = {props.changeMode}>Next</Button>
-     </>}
-     />
 
-    
-  
+  return (
+    <>
+      <Card  className={classes.cardClass}>
+          <Header.H3>Enter your Address</Header.H3>
+          {(props.addressFotmaError) && <Alert type="danger" hasExtraSpace>
+            <div>{props.addressFotmaError}</div>
+          </Alert>
+          }
+          <form autoComplete="off" onSubmit={event => event.preventDefault()}>
+            <Form.Group label="Address">
+              <Form.InputGroup>
+                <Form.Input
+                  id="add"
+                  placeholder="Enter your address"
+                  onChange={props.UpdateAddress}
+                />
+                <Form.InputGroupAppend>
+                  <Button
+                    RootComponent="a"
+                    color="primary"
+                    onClick={handleAddress}
+                    disabled={props.addressButtonDisabled}
+                    type="submit"
+                  >
+                    Go!
+              </Button>
+                </Form.InputGroupAppend>
+              </Form.InputGroup>
+            </Form.Group>
+          </form>
+          <Card>
+            <div>
+              <iframe width="520" height="400" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" id="gmap_canvas" className="responsive-iframe"
+                src={finalAddr}>
+              </iframe>
+            </div>
+
+
+            <Button
+              variant="contained"
+              color="primary"
+              id="next"
+              onClick={props.changeMode}
+              disabled={props.addressButtonDisabled}
+            >
+              Next
+            </Button>
+            </Card>
+            </Card>
+</>
   );
 }
