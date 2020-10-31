@@ -42,6 +42,12 @@ const useStyles = makeStyles({
   table: {
     minWidth: 700,
   },
+  redClass: {
+    color: 'red',
+  },
+  greenClass: {
+    color: 'green',
+  },
 });
 
 export default function CustomizedTables(props) {
@@ -76,7 +82,7 @@ export default function CustomizedTables(props) {
               </StyledTableCell>
               <StyledTableCell align="right">{formatNumbers(row.monthlyProduction)}</StyledTableCell>
               <StyledTableCell align="right">{formatNumbers(row.value)}</StyledTableCell>
-              <StyledTableCell align="right">{formatNumbers(row.grid)}</StyledTableCell>
+              <StyledTableCell align="right" className={row.grid > 0 ? classes.greenClass : classes.redClass}>{formatNumbers(row.grid)}</StyledTableCell>
             
             </StyledTableRow>
           ))}
