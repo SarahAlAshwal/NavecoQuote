@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   calculatePayback,
-  totalSaving, newBill, totalOriginal, calculateROI, calculteProduct
+  totalSaving, newBill, totalOriginal, calculateROI, calculteProduct, calculatePowerBillWithoutSolar, calculateAcPowerValue
 } from '../../helpers/overviewCalculation';
 import OverviewHeader from './OverviewHeader';
 import SavingSummery from './SavingSummery';
@@ -15,6 +15,7 @@ import  '../../styles/OverviewStyle.css';
 import YearsSlide from './YearsSlide';
 import ProductBar from './ProductBar';
 import Environment from '../environment';
+import Charts from './Charts';
 
 import "tabler-react/dist/Tabler.css";
 import C3Chart from "react-c3js";
@@ -122,11 +123,22 @@ export default function Overview (props) {
       <Tab title={"Production"}>
       <Grid.Row cards={true}>
         <Grid.Col width={20} sm={20} lg={20}  >
-          <ProductBar state={calculteProduct(props.acMonthly,props.monthlyAmount)} changedYear={props.year}/>
+          <ProductBar data={calculteProduct(props.acMonthly,props.monthlyAmount)} changedYear={props.year}/>
         </Grid.Col>
     </Grid.Row>
       </Tab>
+      <Tab title ={"Power Value"}>
+        <Grid.Col width={20} sm={20} lg={20}  >
+          <Charts data={calculatePowerBillWithoutSolar(props.monthlyAmount) }/>
+        </Grid.Col>
+      </Tab>
+      <Tab title = {"AC Power Value"}>
+      <Grid.Col width={20} sm={20} lg={20}  >
+        <Charts data = {calculateAcPowerValue(props.acAnnual)}/>
+      </Grid.Col>
+    </Tab>
     </TabbedCard>
+    
     
     <Grid.Row cards={false}>
         <Grid.Col width={20} sm={20} lg={20} >

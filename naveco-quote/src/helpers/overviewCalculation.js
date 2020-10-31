@@ -1,4 +1,4 @@
-export function calculateAcAnnualForManyYears (acAnnual, lifespan = 25, rate = 0.12, degradationRate = 0.005, escalationRate = 0.029) {
+export function calculateAcAnnualForManyYears (acAnnual, lifespan = 25, rate = 0.12, degradationRate = 0.005, escalationRate = 0.025) {
 
   let currentYear = new Date().getFullYear();
     const dataPerYear = {};
@@ -16,7 +16,7 @@ export function calculateAcAnnualForManyYears (acAnnual, lifespan = 25, rate = 0
     return dataPerYear;
 }
 
-export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, lifespan = 25, rate = 0.12, degradationRate = 0.005, escalationRate = 0.029) {
+export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, lifespan = 25, rate = 0.12, degradationRate = 0.005, escalationRate = 0.025) {
   let currentYear = new Date().getFullYear();
   const monthlyDataPerYear = {};
   const powerConsumption = monthlyAmount / 0.12;
@@ -46,6 +46,7 @@ export function calculteProduct(acMonthly, monthlyAmount){
 
   for (const year in data) {
     for(let i=0; i< 12; i++){
+      
       monthPower.push({month:months[i], power: Math.round(data[year].acMonthly[i])})
     }
     chartData[year] = monthPower;
@@ -53,6 +54,34 @@ export function calculteProduct(acMonthly, monthlyAmount){
   }
   return chartData;
 
+}
+
+export function calculatePowerBillWithoutSolar(monthlyAmount, escalationRate = 0.025){
+  const currentYear = new Date().getFullYear();
+  const chartData = [];
+  let year = currentYear;
+  
+  chartData.push({year: currentYear.toString() , value: monthlyAmount  })
+  
+  for (let i = 1; i < 25; i++) {
+    let valueAfterEscalation = chartData[i-1].value * (1 + escalationRate);
+    chartData.push({year: (year + 1).toString(), value: Math.round(valueAfterEscalation) })
+    year ++;
+  }
+  return chartData;
+
+}
+
+export function calculateAcPowerValue(acAnnual, lifespan = 25) {
+  const data = calculateAcAnnualForManyYears (acAnnual);
+  const currentYear =  new Date().getFullYear();
+  let year = currentYear;
+  const chartData = [];
+  for (let i = 0; i < lifespan; i ++) {
+    chartData.push({year: year.toString(), value: Math.round(data[year].amount)});
+    year ++;
+  }
+  return chartData
 }
 
 
@@ -86,7 +115,7 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0,
     return dataPerYear;
   }
 
-  export function calculateProfit(acAnnual, rate = 0.12, degradationRate = 0.005, escalationRate = 0.029) {
+  export function calculateProfit(acAnnual, rate = 0.12, degradationRate = 0.005, escalationRate = 0.025) {
     let sum = 0;
     const dataPerYear = createData(acAnnual, rate, degradationRate, escalationRate);
 
@@ -102,7 +131,7 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0,
     return sum;
   }
 
-  export function totalOriginal(monthlyBill, escalationRate = 0.029, lifespan = 25, rate = 0.12) {
+  export function totalOriginal(monthlyBill, escalationRate = 0.025, lifespan = 25, rate = 0.12) {
     const firstYearBill = 12 * monthlyBill;
     const yearlyConsumption = firstYearBill/rate;
     let yearlyBill = []

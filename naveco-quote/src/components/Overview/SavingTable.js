@@ -14,7 +14,7 @@ import {calculateAcMonthlyForManyYears} from '../../helpers/overviewCalculation'
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     head: {
-      backgroundColor: theme.palette.common.black,
+      backgroundColor: "orange",
       color: theme.palette.common.white,
     },
     body: {
