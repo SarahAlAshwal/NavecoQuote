@@ -45,7 +45,7 @@ export default function GoogleMaps(props) {
         }}
         variant="outlined"
       />
-        <Button variant="contained" color="primary" onClick={handleAddress}>Enter</Button>
+        <Button type="submit" variant="contained" color="primary" onClick={handleAddress}>Enter</Button>
       </form>
       <div>
        <iframe width="520" height="400" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" id="gmap_canvas" className="responsive-iframe"
