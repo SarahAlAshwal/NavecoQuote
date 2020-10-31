@@ -9,10 +9,11 @@ import {useVisualMode} from './hooks/useVisualMode'
 
 import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import GoogleMaps from './components/map';
+import Offset from './components/Offset';
 
 const BILLINFO = 'BILLINFO';
 const ADDRESS = "ADDRESS";
-const CALCULATION = 'CALCULATION'
+const CALCULATION = 'CALCULATION';
 
 function App() {
   const { mode, transition, back } = useVisualMode(ADDRESS);
@@ -73,7 +74,7 @@ function App() {
             </div>
           </Route>
           <Route path='/how'>
-            <GoogleMaps address= {state.address} UpdateAddress={UpdateAddress}/>
+            <Offset/>
           </Route>
           
         </Switch>
