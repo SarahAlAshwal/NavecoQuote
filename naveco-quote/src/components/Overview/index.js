@@ -11,33 +11,20 @@ import PaybackCard from './PaybackCard';
 import SavingTable from './SavingTable';
 import OffsetBill from './OffsetBill';
 import FinancingForm from './FinancingForm';
-import  '../../styles/OverviewStyle.css';
+import FinancingResults from './FinancingResults';
 import YearsSlide from './YearsSlide';
 import ProductBar from './ProductBar';
 import Environment from '../environment';
 
+import '../../styles/OverviewStyle.css';
 import "tabler-react/dist/Tabler.css";
 import C3Chart from "react-c3js";
 
 import {
   Tab,
   TabbedCard,
-  Page,
-  Avatar,
-  Icon,
   Grid,
   Card,
-  Text,
-  Table,
-  Alert,
-  Progress,
-  colors,
-  Dropdown,
-  Button,
-  StampCard,
-  StatsCard,
-  ProgressCard,
-  Badge,
 } from "tabler-react";
 
 import { useVisualMode } from "../../hooks/useVisualMode";
@@ -46,7 +33,7 @@ import { useVisualMode } from "../../hooks/useVisualMode";
 const FINANCING = "FINANCING";
 const WITHOUT_FINANCING = "WITHOUT_FINANCING";
 
-export default function Overview (props) {
+export default function Overview(props) {
   const { mode, transition, back } = useVisualMode(
     //props.financing ? FINANCING : WITHOUT_FINANCING
     FINANCING
@@ -87,36 +74,41 @@ export default function Overview (props) {
           </Grid.Col>
         </Grid.Row>
       </Tab>
-      <Tab title={"Finance"}>
-        <Grid.Row cards={true}>
-          <Grid.Col width={20} sm={20} lg={20}>
-            <Card>
-             <PaybackCard
-               paybackPeriod = {props.state.payback && mode === FINANCING ? props.state.payback : calculatePayback(props.state.acAnnual, props.state.totalNet)}
-               roi = {props.state.roi && mode === FINANCING ? props.state.roi : calculateROI(totalSaving(props.state.acAnnual), props.state.totalGross)}> 
-             </PaybackCard>
-           </Card>
-          </Grid.Col>
-          <Grid.Col width={20} sm={20} lg={20}>
-           <Card>
-            {mode === FINANCING  && (
-            <FinancingForm
-              newBill={newBill(props.acMonthly, props.monthlyAmount, props.year)}
-              cost={props.state.totalGross}
-              interestRate={props.state.interestRate}
-              loanTermInYears={props.state.loanTermInYears}
-              monthlyPayments={props.state.monthlyPayments}
-              handleLoanChange={props.handleLoanChange}
-            />
-            )}
-           </Card>
-          </Grid.Col>
-        </Grid.Row>
-      </Tab>
-      <Tab title="Environment">
+        <Tab title={"Finance"}>
+          <Grid.Row cards={true}>
+            <Grid.Col width={20} sm={20} lg={20}>
+                {mode === FINANCING && (
+                  <FinancingForm
+                    newBill={newBill(props.acMonthly, props.monthlyAmount, props.year)}
+                    cost={props.state.totalGross}
+                    interestRate={props.state.interestRate}
+                    loanTermInYears={props.state.loanTermInYears}
+                    monthlyPayments={props.state.monthlyPayments}
+                    handleLoanChange={props.handleLoanChange}
+                    loanFotmaError={props.state.loanFotmaError}
+                  />
+                )}
+            </Grid.Col>
+            <Grid.Col>
+            {mode === FINANCING && (
+                  <FinancingResults
+                    newBill={newBill(props.acMonthly, props.monthlyAmount, props.year)}
+                    monthlyPayments={props.state.monthlyPayments}
+                  />
+                )}
+            </Grid.Col>
+            <Grid.Col>
+                <PaybackCard
+                  paybackPeriod={props.state.payback && mode === FINANCING ? props.state.payback : calculatePayback(props.state.acAnnual, props.state.totalNet)}
+                  roi={props.state.roi && mode === FINANCING ? props.state.roi : calculateROI(totalSaving(props.state.acAnnual), props.state.totalGross)}>
+                </PaybackCard>
+            </Grid.Col>
+          </Grid.Row>
+        </Tab>
+        <Tab title="Environment">
           <Environment state={Math.round(totalSaving(props.state.acAnnual))}/>
-       </Tab>
-    </TabbedCard>
+        </Tab>
+      </TabbedCard>
 
     <TabbedCard initialTab = 'Production'>
       <Tab title={"Production"}>

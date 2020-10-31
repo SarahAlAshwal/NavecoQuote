@@ -34,7 +34,7 @@ export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, lifesp
     rate = newRate;
   }
 
-  console.log(monthlyDataPerYear);
+  //console.log(monthlyDataPerYear);
   return monthlyDataPerYear;
 }
 
@@ -131,7 +131,7 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0,
    
     const avg = sum / lifespan;
 
-    console.log(avg);
+    //console.log(avg);
 
     return netCost / avg;
   };

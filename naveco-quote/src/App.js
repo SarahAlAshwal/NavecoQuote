@@ -23,12 +23,12 @@ function App() {
     handleLoanChange,
     handleYearChange,
     handleInputs,
-    UpdateAddress
+    UpdateAddress,
+    handleRateInput,
   } = useApplicationData();
 
 
   function onCalculate () {
-    calculateMonthlyACPower(state.address, state.systemCapacity);
     calculateMonthlyACPower();
     transition('CALCULATION');
   }
@@ -44,11 +44,17 @@ function App() {
         <Switch>
           <Route exact path = '/'>
             <div className='userInput'>
-             {mode === ADDRESS && <GoogleMaps address= {state.address} UpdateAddress={UpdateAddress} changeMode={changeMode}/>}
+             {mode === ADDRESS && <GoogleMaps 
+              address= {state.address}
+              UpdateAddress={UpdateAddress}
+              changeMode={changeMode}
+              addressFotmaError={state.addressFotmaError}
+              />}
               {mode === BILLINFO  && <MonthlyForm
                 handleChangeAmount={handleChangeAmount}
                 state={state}
                 handleInputs={handleInputs}
+                handleRateInput={handleRateInput}
                 calculate={onCalculate}
               />}
               {state.acMonthly[0] && mode === CALCULATION && <Overview 

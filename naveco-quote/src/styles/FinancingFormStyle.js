@@ -11,5 +11,11 @@ export default theme => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: 'center'
+  },
+  cardFormat: {
+    display: 'block',
+    width: '30vw',
+    transitionDuration: '0.3s',
+    height: '20vw'
   }
 });

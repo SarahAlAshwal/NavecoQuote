@@ -1,48 +1,49 @@
-import React from 'react';
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+//import Card from '@material-ui/core/Card';
+//import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { formatNumbers } from '../../helpers/formatNumbers';
 
 import styles from "../../styles/FinancingFormStyle";
 
 import '../frontPage.css';
-import { Card, Grid } from "tabler-react";
+import { Card, Form, Grid } from "tabler-react";
+
+import { formatNumbers } from '../../helpers/formatNumbers';
 
 const useStyles = makeStyles(styles);
 
-export default function PaybackCard(props) {
+export default function FinancingForm(props) {
   const classes = useStyles();
-
   return (
     <>
           <Card>
             <Card.Status color="blue" side />
             <Card.Header>
-              <Card.Title>Finance Informations</Card.Title>
+              <Card.Title>Payments</Card.Title>
             </Card.Header>
             <Card.Body>
               <div>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                  Payback Period
+                  Monthly Payments
                 </Typography>
                 <Typography variant="h5" component="h2">
-                  {formatNumbers(props.paybackPeriod)} Years
+                  ${formatNumbers(props.monthlyPayments)}
                 </Typography>
+
               </div>
               <br />
               <div>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                  ROI
+                  New energy bill + Finance Payment
+                </Typography>
+                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                  ${formatNumbers(props.monthlyPayments + props.newBill)}
                 </Typography>
               </div>
-              <div className={classes.inlineClass}>
-                <Typography variant="h5" component="h2">
-                  {formatNumbers(props.roi)}%
-                </Typography>
-              </div>
-
             </Card.Body>
           </Card>
     </>
   );
-}
+};
