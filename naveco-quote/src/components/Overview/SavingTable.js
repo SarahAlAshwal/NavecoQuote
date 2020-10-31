@@ -11,6 +11,7 @@ import style from '../../styles/SavingTableStyle';
 import {formatNumbers} from '../../helpers/formatNumbers';
 import {calculateAcMonthlyForManyYears} from '../../helpers/overviewCalculation';
 import {Card} from "tabler-react";
+import { red } from '@material-ui/core/colors';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -29,7 +30,8 @@ const StyledTableRow = withStyles((theme: Theme) =>
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     }
-  },}),
+  },
+}),
 )(TableRow);
 
 function createData(month: string, monthlyProduction: number, value: number, grid: number) {
@@ -45,15 +47,12 @@ const useStyles = makeStyles({
 export default function CustomizedTables(props) {
   const classes = useStyles();
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const rate = 0.12;
-
- // console.log('inside table', calculateAcMonthlyForManyYears(props.acMonthly, props.monthlyAmount));
+ 
   const tableData = calculateAcMonthlyForManyYears(props.acMonthly, props.monthlyAmount);
 
   const rows = []
 
   for (let i = 0; i < months.length; i++) {
-    //rows.push(createData(months[i], props.acMonthly[i], props.acMonthly[i] * rate , props.acMonthly[i] * rate -props.monthlyAmount));
     rows.push(createData(months[i], tableData[props.year].acMonthly[i],tableData[props.year].acMonthlyValue[i], tableData[props.year].grid[i]));
   }
 
