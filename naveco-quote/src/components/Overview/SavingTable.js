@@ -54,7 +54,7 @@ export default function CustomizedTables(props) {
   const classes = useStyles();
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
  
-  const tableData = calculateAcMonthlyForManyYears(props.acMonthly, props.monthlyAmount);
+  const tableData = calculateAcMonthlyForManyYears(props.acMonthly, props.monthlyAmount, props.rate);
 
   const rows = []
 

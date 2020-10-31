@@ -1,5 +1,5 @@
-export function calculateAcAnnualForManyYears (acAnnual, lifespan = 25, rate = 0.12, degradationRate = 0.005, escalationRate = 0.025) {
-
+export function calculateAcAnnualForManyYears (acAnnual, rate, lifespan = 25, degradationRate = 0.005, escalationRate = 0.025) {
+  console.log('calculateAcAnnualForManyYears', rate)
   let currentYear = new Date().getFullYear();
     const dataPerYear = {};
    
@@ -16,7 +16,7 @@ export function calculateAcAnnualForManyYears (acAnnual, lifespan = 25, rate = 0
     return dataPerYear;
 }
 
-export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, lifespan = 25, rate = 0.12, degradationRate = 0.005, escalationRate = 0.025) {
+export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, rate, lifespan = 25, degradationRate = 0.005, escalationRate = 0.025) {
   let currentYear = new Date().getFullYear();
   const monthlyDataPerYear = {};
   const powerConsumption = monthlyAmount / 0.12;
@@ -38,8 +38,8 @@ export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, lifesp
   return monthlyDataPerYear;
 }
 
-export function calculteProduct(acMonthly, monthlyAmount){
-  const data = calculateAcMonthlyForManyYears (acMonthly, monthlyAmount);
+export function calculteProduct(acMonthly, monthlyAmount, rate){
+  const data = calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, rate);
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const chartData = {};
   let monthPower = [];
@@ -72,8 +72,8 @@ export function calculatePowerBillWithoutSolar(monthlyAmount, escalationRate = 0
 
 }
 
-export function calculateAcPowerValue(acAnnual, lifespan = 25) {
-  const data = calculateAcAnnualForManyYears (acAnnual);
+export function calculateAcPowerValue(acAnnual, lifespan = 25, rate) {
+  const data = calculateAcAnnualForManyYears (acAnnual,rate);
   const currentYear =  new Date().getFullYear();
   let year = currentYear;
   const chartData = [];
@@ -115,14 +115,15 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0,
     return dataPerYear;
   }
 
-  export function calculateProfit(acAnnual, rate = 0.12, degradationRate = 0.005, escalationRate = 0.025) {
+  export function calculateProfit(acAnnual, rate, degradationRate = 0.005, escalationRate = 0.025) {
     let sum = 0;
     const dataPerYear = createData(acAnnual, rate, degradationRate, escalationRate);
 
   }
 
-  export function totalSaving (acAnnual) {
-    const dataPerYear = calculateAcAnnualForManyYears(acAnnual)
+  export function totalSaving (acAnnual, rate) {
+    const dataPerYear = calculateAcAnnualForManyYears(acAnnual, rate)
+    console.log('inside total saving: ', dataPerYear);
     //the average value of power produced for the system's lifespan.
     let sum = 0;
     for  (let year in dataPerYear) {
@@ -131,7 +132,7 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0,
     return sum;
   }
 
-  export function totalOriginal(monthlyBill, escalationRate = 0.025, lifespan = 25, rate = 0.12) {
+  export function totalOriginal(monthlyBill, rate, escalationRate = 0.025, lifespan = 25) {
     const firstYearBill = 12 * monthlyBill;
     const yearlyConsumption = firstYearBill/rate;
     let yearlyBill = []
@@ -147,16 +148,16 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0,
     return sum;
   }
 
-  export function newBill (acMonthly, monthlyAmount, year) {
+  export function newBill (acMonthly, monthlyAmount, year, rate) {
     //return (totalOriginal(monthlyBill) - totalSaving(acAnnual)) / (12 * 25);
-    const yearsData = calculateAcMonthlyForManyYears(acMonthly, monthlyAmount);
+    const yearsData = calculateAcMonthlyForManyYears(acMonthly, monthlyAmount, rate);
     const grid = yearsData[year].grid.reduce((total,value)=> total + value);
     return -1 * grid / 12;
   }
 
-  export function calculatePayback(acAnnual, netCost, lifespan = 25 ) {
+  export function calculatePayback(acAnnual, netCost, rate, lifespan = 25 ) {
     
-    const sum = totalSaving(acAnnual);
+    const sum = totalSaving(acAnnual, rate);
    
     const avg = sum / lifespan;
 
