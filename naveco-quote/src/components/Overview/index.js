@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  calculatePayback,
-  totalSaving, calculateROI, calculteProduct, calculatePowerBillWithoutSolar, calculateAcPowerValue
+import { calculteProduct, calculatePowerBillWithoutSolar, calculateAcPowerValue
 } from '../../helpers/overviewCalculation';
 import OverviewHeader from './OverviewHeader';
 import SavingSummery from './SavingSummery';

@@ -98,22 +98,6 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0,
     return profit / investment * 100 / projectLC;
   }
 
-  function createData(acAnnual, rate, degradationRate, escalationRate) {
-    const dataPerYear = {};
-    let currentYear = new Date().getFullYear();
-    dataPerYear[currentYear] = {acAnnual, amount: (acAnnual * rate)};
-    let year = currentYear;
-    for (let i = 1; i < 25; i++) {
-      // power of every year is calculated based on prevous year's power factoring degradation rate
-      const newPower = dataPerYear[year].acAnnual - (dataPerYear[year].acAnnual * degradationRate);
-      // Amount is calculated based on newly calculated power factoring escalation rate
-      dataPerYear[year + 1] = {acAnnual: newPower, amount: (newPower  * rate * ( 1 + escalationRate ))};
-      year++;
-    }
-    return dataPerYear;
-  }
-
-
   export function totalSaving (acAnnual, rate) {
     const dataPerYear = calculateAcAnnualForManyYears(acAnnual, rate)
     //the average value of power produced for the system's lifespan.
