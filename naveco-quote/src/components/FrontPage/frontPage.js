@@ -80,7 +80,7 @@ export default function FrontPage(props) {
             </Typography>
             <Typography variant="subtitle1" color="textSecondary">
             Get your estimation overview for savings and finanacing&nbsp;&nbsp;&nbsp;
-            <Button variant="contained" color="primary" id="next" >  More Info</Button>
+            <Button variant="contained" color="primary" id="next" onClick={props.goHow} >  More Info</Button>
             </Typography>
             <img src={require("../../images/calculate.gif")}/>
           </CardContent>

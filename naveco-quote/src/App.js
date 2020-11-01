@@ -63,7 +63,7 @@ function App() {
       {! (mode === CALCULATION) && <Navigator goHome={goHome} goHow={goHow} />}
         <Switch>
           <Route exact path = '/'>
-            {mode === FRONTPAGE && <FrontPage frontPage={frontPage}/>}
+            {mode === FRONTPAGE && <FrontPage frontPage={frontPage} goHow={goHow}/>}
             <div className='userInput'>
              {mode === ADDRESS && <GoogleMaps 
               address= {state.address}
