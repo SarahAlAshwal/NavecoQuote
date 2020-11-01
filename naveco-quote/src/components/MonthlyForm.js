@@ -21,11 +21,7 @@ export default function MonthlyForm(props) {
       <Grid.Col>
         <Card lg={10} deck>
           <div>
-            <Header.H3>What do you spend each month on power?</Header.H3>
-            {!(props.state.npFotmaError || props.state.rateFotmaError || props.state.monthlyAmountError) && <Alert type="primary" hasExtraSpace>
-              {props.state.message}
-            </Alert>
-            }
+            <Header.H3>Hom much do you spend each month on power?</Header.H3>
             {(props.state.npFotmaError || props.state.rateFotmaError || props.state.monthlyAmountError) && <Alert type="danger" hasExtraSpace>
               <div>{props.state.monthlyAmountError}</div>
               <div>{props.state.npFotmaError}</div>
@@ -40,6 +36,10 @@ export default function MonthlyForm(props) {
                   value={props.state.monthlyAmount ? props.state.monthlyAmount : ""}
                 />
               </Form.Group>
+              {!(props.state.npFotmaError || props.state.rateFotmaError || props.state.monthlyAmountError) && <Alert type="primary" hasExtraSpace>
+              {props.state.message}
+            </Alert>
+            }
               <Form.Group label="Number of panels" isRequired>
                 <Form.Input
                   name="numberOfPanels"
