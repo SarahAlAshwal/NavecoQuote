@@ -3,9 +3,10 @@ import './App.css';
 import MonthlyForm from './components/MonthlyForm';
 import {useApplicationData} from "./hooks/useApplicationData";
 import Header from './components/Header';
+import Navigator from "./components/FrontPage/navigator"
 import Overview from './components/Overview'
 import {useVisualMode} from './hooks/useVisualMode'
-
+import FrontPage from "./components/FrontPage/frontPage";
 
 import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import GoogleMaps from './components/map';
@@ -13,9 +14,10 @@ import GoogleMaps from './components/map';
 const BILLINFO = 'BILLINFO';
 const ADDRESS = "ADDRESS";
 const CALCULATION = 'CALCULATION'
+const FRONTPAGE = 'FRONTPAGE'
 
 function App() {
-  const { mode, transition, back } = useVisualMode(ADDRESS);
+  const { mode, transition, back } = useVisualMode(FRONTPAGE);
   const {
     state,
     handleChangeAmount,
@@ -36,14 +38,20 @@ function App() {
   function changeMode(){
     transition('BILLINFO')
   }
+
+  function frontPage(){
+    transition('ADDRESS')
+  }
  
   return (
     <main >
       <Router>
-        <Header/>
+      <Navigator />
         <Switch>
           <Route exact path = '/'>
+            {mode === FRONTPAGE && <FrontPage frontPage={frontPage}/>}
             <div className='userInput'>
+            
              {mode === ADDRESS && <GoogleMaps address= {state.address} UpdateAddress={UpdateAddress} changeMode={changeMode}/>}
               {mode === BILLINFO  && <MonthlyForm
                 handleChangeAmount={handleChangeAmount}

@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 //mport { action } from "@storybook/addon-actions";
 
 
-import ProductBar from "../components/productBar"
+import ProductBar from "../components/Overview/ProductBar"
 
  const data = {
   2020: [
