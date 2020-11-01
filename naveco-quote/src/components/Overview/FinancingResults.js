@@ -1,20 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-//import Card from '@material-ui/core/Card';
-//import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-
 import styles from "../../styles/FinancingFormStyle";
-
 import '../frontPage.css';
-import { Card, Form, Grid } from "tabler-react";
-
+import { Card} from "tabler-react";
 import { formatNumbers } from '../../helpers/formatNumbers';
+import StateContext from '../../StateContext';
+import {newBill} from '../../helpers/overviewCalculation';
 
 const useStyles = makeStyles(styles);
 
 export default function FinancingForm(props) {
+  const state = useContext(StateContext);
   const classes = useStyles();
   return (
     <>
@@ -29,7 +26,7 @@ export default function FinancingForm(props) {
                   Monthly Payments
                 </Typography>
                 <Typography variant="h5" component="h2">
-                  ${formatNumbers(props.monthlyPayments)}
+                  ${formatNumbers(state.monthlyPayments)}
                 </Typography>
 
               </div>
@@ -39,7 +36,7 @@ export default function FinancingForm(props) {
                   New energy bill + Finance Payment
                 </Typography>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                  ${formatNumbers(props.monthlyPayments + props.newBill)}
+                  ${formatNumbers(state.monthlyPayments + newBill(state.acMonthly, state.monthlyAmount, state.year, state.rate))}
                 </Typography>
               </div>
             </Card.Body>

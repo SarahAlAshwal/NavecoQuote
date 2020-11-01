@@ -1,11 +1,9 @@
 import * as React from 'react';
-import Paper from '@material-ui/core/Paper';
 import {
   Chart,
   ArgumentAxis,
   ValueAxis,
   BarSeries,
-  Legend,
   Tooltip,
   Title,
 } from '@devexpress/dx-react-chart-material-ui';

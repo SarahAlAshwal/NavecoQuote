@@ -6,7 +6,7 @@ import { formatNumbers } from '../../helpers/formatNumbers';
 import styles from "../../styles/FinancingFormStyle";
 
 import '../frontPage.css';
-import { Card, Grid } from "tabler-react";
+import { Card } from "tabler-react";
 
 const useStyles = makeStyles(styles);
 

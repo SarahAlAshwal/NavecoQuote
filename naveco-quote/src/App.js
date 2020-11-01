@@ -5,6 +5,7 @@ import {useApplicationData} from "./hooks/useApplicationData";
 import Header from './components/Header';
 import Overview from './components/Overview'
 import {useVisualMode} from './hooks/useVisualMode'
+import StateContext from './StateContext';
 
 
 import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom';
@@ -40,16 +41,14 @@ function App() {
   return (
     <main >
       <Router>
+        <StateContext.Provider value={state}>
         <Header/>
         <Switch>
           <Route exact path = '/'>
             <div className='userInput'>
              {mode === ADDRESS && <GoogleMaps 
-              address= {state.address}
               UpdateAddress={UpdateAddress}
               changeMode={changeMode}
-              addressFotmaError={state.addressFotmaError}
-              addressButtonDisabled={state.addressButtonDisabled}
               />}
               {mode === BILLINFO  && <MonthlyForm
                 handleChangeAmount={handleChangeAmount}
@@ -59,24 +58,18 @@ function App() {
                 calculate={onCalculate}
               />}
               {state.acMonthly[0] && mode === CALCULATION && <Overview 
-                acAnnual= {state.acAnnual}
-                acMonthly={state.acMonthly}
-                monthlyAmount={state.monthlyAmount}
                 handleLoanChange={handleLoanChange}
-                state={state}
                 handleYearChange = {handleYearChange}
-                year = {state.year}
-                capacity={state.systemCapacity}
                 />}
              
               
             </div>
           </Route>
           <Route path='/how'>
-            <GoogleMaps address= {state.address} UpdateAddress={UpdateAddress}/>
           </Route>
           
         </Switch>
+        </StateContext.Provider>
       </Router>
     </main>
   );

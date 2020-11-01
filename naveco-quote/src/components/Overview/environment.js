@@ -1,5 +1,4 @@
-import React from 'react';
-import {useState} from 'react';
+import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,7 +7,9 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Box from '@material-ui/core/Box';
-import {formatNumbers} from '../helpers/formatNumbers';
+import {formatNumbers} from '../../helpers/formatNumbers';
+import StateContext from '../../StateContext';
+import {totalSaving} from '../../helpers/overviewCalculation';
 
 
 
@@ -42,20 +43,18 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Environment(props) {
+
+  const state = useContext(StateContext);
+  const saving = totalSaving(state.acAnnual, state.rate);
   
-  //const [state, setState] = useState(43298.28);
-
   const classes = useStyles();
-
-
-
   return (
    
     <main >
       <AppBar  position="static" className={classes.rootAppBar} >
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-           $ {formatNumbers(props.state)} saved over 25 years
+           $ {formatNumbers(saving)} saved over 25 years
           </Typography>
         </Toolbar>
       </AppBar>
@@ -67,12 +66,12 @@ export default function Environment(props) {
       <Card>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-        <b>{formatNumbers(props.state/137)}</b> Gallons saved
+        <b>{formatNumbers(saving/137)}</b> Gallons saved
         </Typography>
       </CardContent>
       <CardMedia
         className={classes.media}
-        image={require("../images/oil.jpeg")}
+        image={require("../../images/oil.jpeg")}
         title="media"
       />
       </Card>
@@ -82,12 +81,13 @@ export default function Environment(props) {
       <Card >
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          <b>{Math.round(props.state/1500)}</b> cars off the road
+          <b>{Math.round(saving/1500)}</b> cars off the road
         </Typography>
       </CardContent>
       <CardMedia
         className={classes.media}
-        image={require("../images/cars.png")}
+        image={require("../../images/cars.png")}
+        
         title="media"
       />
       </Card>
@@ -97,12 +97,12 @@ export default function Environment(props) {
       <Card >
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-        <b>{formatNumbers(props.state/0.28)}</b> lbs of coal not burned
+        <b>{formatNumbers(saving/0.28)}</b> lbs of coal not burned
         </Typography>
       </CardContent>
       <CardMedia
         className={classes.media}
-        image={require("../images/coal2.png")}
+        image={require("../../images/coal2.png")}
         title="media"
       />
       </Card>
