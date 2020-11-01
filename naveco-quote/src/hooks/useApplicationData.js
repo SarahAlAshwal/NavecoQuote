@@ -147,7 +147,9 @@ export function useApplicationData() {
   const handleOffsetChange = (v) => {
     setState({
       ...state, 
-      offset:  Math.round(v * 10) / 10
+      offset:  Math.round(v * 10) / 10,
+      systemCapacity: ((state.powerPerYear / 1000) * 1.25 ) * state.offset 
+     
 
     })
   }
@@ -197,14 +199,15 @@ export function useApplicationData() {
     const roi = calculateROI(totalSaving(state.acAnnual), newSystemBaseCost);
     const payback = calculatePayback(state.acAnnual, state.totalNet + (newSystemBaseCost - state.totalGross));
 
-    const totalHardware = state.numberOfPanels * panelCost;
+    //const totalHardware = state.numberOfPanels * panelCost;
+    const totalHardware = state.systemCapacity * 1000 * 2.7;
     const baseCost = totalHardware + installation;
 
     const totalGross = calculateSystemGrossCostAfterRebate(baseCost);
     const totalNet = calculateSystemNetCostAfterRebate(baseCost);
 
-    const systemCapacity = state.numberOfPanels * panelCapacity / 1000;
-
+    //const systemCapacity = state.numberOfPanels * panelCapacity / 1000;
+    
 
     console.log('inside useEffect, number of pannels',state.numberOfPanels);
     
@@ -216,7 +219,6 @@ export function useApplicationData() {
       payback,
       totalGross,
       totalNet,
-      systemCapacity,
     });
 
   }, [
@@ -234,11 +236,12 @@ export function useApplicationData() {
 
   const calculateMonthlyACPower = function(address, systemCapacity , moduleType = 1, losses = 10.2, arrayType = 1, dataset = 'intl', invEff = 99, tilt=20, azimuth = 180){
     const apiKey = 'le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg';
-    //address= "14446+Evangeline+Trail+Wilmot+NS";
+    
+   
+
     systemCapacity = state.systemCapacity;
    
-    //address= "14446+Evangeline+Trail+Wilmot+NS";
-    //address= "14446+Evangeline+Trail";
+   
     address = formatAddress(state.address);
    
   
@@ -247,6 +250,7 @@ export function useApplicationData() {
       //const url=' https://developer.nrel.gov/api/pvwatts/v6.json?api_key=DEMO_KEY&lat=40&lon=-105&system_capacity=4&azimuth=180&tilt=40&array_type=1&module_type=1&losses=10'
       //const url = 'https://developer.nrel.gov/api/pvwatts/v6.json?api_key=le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg&address=14446+Evangeline+Trail+Wilmot+NS&system_capacity=4&azimuth=180&tilt=40&array_type=1&module_type=1&losses=10'
       const url = `https://developer.nrel.gov/api/pvwatts/v6.json?api_key=${apiKey}&address=${address}&system_capacity=${systemCapacity}&azimuth=${azimuth}&tilt=${tilt}&array_type=${arrayType}&module_type=${moduleType}&losses=${losses}&inv_eff=${invEff}`;
+      console.log(url);
       axios.get(url)
       .then((res)=>{
 
