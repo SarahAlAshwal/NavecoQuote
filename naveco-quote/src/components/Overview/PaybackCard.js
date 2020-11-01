@@ -1,16 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { formatNumbers } from '../../helpers/formatNumbers';
+import StateContext from '../../StateContext';
+import {calculatePayback, calculateROI, totalSaving} from '../../helpers/overviewCalculation';
+
+
 
 import styles from "../../styles/FinancingFormStyle";
 
 import '../frontPage.css';
-import { Card, Grid } from "tabler-react";
+import { Card } from "tabler-react";
 
 const useStyles = makeStyles(styles);
 
 export default function PaybackCard(props) {
+  const state = useContext(StateContext);
   const classes = useStyles();
 
   return (
@@ -26,7 +31,7 @@ export default function PaybackCard(props) {
                   Payback Period
                 </Typography>
                 <Typography variant="h5" component="h2">
-                  {formatNumbers(props.paybackPeriod)} Years
+                  {formatNumbers(state.payback ? state.payback : calculatePayback(state.acAnnual, state.totalNet, state.rate))} Years
                 </Typography>
               </div>
               <br />
@@ -37,7 +42,7 @@ export default function PaybackCard(props) {
               </div>
               <div className={classes.inlineClass}>
                 <Typography variant="h5" component="h2">
-                  {formatNumbers(props.roi)}%
+                  {formatNumbers(state.roi ? state.roi : calculateROI(totalSaving(state.acAnnual, state.rate), state.totalGross))}%
                 </Typography>
               </div>
 

@@ -1,5 +1,4 @@
 export function calculateAcAnnualForManyYears (acAnnual, rate, lifespan = 25, degradationRate = 0.005, escalationRate = 0.025) {
-  console.log('calculateAcAnnualForManyYears', rate)
   let currentYear = new Date().getFullYear();
     const dataPerYear = {};
    
@@ -34,7 +33,6 @@ export function calculateAcMonthlyForManyYears (acMonthly, monthlyAmount, rate, 
     rate = newRate;
   }
 
-  //console.log(monthlyDataPerYear);
   return monthlyDataPerYear;
 }
 
@@ -115,15 +113,9 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0,
     return dataPerYear;
   }
 
-  export function calculateProfit(acAnnual, rate, degradationRate = 0.005, escalationRate = 0.025) {
-    let sum = 0;
-    const dataPerYear = createData(acAnnual, rate, degradationRate, escalationRate);
-
-  }
 
   export function totalSaving (acAnnual, rate) {
     const dataPerYear = calculateAcAnnualForManyYears(acAnnual, rate)
-    console.log('inside total saving: ', dataPerYear);
     //the average value of power produced for the system's lifespan.
     let sum = 0;
     for  (let year in dataPerYear) {
@@ -160,8 +152,6 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0,
     const sum = totalSaving(acAnnual, rate);
    
     const avg = sum / lifespan;
-
-    //console.log(avg);
 
     return netCost / avg;
   };

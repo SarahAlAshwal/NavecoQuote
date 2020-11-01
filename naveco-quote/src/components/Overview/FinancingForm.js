@@ -1,32 +1,23 @@
-import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-//import Card from '@material-ui/core/Card';
-//import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-
-import styles from "../../styles/FinancingFormStyle";
-
+import React, {useContext} from "react";
 import '../frontPage.css';
 import { Form, Alert } from "tabler-react";
-
 import { formatNumbers } from '../../helpers/formatNumbers';
-
-const useStyles = makeStyles(styles);
+import StateContext from '../../StateContext';
 
 export default function FinancingForm(props) {
-  const classes = useStyles();
+  const state = useContext(StateContext);
+  
   return (
     <>
-      {(props.loanFotmaError) && <Alert type="danger" hasExtraSpace>
-          <div>{props.loanFotmaError}</div>
+      {(state.loanFotmaError) && <Alert type="danger" hasExtraSpace>
+          <div>{state.loanFotmaError}</div>
         </Alert>
       }
       <Form.FieldSet>
         <Form.Group label="Loan Amount" isRequired>
           <Form.Input
             id="loan"
-            value={props.cost}
+            value={formatNumbers(state.totalGross)}
             disabled
           />
         </Form.Group>
@@ -34,14 +25,14 @@ export default function FinancingForm(props) {
           <Form.Input
             name="loanTermInYears"
             onChange={props.handleLoanChange}
-            value={props.loanTermInYears}
+            value={state.loanTermInYears}
           />
         </Form.Group>
         <Form.Group label="Interest Rate" isRequired>
           <Form.Input
             name="interestRate"
             onChange={props.handleLoanChange}
-            value={props.interestRate}
+            value={state.interestRate}
           />
         </Form.Group>
       </Form.FieldSet>

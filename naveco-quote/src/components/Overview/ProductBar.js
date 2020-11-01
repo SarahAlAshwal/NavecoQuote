@@ -1,11 +1,9 @@
-import * as React from 'react';
-import Paper from '@material-ui/core/Paper';
+import React from 'react';
 import {
   Chart,
   ArgumentAxis,
   ValueAxis,
   BarSeries,
-  Legend,
   Tooltip,
   Title,
 } from '@devexpress/dx-react-chart-material-ui';
@@ -15,8 +13,6 @@ import { ValueScale, Animation, EventTracker } from '@devexpress/dx-react-chart'
 import { withStyles,makeStyles  } from '@material-ui/core/styles';
 
 export default function ProductBar(props) {
-
-  console.log('product bar:', props);
 //styles for toolpit content and colors and to adjust the charts root margin
 const useStyles = makeStyles({
   arrow: {
