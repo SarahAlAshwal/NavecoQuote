@@ -51,7 +51,7 @@ function App() {
           <Route exact path = '/'>
             {mode === FRONTPAGE && <FrontPage frontPage={frontPage}/>}
             <div className='userInput'>
-<<<<<<< HEAD
+
              {mode === ADDRESS && <GoogleMaps 
               address= {state.address}
               UpdateAddress={UpdateAddress}
@@ -59,10 +59,10 @@ function App() {
               addressFotmaError={state.addressFotmaError}
               addressButtonDisabled={state.addressButtonDisabled}
               />}
-=======
+
             
-             {mode === ADDRESS && <GoogleMaps address= {state.address} UpdateAddress={UpdateAddress} changeMode={changeMode}/>}
->>>>>>> frontPage
+            
+
               {mode === BILLINFO  && <MonthlyForm
                 handleChangeAmount={handleChangeAmount}
                 state={state}
