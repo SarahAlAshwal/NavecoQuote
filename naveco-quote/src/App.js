@@ -10,6 +10,7 @@ import FrontPage from "./components/FrontPage/frontPage";
 
 import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import GoogleMaps from './components/map';
+import HowItWorks from './components/HowItWorks';
 
 const BILLINFO = 'BILLINFO';
 const ADDRESS = "ADDRESS";
@@ -80,7 +81,7 @@ function App() {
             </div>
           </Route>
           <Route path='/how'>
-            <GoogleMaps address= {state.address} UpdateAddress={UpdateAddress}/>
+           <HowItWorks/>
           </Route>
           
         </Switch>
