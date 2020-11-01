@@ -16,6 +16,8 @@ import { withStyles,makeStyles  } from '@material-ui/core/styles';
 
 export default function Charts (props) {
 
+  console.log('inside chart ', props);
+
 //styles for toolpit content and colors and to adjust the charts root margin
 const useStyles = makeStyles({
   arrow: {

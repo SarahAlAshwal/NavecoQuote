@@ -10,11 +10,13 @@ import FrontPage from "./components/FrontPage/frontPage";
 
 import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import GoogleMaps from './components/map';
+import HowItWorks from './components/HowItWorks';
 
 const BILLINFO = 'BILLINFO';
 const ADDRESS = "ADDRESS";
 const CALCULATION = 'CALCULATION'
 const FRONTPAGE = 'FRONTPAGE'
+const HOW ="HOW";
 
 function App() {
   const { mode, transition, back } = useVisualMode(FRONTPAGE);
@@ -42,16 +44,27 @@ function App() {
   function frontPage(){
     transition('ADDRESS')
   }
+
+  function goHome(){
+    transition(FRONTPAGE);
+  }
+  
+  function goHow(){
+    transition(HOW);
+  }
+
+  function close(){
+    back();
+  }
  
   return (
     <main >
       <Router>
-      <Navigator />
+      {! (mode === CALCULATION) && <Navigator goHome={goHome} goHow={goHow} />}
         <Switch>
           <Route exact path = '/'>
             {mode === FRONTPAGE && <FrontPage frontPage={frontPage}/>}
             <div className='userInput'>
-
              {mode === ADDRESS && <GoogleMaps 
               address= {state.address}
               UpdateAddress={UpdateAddress}
@@ -59,10 +72,6 @@ function App() {
               addressFotmaError={state.addressFotmaError}
               addressButtonDisabled={state.addressButtonDisabled}
               />}
-
-            
-            
-
               {mode === BILLINFO  && <MonthlyForm
                 handleChangeAmount={handleChangeAmount}
                 state={state}
@@ -80,12 +89,12 @@ function App() {
                 year = {state.year}
                 capacity={state.systemCapacity}
                 />}
-             
+             {mode === HOW && <HowItWorks close={close}/>}
               
             </div>
           </Route>
           <Route path='/how'>
-            <GoogleMaps address= {state.address} UpdateAddress={UpdateAddress}/>
+           
           </Route>
           
         </Switch>

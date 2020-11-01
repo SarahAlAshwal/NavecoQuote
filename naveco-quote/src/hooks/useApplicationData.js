@@ -62,7 +62,7 @@ export function useApplicationData() {
     if(isNaN(input)  || input === ''){  
       monthlyAmountError = 'Monthly amount sould be Number';
     }
-    const monthlyAmount = input;
+    const monthlyAmount = Number(input);
     let powerPerMonth = input / state.rate;
     let powerPerYear = (input / state.rate) * 12;
     let yearlyAmount = input * 12;
