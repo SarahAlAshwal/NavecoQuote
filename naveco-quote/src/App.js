@@ -26,6 +26,7 @@ function App() {
     handleInputs,
     UpdateAddress,
     handleRateInput,
+    handleOffsetChange,
   } = useApplicationData();
 
 
@@ -58,6 +59,8 @@ function App() {
                 handleInputs={handleInputs}
                 handleRateInput={handleRateInput}
                 calculate={onCalculate}
+                handleChange={handleOffsetChange}
+                offset= {state.offset}
               />}
               {state.acMonthly[0] && mode === CALCULATION && <Overview 
                 acAnnual= {state.acAnnual}
@@ -74,7 +77,7 @@ function App() {
             </div>
           </Route>
           <Route path='/how'>
-            <Offset/>
+           
           </Route>
           
         </Switch>

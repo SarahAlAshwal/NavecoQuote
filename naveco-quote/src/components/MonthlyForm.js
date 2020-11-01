@@ -9,6 +9,8 @@ import { CardActions } from "@material-ui/core";
 import styles from "../styles/MonthlyFormStyle";
 import { formatNumbers } from '../helpers/formatNumbers';
 import { Card, Grid, Form, Alert, Header } from "tabler-react";
+import Offset from "./Offset";
+import { defaultProps } from "react-circular-input/dist/CircularTrack";
 
 
 const useStyles = makeStyles(styles);
@@ -40,13 +42,13 @@ export default function MonthlyForm(props) {
                   value={props.state.monthlyAmount ? props.state.monthlyAmount : ""}
                 />
               </Form.Group>
-              <Form.Group label="Number of panels" isRequired>
+              {/* <Form.Group label="Number of panels" isRequired>
                 <Form.Input
                   name="numberOfPanels"
                   onChange={props.handleInputs}
                   value={props.state.numberOfPanels ? props.state.numberOfPanels : ""}
                 />
-              </Form.Group>
+              </Form.Group> */}
               <Form.Group label="Rate" isRequired>
                 <Form.Input
                   name="rate"
@@ -97,6 +99,9 @@ export default function MonthlyForm(props) {
               </div>
             </Card.Body>
           </Card>
+        </Grid.Col>
+        <Grid.Col>
+          <Offset offset ={props.offset} handleChange={props.handleChange}/>
         </Grid.Col>
     </Grid.Row>
   );

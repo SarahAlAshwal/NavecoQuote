@@ -12,9 +12,6 @@ import { calculateMonthlyPaiment,
 } from '../helpers/overviewCalculation';
 
 export function useApplicationData() {
-  //const rate = 0.12;
-
-   
   
   const installation = 3000;
   const panelCost = 925;
@@ -51,6 +48,7 @@ export function useApplicationData() {
     loanFotmaError: '',
     addressFotmaError: '',
     addressButtonDisabled: true,
+    offset: 0.5
   });
 
   totalHardware = state.numberOfPanels * panelCost;
@@ -145,6 +143,14 @@ export function useApplicationData() {
       year: newValue
     })
   };  
+
+  const handleOffsetChange = (v) => {
+    setState({
+      ...state, 
+      offset:  Math.round(v * 10) / 10
+
+    })
+  }
 
   //updates the address
   const UpdateAddress = (event) => {
@@ -266,6 +272,7 @@ export function useApplicationData() {
     handleInputs,
     UpdateAddress,
     handleRateInput,
+    handleOffsetChange
   }; 
 
 }
