@@ -1,30 +1,28 @@
-import React, { useState } from "react";
-import { Button, TextField, Typography, Box } from '@material-ui/core';
+import React, { useContext } from "react";
+import { Button } from '@material-ui/core';
 import './frontPage.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, Alert, Header, Form } from "tabler-react";
+import StateContext from '../StateContext';
 
 //initial web address
 const webaddress = "https://maps.google.com/maps?width=520&height=400&hl=en&t=h&z=19&ie=UTF8&iwloc=B&output=embed&q=%20";
 
 const useStyles = makeStyles(theme => ({
   cardClass: {
-    //display: 'flex',
-    //justifyContent: 'space-evenly',
     padding: '10px'
   },
 }));
 
 export default function GoogleMaps(props) {
+  const state = useContext(StateContext);
 
   let finalAddr = "";
   const classes = useStyles();
 
-
-
   //adds user input to the webaddress and diplays the map on click
   const handleAddress = () => {
-    finalAddr = webaddress + props.address;
+    finalAddr = webaddress + state.address;
     //to diplay the hidden map
     document.getElementById('gmap_canvas').style.visibility = 'visible';
     // to reload
@@ -35,8 +33,8 @@ export default function GoogleMaps(props) {
     <>
       <Card  className={classes.cardClass}>
           <Header.H3>Enter your Address</Header.H3>
-          {(props.addressFotmaError) && <Alert type="danger" hasExtraSpace>
-            <div>{props.addressFotmaError}</div>
+          {(state.addressFotmaError) && <Alert type="danger" hasExtraSpace>
+            <div>{state.addressFotmaError}</div>
           </Alert>
           }
           <form autoComplete="off" onSubmit={event => event.preventDefault()}>
@@ -52,7 +50,7 @@ export default function GoogleMaps(props) {
                     RootComponent="a"
                     color="primary"
                     onClick={handleAddress}
-                    disabled={props.addressButtonDisabled}
+                    disabled={state.addressButtonDisabled}
                     type="submit"
                   >
                     Go!
@@ -74,7 +72,7 @@ export default function GoogleMaps(props) {
               color="primary"
               id="next"
               onClick={props.changeMode}
-              disabled={props.addressButtonDisabled}
+              disabled={state.addressButtonDisabled}
             >
               Next
             </Button>

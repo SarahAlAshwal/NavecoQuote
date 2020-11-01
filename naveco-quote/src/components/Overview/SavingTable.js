@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,11 +7,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import style from '../../styles/SavingTableStyle';
 import {formatNumbers} from '../../helpers/formatNumbers';
 import {calculateAcMonthlyForManyYears} from '../../helpers/overviewCalculation';
 import {Card} from "tabler-react";
-import { red } from '@material-ui/core/colors';
+import StateContext from '../../StateContext';
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -50,16 +49,17 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CustomizedTables(props) {
+export default function CustomizedTables() {
+  const state = useContext(StateContext);
   const classes = useStyles();
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
  
-  const tableData = calculateAcMonthlyForManyYears(props.acMonthly, props.monthlyAmount, props.rate);
+  const tableData = calculateAcMonthlyForManyYears(state.acMonthly, state.monthlyAmount, state.rate);
 
   const rows = []
 
   for (let i = 0; i < months.length; i++) {
-    rows.push(createData(months[i], tableData[props.year].acMonthly[i],tableData[props.year].acMonthlyValue[i], tableData[props.year].grid[i]));
+    rows.push(createData(months[i], tableData[state.year].acMonthly[i],tableData[state.year].acMonthlyValue[i], tableData[state.year].grid[i]));
   }
 
   return (

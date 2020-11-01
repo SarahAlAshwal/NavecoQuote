@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent'
 import { PieChart } from 'react-minimal-pie-chart';
 import {formatNumbers} from '../../helpers/formatNumbers';
+import StateContext from '../../StateContext';
+import {totalSaving, totalOriginal, newBill} from '../../helpers/overviewCalculation';
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    fontSize: 'samll',
   },
 });
 
-export default function OffsetBill (props) {
+export default function OffsetBill () {
+
+  const state = useContext(StateContext);
 
   const classes = useStyles();
-  
+
+  //const solar = totalSaving(state.acAnnual, state.rate) / totalOriginal(state.monthlyAmount, state.rate)
+  const solar = newBill(state.acMonthly, state.monthlyAmount, state.year, state.rate) / state.monthlyAmount;
   const dataMock=[
-    { title: 'Solar', value: (props.solar) * 100 , color: 'orange', },
-    { title: 'Grid', value: (1 - (props.solar)) * 100 , color: 'blue' },
+    { title: 'Solar', value: (solar) * 100 , color: 'orange', },
+    { title: 'Grid', value: (1 - (solar)) * 100 , color: 'blue' },
     ];
 
     

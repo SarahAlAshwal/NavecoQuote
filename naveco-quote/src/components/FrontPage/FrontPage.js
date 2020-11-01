@@ -3,9 +3,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Divider,Button} from '@material-ui/core';
-import MediaControlCard from "./videoc";
-import Navigator from "./navigator"
-import Footer from "./footer"
+import MediaControlCard from "./Videoc";
+import Navigator from "./Navigator"
+import Footer from "./Footer"
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';

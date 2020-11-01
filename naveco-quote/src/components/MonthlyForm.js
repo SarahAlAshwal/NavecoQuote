@@ -1,19 +1,17 @@
-import React from "react";
-import TextField from '@material-ui/core/TextField';
+import React, {useContext} from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import CardContent from '@material-ui/core/CardContent';
-//import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
-import { CardActions } from "@material-ui/core";
 import styles from "../styles/MonthlyFormStyle";
 import { formatNumbers } from '../helpers/formatNumbers';
 import { Card, Grid, Form, Alert, Header } from "tabler-react";
+import StateContext from '../StateContext';
 
 
 const useStyles = makeStyles(styles);
 
 export default function MonthlyForm(props) {
+  const state = useContext(StateContext);
   const classes = useStyles();
 
   return (
@@ -21,11 +19,11 @@ export default function MonthlyForm(props) {
       <Grid.Col>
         <Card lg={10} deck>
           <div>
-            <Header.H3>Hom much do you spend each month on power?</Header.H3>
-            {(props.state.npFotmaError || props.state.rateFotmaError || props.state.monthlyAmountError) && <Alert type="danger" hasExtraSpace>
-              <div>{props.state.monthlyAmountError}</div>
-              <div>{props.state.npFotmaError}</div>
-              <div>{props.state.rateFotmaError}</div>
+            <Header.H3>How much do you spend each month on power?</Header.H3>
+            {(state.npFotmaError || state.rateFotmaError || state.monthlyAmountError) && <Alert type="danger" hasExtraSpace>
+              <div>{state.monthlyAmountError}</div>
+              <div>{state.npFotmaError}</div>
+              <div>{state.rateFotmaError}</div>
             </Alert>
             }
             <Form.FieldSet>
@@ -33,31 +31,31 @@ export default function MonthlyForm(props) {
                 <Form.Input
                   name="monthlyAmount"
                   onChange={props.handleChangeAmount}
-                  value={props.state.monthlyAmount ? props.state.monthlyAmount : ""}
+                  value={state.monthlyAmount ? state.monthlyAmount : ""}
                 />
               </Form.Group>
-              {!(props.state.npFotmaError || props.state.rateFotmaError || props.state.monthlyAmountError) && <Alert type="primary" hasExtraSpace>
-              {props.state.message}
+              {!(state.npFotmaError || state.rateFotmaError || state.monthlyAmountError) && <Alert type="primary" hasExtraSpace>
+              {state.message}
             </Alert>
             }
               <Form.Group label="Number of panels" isRequired>
                 <Form.Input
                   name="numberOfPanels"
                   onChange={props.handleInputs}
-                  value={props.state.numberOfPanels ? props.state.numberOfPanels : ""}
+                  value={state.numberOfPanels ? state.numberOfPanels : ""}
                 />
               </Form.Group>
               <Form.Group label="Rate" isRequired>
                 <Form.Input
                   name="rate"
                   onChange={props.handleRateInput}
-                  value={props.state.rate ? props.state.rate : ""}
+                  value={state.rate ? state.rate : ""}
                 />
               </Form.Group>
             </Form.FieldSet>
             <Button 
               variant="contained" 
-              disabled={props.state.npFotmaError || props.state.rateFotmaError || props.state.monthlyAmountError} 
+              disabled={state.npFotmaError || state.rateFotmaError || state.monthlyAmountError} 
               color="primary" 
               onClick={() => props.calculate()} >
               Calculate
@@ -74,21 +72,21 @@ export default function MonthlyForm(props) {
             <Card.Body>
               <div>
                 <Typography gutterBottom variant="h5" component="h2">
-                  {formatNumbers(props.state.powerPerMonth)}
+                  {formatNumbers(state.powerPerMonth)}
                 </Typography>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                   {'kWhs used per month'}
                 </Typography>
                 <br />
                 <Typography gutterBottom variant="h5" component="h2">
-                  {`$${formatNumbers(props.state.yearlyAmount)}`}
+                  {`$${formatNumbers(state.yearlyAmount)}`}
                 </Typography>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                   {'spent on power each year'}
                 </Typography>
                 <br />
                 <Typography gutterBottom variant="h5" component="h2">
-                  {formatNumbers(props.state.powerPerYear)}
+                  {formatNumbers(state.powerPerYear)}
                 </Typography>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                   {'kWhs used per year'}

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   calculatePayback,
-  totalSaving, newBill, totalOriginal, calculateROI, calculteProduct, calculatePowerBillWithoutSolar, calculateAcPowerValue
+  totalSaving, calculateROI, calculteProduct, calculatePowerBillWithoutSolar, calculateAcPowerValue
 } from '../../helpers/overviewCalculation';
 import OverviewHeader from './OverviewHeader';
 import SavingSummery from './SavingSummery';
@@ -14,12 +14,12 @@ import FinancingForm from './FinancingForm';
 import FinancingResults from './FinancingResults';
 import YearsSlide from './YearsSlide';
 import ProductBar from './ProductBar';
-import Environment from '../environment';
+import Environment from './environment';
 import Charts from './Charts';
-
+import StateContext from '../../StateContext';
 import '../../styles/OverviewStyle.css';
 import "tabler-react/dist/Tabler.css";
-import C3Chart from "react-c3js";
+
 
 import {
   Tab,
@@ -32,17 +32,13 @@ import { useVisualMode } from "../../hooks/useVisualMode";
 
 
 const FINANCING = "FINANCING";
-const WITHOUT_FINANCING = "WITHOUT_FINANCING";
 
 export default function Overview(props) {
+  const state = useContext(StateContext);
   const { mode, transition, back } = useVisualMode(
-    //props.financing ? FINANCING : WITHOUT_FINANCING
     FINANCING
   );
 
-  const rate = 0.12;
-
- 
 
   return (
     <>
@@ -52,11 +48,11 @@ export default function Overview(props) {
       <Tab title="Saving">
         <Grid.Row card deck>
           <Grid.Col width={20} sm={20} lg={20} >
-            <SavingSummery saved = {totalSaving(props.state.acAnnual, props.state.rate)} capacity = {props.capacity}/>
+            <SavingSummery />
           </Grid.Col>
           <Grid.Col width={20} sm={20} lg={20} >
            <Card title={"First Year Saving"}
-            body = { <FirstYear kwhs = {props.state.acAnnual} amount = {props.state.acAnnual * rate}/>}/>
+            body = { <FirstYear/>}/>
          </Grid.Col>
         </Grid.Row>
        </Tab>
@@ -65,12 +61,12 @@ export default function Overview(props) {
         <Grid.Row cards={true}>
           <Grid.Col width={20} sm={20} lg={20}>
             <Card>
-              <PriceCard cost={props.state.totalGross} newBill={newBill(props.acMonthly, props.monthlyAmount, props.year, props.state.rate)} />
+              <PriceCard/>
             </Card>
           </Grid.Col>
           <Grid.Col width={20} sm={20} lg={20}>
             <Card>
-              <OffsetBill solar={totalSaving(props.state.acAnnual, props.state.rate) / totalOriginal(props.monthlyAmount, props.state.rate)} />
+              <OffsetBill/>
             </Card>
           </Grid.Col>
         </Grid.Row>
@@ -79,35 +75,24 @@ export default function Overview(props) {
           <Grid.Row cards={true}>
             <Grid.Col width={20} sm={20} lg={20}>
                 {mode === FINANCING && (
-                  <FinancingForm
-                    newBill={newBill(props.acMonthly, props.monthlyAmount, props.year, props.state.rate)}
-                    cost={props.state.totalGross}
-                    interestRate={props.state.interestRate}
-                    loanTermInYears={props.state.loanTermInYears}
-                    monthlyPayments={props.state.monthlyPayments}
-                    handleLoanChange={props.handleLoanChange}
-                    loanFotmaError={props.state.loanFotmaError}
-                  />
+                  <FinancingForm handleLoanChange={props.handleLoanChange}/>
                 )}
             </Grid.Col>
             <Grid.Col>
             {mode === FINANCING && (
-                  <FinancingResults
-                    newBill={newBill(props.acMonthly, props.monthlyAmount, props.year, props.state.rate)}
-                    monthlyPayments={props.state.monthlyPayments}
-                  />
+                  <FinancingResults/>
                 )}
             </Grid.Col>
             <Grid.Col>
                 <PaybackCard
-                  paybackPeriod={props.state.payback && mode === FINANCING ? props.state.payback : calculatePayback(props.state.acAnnual, props.state.totalNet, props.rate)}
-                  roi={props.state.roi && mode === FINANCING ? props.state.roi : calculateROI(totalSaving(props.state.acAnnual, props.state.rate), props.state.totalGross)}>
+                  paybackPeriod={state.payback && mode === FINANCING ? state.payback : calculatePayback(state.acAnnual, state.totalNet, state.rate)}
+                  roi={state.roi && mode === FINANCING ? state.roi : calculateROI(totalSaving(state.acAnnual, state.rate), state.totalGross)}>
                 </PaybackCard>
             </Grid.Col>
           </Grid.Row>
         </Tab>
         <Tab title="Environment">
-          <Environment state={Math.round(totalSaving(props.state.acAnnual, props.state.rate))}/>
+          <Environment/>
         </Tab>
       </TabbedCard>
 
@@ -115,18 +100,18 @@ export default function Overview(props) {
       <Tab title={"Production"}>
       <Grid.Row cards={true}>
         <Grid.Col width={20} sm={20} lg={20}  >
-          <ProductBar data={calculteProduct(props.acMonthly,props.monthlyAmount, props.state.rate)} changedYear={props.year}/>
+          <ProductBar data={calculteProduct(state.acMonthly, state.monthlyAmount, state.rate)} changedYear={state.year}/>
         </Grid.Col>
     </Grid.Row>
       </Tab>
       <Tab title ={"Yearly Power Value Without Solar"}>
         <Grid.Col width={20} sm={20} lg={20}  >
-          <Charts data={calculatePowerBillWithoutSolar(props.monthlyAmount) }/>
+          <Charts data={calculatePowerBillWithoutSolar(state.monthlyAmount) }/>
         </Grid.Col>
       </Tab>
       <Tab title = {"Solar AC Power Value"}>
       <Grid.Col width={20} sm={20} lg={20}  >
-        <Charts data = {calculateAcPowerValue(props.acAnnual, props.state.rate)}/>
+        <Charts data = {calculateAcPowerValue(state.acAnnual, state.rate)}/>
       </Grid.Col>
     </Tab>
     </TabbedCard>
@@ -134,11 +119,11 @@ export default function Overview(props) {
     
     <Grid.Row cards={false}>
         <Grid.Col width={20} sm={20} lg={20} >
-          <YearsSlide year= {props.year} handleYearChange = {props.handleYearChange}/>  
+          <YearsSlide handleYearChange = {props.handleYearChange}/>  
         </Grid.Col>
       </Grid.Row>
       <Grid.Row cards={true}>
-          <SavingTable acMonthly={props.acMonthly} monthlyAmount={props.monthlyAmount} year={props.year} rate={props.state.rate} />
+          <SavingTable />
       </Grid.Row>
       
 </>

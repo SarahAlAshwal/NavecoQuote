@@ -46,24 +46,21 @@ export default function MediaControlCard() {
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
             Watch us
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary"> 
-            Naveco Power
-          </Typography>
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary"> 
+              Naveco Power
+            </Typography>
         </CardContent>
         <CardMedia
-        className={classes.cover}
-        component='iframe'
-        src="https://www.youtube-nocookie.com/embed/7_9n1u-Ju5k"
-        title="Live from space album cover"
-        
-      />
+          className={classes.cover}
+          component='iframe'
+          src="https://www.youtube-nocookie.com/embed/7_9n1u-Ju5k"
+          title="Live from space album cover"
+        />
       </div>
-      
-      
     </Card>
     
-    </Grid>
+  </Grid>
   );
 }
 
