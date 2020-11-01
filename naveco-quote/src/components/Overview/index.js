@@ -47,7 +47,7 @@ export default function Overview(props) {
   return (
     <>
     
-    <OverviewHeader/>
+    <OverviewHeader goHome={props.goHome} goHow={props.goHow}/>
     <TabbedCard initialTab="Saving">
       <Tab title="Saving">
         <Grid.Row card deck>

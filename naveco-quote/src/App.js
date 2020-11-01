@@ -88,6 +88,8 @@ function App() {
                 handleYearChange = {handleYearChange}
                 year = {state.year}
                 capacity={state.systemCapacity}
+                goHome={goHome}
+                goHow={goHow}
                 />}
              {mode === HOW && <HowItWorks close={close}/>}
               
