@@ -6,6 +6,9 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import Button from '@material-ui/core/Button';
+
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
       }
 }));
 
-export default function Navigator() {
+export default function Navigator(props) {
   const classes = useStyles();
 
   return (
@@ -43,6 +46,10 @@ export default function Navigator() {
             
             <div>
             <img src={require("../../images/navigatorLogo.png")}/>
+            </div>
+            <div>
+              <Button className={classes.Button} color="inherit" onClick={props.goHome}>Home</Button>
+              <Button  className={classes.Button} color="inherit"onClick={props.goHow}>How it works</Button>
             </div>
         </Toolbar>
     </AppBar>
