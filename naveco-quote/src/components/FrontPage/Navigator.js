@@ -21,11 +21,12 @@ const useStyles = makeStyles((theme) => ({
       }
 }));
 
+/*navigator bar that has socialmedia icon, company logo, home icon and how it works tags*/
 export default function Navigator(props) {
   const classes = useStyles();
 
   return (
-
+    
    <main>
     <AppBar position="static" >
         <Toolbar className= {classes.align}>
@@ -45,7 +46,7 @@ export default function Navigator(props) {
             </div>
             
             <div>
-            <img src={require("../../images/navigatorLogo.png")}/>
+            <img src={require("../../images/navigatorLogo.png")} alt="company logo"/>
             </div>
             <div>
               <Button className={classes.Button} color="inherit" onClick={props.goHome}>Home</Button>

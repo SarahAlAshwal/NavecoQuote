@@ -20,6 +20,8 @@ export function useApplicationData() {
   const panelCost = 925;
   const panelCapacity = 415;
   let totalHardware = 20 * panelCost;
+
+
   const totalNet = calculateSystemNetCostAfterRebate(totalHardware + installation);
   //totalGross is the Gross cost (Hardware (nb panel) + installation) after rebate
   const totalGross = calculateSystemGrossCostAfterRebate(totalHardware + installation);
@@ -29,7 +31,7 @@ export function useApplicationData() {
     powerPerMonth: 175 / 0.12,
     yearlyAmount: 175 * 12,
     powerPerYear: (175 / 0.12) * 12,
-    message: "This is fairly average. It is likely that we can offset this entirely. 😃",
+    message: "This is fairly average. It is likely that we can offset this entirely.",
     acMonthly:[],
     acAnnual:0,
     year: new Date().getFullYear(),
@@ -56,6 +58,7 @@ export function useApplicationData() {
   totalHardware = state.numberOfPanels * panelCost;
 
   
+  // handle monthly amuont typed value in monthly form
   const handleChangeAmount = (event) => {
     const input = event.target.value;
     let monthlyAmountError = '';
@@ -66,12 +69,12 @@ export function useApplicationData() {
     let powerPerMonth = input / state.rate;
     let powerPerYear = (input / state.rate) * 12;
     let yearlyAmount = input * 12;
-    let message = "This is fairly average. It is likely that we can offset this entirely. 😃";
+    let message = "This is fairly average. It is likely that we can offset this entirely.";
 
     if (yearlyAmount > 3000) {
-      message = "Above average. We'll do our best. 😅";
+      message = "Above average. We'll do our best.";
     } else if (yearlyAmount <= 1800) {
-      message = "Not bad, shouldn't be hard to offset this entirely. 😀";
+      message = "Not bad, shouldn't be hard to offset this entirely.";
     }
     if(isNaN(input)  || input === ''){  
       monthlyAmountError = 'Monthly amount sould be Number';
@@ -92,6 +95,7 @@ export function useApplicationData() {
     });
   }
 
+  // handle rate typed value in monthly form
   const handleRateInput = (evt) => {
     const rate = evt.target.value;
     let rateFotmaError = '';
@@ -99,16 +103,16 @@ export function useApplicationData() {
     let powerPerMonth = state.monthlyAmount / rate;
     let powerPerYear = (state.monthlyAmount / rate) * 12;
     let yearlyAmount = state.monthlyAmount * 12;
-    let message = "This is fairly average. It is likely that we can offset this entirely. 😃";
+    let message = "This is fairly average. It is likely that we can offset this entirely.";
 
     if (yearlyAmount > 3000) {
-      message = "Above average. We'll do our best. 😅";
+      message = "Above average. We'll do our best.";
     } else if (yearlyAmount <= 1800) {
-      message = "Not bad, shouldn't be hard to offset this entirely. 😀";
+      message = "Not bad, shouldn't be hard to offset this entirely.";
     }
 
-    if(isNaN(rate)  || rate === ''){  
-      rateFotmaError = 'Rate field sould be Number';
+    if(isNaN(rate)  || rate === '' || rate <= 0){  
+      rateFotmaError = 'Rate field sould be a non-null number';
       powerPerMonth = 0;
       powerPerYear = 0;
       yearlyAmount = 0;
@@ -126,6 +130,7 @@ export function useApplicationData() {
 
   }
 
+  // handle number of pannels typed value in monthly form
   const handleInputs = (evt) => {
     const numberOfPanels = evt.target.value;
     let npFotmaError = '';
@@ -163,6 +168,7 @@ export function useApplicationData() {
     });
   }
 
+  //handle intereset rate and number year term inputs
   const handleLoanChange = (evt) => {
     let value = evt.target.value;
     let loanFotmaError = '';
@@ -181,26 +187,28 @@ export function useApplicationData() {
 
   useEffect(() => {
     let monthlyPayments = 0;
+    // initialized with gross system cost in state
     let newSystemBaseCost = state.totalGross;
 
+    // calculate monthlyPayments newSystemBaseCost based financing inputs
     if (state.loanTermInYears && state.interestRate) {
       monthlyPayments = calculateMonthlyPaiment(state.totalGross, state.interestRate, state.loanTermInYears);
       newSystemBaseCost = monthlyPayments * state.loanTermInYears * 12;
-     
     }
 
+    // recalculate ROI and payback based on new system cost
     const roi = calculateROI(totalSaving(state.acAnnual, state.rate), newSystemBaseCost);
     const payback = calculatePayback(state.acAnnual, state.totalNet + (newSystemBaseCost - state.totalGross), state.rate);
 
     const totalHardware = state.numberOfPanels * panelCost;
     const baseCost = totalHardware + installation;
 
+    // recalculate net and gross system cost based on number of pannels filled
     const totalGross = calculateSystemGrossCostAfterRebate(baseCost);
     const totalNet = calculateSystemNetCostAfterRebate(baseCost);
 
     const systemCapacity = state.numberOfPanels * panelCapacity / 1000;
-
-    
+   
     setState({
       ...state,
       monthlyPayments,

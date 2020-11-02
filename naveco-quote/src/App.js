@@ -8,8 +8,6 @@ import Overview from './components/Overview'
 import {useVisualMode} from './hooks/useVisualMode'
 import FrontPage from "./components/FrontPage/FrontPage";
 import StateContext from './StateContext';
-
-
 import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import GoogleMaps from './components/Map';
 import HowItWorks from './components/HowItWorks';
@@ -62,6 +60,7 @@ function App() {
   return (
     <main >
       <Router>
+
       {! (mode === CALCULATION) && <Navigator goHome={goHome} goHow={goHow} />}
         <StateContext.Provider value={state}>
         <Switch>
@@ -89,7 +88,7 @@ function App() {
             </div>
           </Route>
           <Route path='/how'>
-           
+
           </Route>
           
         </Switch>

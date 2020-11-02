@@ -1,5 +1,4 @@
 import React, {useContext} from "react";
-import '../frontPage.css';
 import { Form, Alert } from "tabler-react";
 import { formatNumbers } from '../../helpers/formatNumbers';
 import StateContext from '../../StateContext';
