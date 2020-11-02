@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {
   Chart,
   ArgumentAxis,
@@ -51,12 +51,12 @@ const tooltipContentBodyStyle = {
   paddingTop: 0,
 };
 
-// //css for title "Production"
+// //css for title 
 const TitleText = withStyles({ title: { background: "orange", marginBottom: '30px' } })(({ classes, ...restProps }) => (
   <Title.Text {...restProps} className={classes.title} />
 ));
 
-// //returns each month inside tooltip
+// //returns each year inside tooltip
 const returnYear = (year) => {
   return props.data[year].year;
 }
@@ -88,8 +88,8 @@ const TooltipContent = (props) => {
 };
 
 
-//chart x axis data from 200 to 1400
-const modifyDomain = domain => {
+//chart y axis will depend on the value of the last item becasue it's the maximum value
+const modifyDomain = () => {
   return [0, props.data[props.data.length - 1].value + 50 ]
 }
 
@@ -99,26 +99,26 @@ const classes = useStyles();
     <div className={classes.root}>
     <Card body = {
        <Chart data={props.data}>
-       <ValueScale name="value" modifyDomain={modifyDomain}/>
-       <ArgumentAxis />
-       <ValueAxis scaleName="value" showGrid={false} showLine showTicks  />
-       <BarSeries
-         name="value in KWh"
-         valueField="value"
-         argumentField="year"
-         scaleName="value"
-       />
-        <Title
-       text="Power Value"
-       textComponent={TitleText}
+        <ValueScale name="value" modifyDomain={modifyDomain}/>
+        <ArgumentAxis />
+        <ValueAxis scaleName="value" showGrid={false} showLine showTicks  />
+        <BarSeries
+          name="value in KWh"
+          valueField="value"
+          argumentField="year"
+          scaleName="value"
         />
-       <Animation />
-       <EventTracker />
-       <Tooltip
-        contentComponent={TooltipContent} 
-        sheetComponent={Sheet}
-        arrowComponent={Arrow}
-       />
+          <Title
+        text="Power Value"
+        textComponent={TitleText}
+          />
+        <Animation />
+        <EventTracker />
+        <Tooltip
+          contentComponent={TooltipContent} 
+          sheetComponent={Sheet}
+          arrowComponent={Arrow}
+        />
      </Chart>
     }/>
         </div>

@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import styles from "../../AppStyle";
+import styles from "../../styles/AppStyle";
 import {formatNumbers} from '../../helpers/formatNumbers';
 import {newBill} from '../../helpers/overviewCalculation';
 import StateContext from '../../StateContext';

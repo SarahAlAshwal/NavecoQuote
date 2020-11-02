@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 
-import styles from "../AppStyle";
+import styles from "../styles/AppStyle";
 
 
 const useStyles = makeStyles(styles);

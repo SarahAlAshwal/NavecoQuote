@@ -88,15 +88,14 @@ const getData = () => {
   return props.data[props.changedYear];
 }
 
-//chart x axis data from 200 to 1400
-const modifyDomain = domain =>{
+//chart y axis depends on the maximum value 
+const modifyDomain = () =>{
   let values = [];
   for (let i = 0; i < props.data[props.changedYear].length; i++) {
     values.push(props.data[props.changedYear][i].power);
   }
-  console.log('chart values: ', values, Math.min(...values) )
   return [ 0, Math.max(...values) + 100]
-}// [0, 1500];
+}
 
 const classes = useStyles();
 
@@ -104,28 +103,28 @@ const classes = useStyles();
     <div className={classes.root}>
     <Card body = {
        <Chart data={getData()}>
-       <ValueScale name="power" modifyDomain={modifyDomain}/>
-       <ArgumentAxis />
-       <ValueAxis scaleName="power" showGrid={false} showLine showTicks  />
-       <BarSeries
-         name="Power in KWh"
-         valueField="power"
-         argumentField="month"
-         scaleName="power"
-       />
-        <Title
-       text="Production"
-       textComponent={TitleText}
+        <ValueScale name="power" modifyDomain={modifyDomain}/>
+        <ArgumentAxis />
+        <ValueAxis scaleName="power" showGrid={false} showLine showTicks  />
+        <BarSeries
+          name="Power in KWh"
+          valueField="power"
+          argumentField="month"
+          scaleName="power"
         />
-       <Animation />
-       <EventTracker />
-       <Tooltip
-        contentComponent={TooltipContent} 
-        sheetComponent={Sheet}
-        arrowComponent={Arrow}
+        <Title
+          text="Production"
+          textComponent={TitleText}
+        />
+        <Animation />
+        <EventTracker />
+        <Tooltip
+          contentComponent={TooltipContent} 
+          sheetComponent={Sheet}
+          arrowComponent={Arrow}
        />
      </Chart>
     }/>
-        </div>
+    </div>
   );
 }
