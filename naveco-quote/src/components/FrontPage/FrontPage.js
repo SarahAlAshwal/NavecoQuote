@@ -1,10 +1,8 @@
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Divider,Button} from '@material-ui/core';
 import MediaControlCard from "./Videoc";
-import Navigator from "./Navigator"
 import Footer from "./Footer"
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -41,15 +39,13 @@ export default function FrontPage(props) {
   return (
     <div>
    
-    
-    
     <Divider className={classes.space}/>
-   
+   {/*container that has main image and ready to get estimate summary*/}
     <Grid container spacing={0} className={classes.space}>
 
       <Grid item xs={6} >
           <Card className={classes.evaluatepic}>
-          <img src={require("../../images/mainPic.png")}/>
+          <img src={require("../../images/mainPic.png")} alt="save with solar"/>
           </Card>
       </Grid>
 
@@ -69,7 +65,7 @@ export default function FrontPage(props) {
       </Grid>
 
     </Grid>
-
+    {/*container that has how to calculate and youTube video*/}
     <Grid container spacing={0}>
 
       <Grid item xs={7} >
@@ -82,7 +78,7 @@ export default function FrontPage(props) {
             Get your estimation overview for savings and finanacing&nbsp;&nbsp;&nbsp;
             <Button variant="contained" color="primary" id="next" onClick={props.goHow} >  More Info</Button>
             </Typography>
-            <img src={require("../../images/calculate.gif")}/>
+            <img src={require("../../images/calculate.gif")} alt="How we calculate"/>
           </CardContent>
         </Card>
       </Grid>
@@ -93,7 +89,7 @@ export default function FrontPage(props) {
         </Card>
       </Grid>
     </Grid>
- 
+  {/*Stay in touch contact card*/} 
   <Grid>
     <Card className={classes.contact}>
       <CardContent>
@@ -111,7 +107,7 @@ export default function FrontPage(props) {
     </Card>
   </Grid>
 
-
+  {/*footer of front page*/}
   <Grid>
     <Footer />
   </Grid>
