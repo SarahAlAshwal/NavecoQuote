@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import styles from "../../AppStyle";
+import styles from "../../styles/AppStyle";
 import {formatNumbers} from '../../helpers/formatNumbers';
 import StateContext from '../../StateContext';
 

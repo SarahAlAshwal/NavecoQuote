@@ -8,7 +8,7 @@ import PrintIcon from '@material-ui/icons/Print';
 import HomeIcon from '@material-ui/icons/Home';
 import HelpIcon from '@material-ui/icons/Help';
 
-import styles from "../../AppStyle";
+import styles from "../../styles/AppStyle";
 
 
 

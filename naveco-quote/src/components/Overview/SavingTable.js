@@ -54,10 +54,11 @@ export default function CustomizedTables() {
   const classes = useStyles();
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
  
+  //prepare the table data
   const tableData = calculateAcMonthlyForManyYears(state.acMonthly, state.monthlyAmount, state.rate);
 
   const rows = []
-
+  //full the rows from the tableData and the months
   for (let i = 0; i < months.length; i++) {
     rows.push(createData(months[i], tableData[state.year].acMonthly[i],tableData[state.year].acMonthlyValue[i], tableData[state.year].grid[i]));
   }
@@ -83,7 +84,6 @@ export default function CustomizedTables() {
               <StyledTableCell align="right">{formatNumbers(row.monthlyProduction)}</StyledTableCell>
               <StyledTableCell align="right">{formatNumbers(row.value)}</StyledTableCell>
               <StyledTableCell align="right" className={row.grid > 0 ? classes.greenClass : classes.redClass}>{formatNumbers(row.grid)}</StyledTableCell>
-            
             </StyledTableRow>
           ))}
         </TableBody>

@@ -60,5 +60,11 @@ export default theme => ({
   OverviewHeader: {
     display: "flex",
     justifyContent: 'space-between'
+  },
+  legend: {
+    display: 'flex',
+    flexDirection: 'row',
+    margin:'1em'
+    
   }
 });

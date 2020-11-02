@@ -2,11 +2,9 @@ import React, {useContext} from 'react';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import CardContent from '@material-ui/core/CardContent';
-//import Card from '@material-ui/core/Card';
 import {Card} from "tabler-react";
 import SettingsIcon from '@material-ui/icons/Settings';
-import styles from "../../AppStyle";
+import styles from "../../styles/AppStyle";
 import {formatNumbers} from '../../helpers/formatNumbers';
 import StateContext from '../../StateContext';
 import {totalSaving} from '../../helpers/overviewCalculation';
@@ -27,13 +25,13 @@ export default function SavingSummery() {
           <Typography gutterBottom variant="h5" component="h2">
             {`Congratulations!! You can save ${formatNumbers(totalSaving(state.acAnnual, state.rate))} with this solar system in the next 25 years!`}
         </Typography>
-        </div>
-        <div className={classes.saving}>
+      </div>
+      <div className={classes.saving}>
         <SettingsIcon fontSize="large"/>
         <div>
-        <Typography gutterBottom variant="h5" component="h2">
-          {`Size: ${state.systemCapacity} KW System`}
-        </Typography>
+          <Typography gutterBottom variant="h5" component="h2">
+            {`Size: ${state.systemCapacity} KW System`}
+          </Typography>
         </div>
       </div>
       </>} />
