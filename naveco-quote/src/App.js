@@ -3,18 +3,13 @@ import './App.css';
 import MonthlyForm from './components/MonthlyForm';
 import {useApplicationData} from "./hooks/useApplicationData";
 import Header from './components/Header';
-import Navigator from "./components/FrontPage/navigator"
+import Navigator from "./components/FrontPage/Navigator"
 import Overview from './components/Overview'
 import {useVisualMode} from './hooks/useVisualMode'
-
-import FrontPage from "./components/FrontPage/frontPage";
-
+import FrontPage from "./components/FrontPage/FrontPage";
 import StateContext from './StateContext';
-
-
-
 import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import GoogleMaps from './components/map';
+import GoogleMaps from './components/Map';
 import HowItWorks from './components/HowItWorks';
 
 const BILLINFO = 'BILLINFO';
@@ -67,10 +62,7 @@ function App() {
       <Router>
 
       {! (mode === CALCULATION) && <Navigator goHome={goHome} goHow={goHow} />}
-
         <StateContext.Provider value={state}>
-        
-
         <Switch>
           <Route exact path = '/'>
             {mode === FRONTPAGE && <FrontPage frontPage={frontPage} goHow={goHow}/>}
@@ -81,7 +73,6 @@ function App() {
               />}
               {mode === BILLINFO  && <MonthlyForm
                 handleChangeAmount={handleChangeAmount}
-                state={state}
                 handleInputs={handleInputs}
                 handleRateInput={handleRateInput}
                 calculate={onCalculate}
@@ -89,6 +80,8 @@ function App() {
               {state.acMonthly[0] && mode === CALCULATION && <Overview 
                 handleLoanChange={handleLoanChange}
                 handleYearChange = {handleYearChange}
+                goHome={goHome}
+                goHow={goHow}
                 />}
              {mode === HOW && <HowItWorks close={close}/>}
               

@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  calculatePayback,
-  totalSaving, calculateROI, calculteProduct, calculatePowerBillWithoutSolar, calculateAcPowerValue
+import { calculteProduct, calculatePowerBillWithoutSolar, calculateAcPowerValue
 } from '../../helpers/overviewCalculation';
 import OverviewHeader from './OverviewHeader';
 import SavingSummery from './SavingSummery';
@@ -43,7 +41,7 @@ export default function Overview(props) {
   return (
     <>
     
-    <OverviewHeader/>
+    <OverviewHeader goHome={props.goHome} goHow={props.goHow}/>
     <TabbedCard initialTab="Saving">
       <Tab title="Saving">
         <Grid.Row card deck>
@@ -79,14 +77,10 @@ export default function Overview(props) {
                 )}
             </Grid.Col>
             <Grid.Col>
-            {mode === FINANCING && (
-                  <FinancingResults/>
-                )}
+              <FinancingResults/>
             </Grid.Col>
             <Grid.Col>
-                <PaybackCard
-                  paybackPeriod={state.payback && mode === FINANCING ? state.payback : calculatePayback(state.acAnnual, state.totalNet, state.rate)}
-                  roi={state.roi && mode === FINANCING ? state.roi : calculateROI(totalSaving(state.acAnnual, state.rate), state.totalGross)}>
+                <PaybackCard>
                 </PaybackCard>
             </Grid.Col>
           </Grid.Row>

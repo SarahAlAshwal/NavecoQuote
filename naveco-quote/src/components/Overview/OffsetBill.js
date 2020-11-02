@@ -5,11 +5,12 @@ import CardContent from '@material-ui/core/CardContent'
 import { PieChart } from 'react-minimal-pie-chart';
 import {formatNumbers} from '../../helpers/formatNumbers';
 import StateContext from '../../StateContext';
-import {totalSaving, totalOriginal} from '../../helpers/overviewCalculation';
+import {totalSaving, totalOriginal, newBill} from '../../helpers/overviewCalculation';
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    fontSize: 'samll',
   },
 });
 
@@ -19,8 +20,8 @@ export default function OffsetBill () {
 
   const classes = useStyles();
 
-  const solar = totalSaving(state.acAnnual, state.rate) / totalOriginal(state.monthlyAmount, state.rate)
-  
+  //const solar = totalSaving(state.acAnnual, state.rate) / totalOriginal(state.monthlyAmount, state.rate)
+  const solar = newBill(state.acMonthly, state.monthlyAmount, state.year, state.rate) / state.monthlyAmount;
   const dataMock=[
     { title: 'Solar', value: (solar) * 100 , color: 'orange', },
     { title: 'Grid', value: (1 - (solar)) * 100 , color: 'blue' },
