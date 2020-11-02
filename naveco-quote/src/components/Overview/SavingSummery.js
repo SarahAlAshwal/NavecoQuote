@@ -29,7 +29,7 @@ export default function SavingSummery(props) {
         <SettingsIcon fontSize="large"/>
         <div>
         <Typography gutterBottom variant="h5" component="h2">
-          {`Size: ${formatNumbers(props.capacity)} KW System`}
+          {`Size: ${formatNumbers(props.capacity)} KW AC System`}
         </Typography>
         {/* <Typography gutterBottom variant="h5" component="h2">
           {`Pitch: 25

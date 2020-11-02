@@ -148,7 +148,7 @@ export function useApplicationData() {
     setState({
       ...state, 
       offset:  Math.round(v * 10) / 10,
-      systemCapacity: ((state.powerPerYear / 1000) * 1.25 ) * state.offset 
+      systemCapacity: ((state.powerPerYear / 1000) / 1.25 ) * state.offset //System Capacity AC
      
 
     })
@@ -200,8 +200,8 @@ export function useApplicationData() {
     const payback = calculatePayback(state.acAnnual, state.totalNet + (newSystemBaseCost - state.totalGross));
 
     //const totalHardware = state.numberOfPanels * panelCost;
-    const totalHardware = state.systemCapacity * 1000 * 2.7;
-    const baseCost = totalHardware + installation;
+    const totalHardware = state.systemCapacity * 1.25 * 1000 * 2.7; //1.25 is a factor to calculate DC system cost 
+    const baseCost = totalHardware;
 
     const totalGross = calculateSystemGrossCostAfterRebate(baseCost);
     const totalNet = calculateSystemNetCostAfterRebate(baseCost);
@@ -234,7 +234,7 @@ export function useApplicationData() {
   ]);
 
 
-  const calculateMonthlyACPower = function(address, systemCapacity , moduleType = 1, losses = 10.2, arrayType = 1, dataset = 'intl', invEff = 99, tilt=20, azimuth = 180){
+  const calculateMonthlyACPower = function(address, systemCapacity , moduleType = 1, losses = 18 , arrayType = 1, dataset = 'intl', invEff = 99, tilt=20, azimuth = 180){
     const apiKey = 'le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg';
     
    
