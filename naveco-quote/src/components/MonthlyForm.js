@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { formatNumbers } from '../helpers/formatNumbers';
 import { Card, Grid, Form, Alert, Header } from "tabler-react";
 import StateContext from '../StateContext';
+import Offset from '../components/Offset';
 
 export default function MonthlyForm(props) {
   const state = useContext(StateContext);
@@ -14,9 +15,8 @@ export default function MonthlyForm(props) {
         <Card lg={10} deck>
           <div>
             <Header.H3>How much do you spend each month on power?</Header.H3>
-            {(state.npFotmaError || state.rateFotmaError || state.monthlyAmountError) && <Alert type="danger" hasExtraSpace>
+            {(state.rateFotmaError || state.monthlyAmountError) && <Alert type="danger" hasExtraSpace>
               <div>{state.monthlyAmountError}</div>
-              <div>{state.npFotmaError}</div>
               <div>{state.rateFotmaError}</div>
             </Alert>
             }
@@ -28,17 +28,11 @@ export default function MonthlyForm(props) {
                   value={state.monthlyAmount ? state.monthlyAmount : ""}
                 />
               </Form.Group>
-              {!(state.npFotmaError || state.rateFotmaError || state.monthlyAmountError) && <Alert type="primary" hasExtraSpace>
+              {!(state.rateFotmaError || state.monthlyAmountError) && <Alert type="primary" hasExtraSpace>
               {state.message}
             </Alert>
             }
-              <Form.Group label="Number of panels" isRequired>
-                <Form.Input
-                  name="numberOfPanels"
-                  onChange={props.handleInputs}
-                  value={state.numberOfPanels ? state.numberOfPanels : ""}
-                />
-              </Form.Group>
+              
               <Form.Group label="Rate" isRequired>
                 <Form.Input
                   name="rate"
@@ -89,6 +83,9 @@ export default function MonthlyForm(props) {
               </div>
             </Card.Body>
           </Card>
+        </Grid.Col>
+        <Grid.Col>
+          <Offset offset ={props.offset} handleChange={props.handleChange}/>
         </Grid.Col>
     </Grid.Row>
   );

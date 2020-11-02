@@ -33,7 +33,7 @@ export default function SavingSummery() {
             <SettingsIcon fontSize="large" />
             <div>
               <Typography gutterBottom variant="h5" component="h2">
-                Size: <b> {formatNumbers(state.systemCapacity)}</b> KW System
+                Size: <b> {formatNumbers(state.systemCapacity)}</b> KW AC System
           </Typography>
             </div>
           </div>
@@ -44,5 +44,3 @@ export default function SavingSummery() {
 
   );
 }
-
-

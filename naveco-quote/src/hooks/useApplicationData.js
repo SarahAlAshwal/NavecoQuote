@@ -49,6 +49,7 @@ export function useApplicationData() {
     loanFotmaError: '',
     addressFotmaError: '',
     addressButtonDisabled: true,
+    offset: 0.5
   });
 
   totalHardware = state.numberOfPanels * panelCost;
@@ -147,6 +148,16 @@ export function useApplicationData() {
     })
   };  
 
+  const handleOffsetChange = (v) => {
+    setState({
+      ...state, 
+      offset:  Math.round(v * 10) / 10,
+      systemCapacity: ((state.powerPerYear / 1000) / 1.25 ) * state.offset //System Capacity AC
+     
+
+    })
+  }
+
   //updates the address
   const UpdateAddress = (event) => {
     let address = event.target.value;
@@ -192,18 +203,19 @@ export function useApplicationData() {
       newSystemBaseCost = monthlyPayments * state.loanTermInYears * 12;
     }
 
+
     // recalculate ROI and payback based on new system cost
     const roi = calculateROI(totalSaving(state.acAnnual, state.rate), newSystemBaseCost);
     const payback = calculatePayback(state.acAnnual, state.totalNet + (newSystemBaseCost - state.totalGross), state.rate);
 
-    const totalHardware = state.numberOfPanels * panelCost;
-    const baseCost = totalHardware + installation;
-
+    const totalHardware = state.systemCapacity * 1.25 * 1000 * 2.7; //1.25 is a factor to calculate DC system cost 
+    const baseCost = totalHardware;
+    
     // recalculate net and gross system cost based on number of pannels filled
     const totalGross = calculateSystemGrossCostAfterRebate(baseCost);
     const totalNet = calculateSystemNetCostAfterRebate(baseCost);
 
-    const systemCapacity = state.numberOfPanels * panelCapacity / 1000;
+    //const systemCapacity = state.numberOfPanels * panelCapacity / 1000;
    
     setState({
       ...state,
@@ -213,7 +225,7 @@ export function useApplicationData() {
       payback,
       totalGross,
       totalNet,
-      systemCapacity,
+      
     });
 
   }, [
@@ -229,7 +241,7 @@ export function useApplicationData() {
   ]);
 
 
-  const calculateMonthlyACPower = function(address, systemCapacity , moduleType = 1, losses = 10.2, arrayType = 1, dataset = 'intl', invEff = 99, tilt=20, azimuth = 180){
+  const calculateMonthlyACPower = function(address, systemCapacity , moduleType = 1, losses = 18 , arrayType = 1, dataset = 'intl', invEff = 99, tilt=20, azimuth = 180){
     const apiKey = 'le83zKQd7t0wDgBD0cpTCwhsJZxPEjx9WmZsFbdg';
     systemCapacity = state.systemCapacity;
     address = formatAddress(state.address);
@@ -258,6 +270,7 @@ export function useApplicationData() {
     handleInputs,
     UpdateAddress,
     handleRateInput,
+    handleOffsetChange
   }; 
 
 }

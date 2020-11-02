@@ -29,6 +29,7 @@ function App() {
     handleInputs,
     UpdateAddress,
     handleRateInput,
+    handleOffsetChange,
   } = useApplicationData();
 
 
@@ -76,6 +77,8 @@ function App() {
                 handleInputs={handleInputs}
                 handleRateInput={handleRateInput}
                 calculate={onCalculate}
+                handleChange={handleOffsetChange}
+                offset= {state.offset}
               />}
               {state.acMonthly[0] && mode === CALCULATION && <Overview 
                 handleLoanChange={handleLoanChange}
