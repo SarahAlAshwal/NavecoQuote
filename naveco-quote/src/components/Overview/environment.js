@@ -23,8 +23,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-
   media: {
     height: 50,
     paddingTop: '56.25%', // 16:9,
@@ -51,6 +49,7 @@ export default function Environment(props) {
   return (
    
     <main >
+      {/*shows the calculated saving summary*/}
       <AppBar  position="static" className={classes.rootAppBar} >
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
@@ -59,8 +58,8 @@ export default function Environment(props) {
         </Toolbar>
       </AppBar>
 
-
-      <Box display="flex" justifyContent="center" m={1} p={1} bgcolor="background.paper" justifyContent="space-between" >
+      {/*box container of 3 cards having calculated environmental saving values fuel consumption, no.of cars off road and lbs of coals burnt */}
+      <Box display="flex" m={1} p={1} bgcolor="background.paper" justifyContent="space-between" >
       
       <Box flexBasis={250}>
       <Card>

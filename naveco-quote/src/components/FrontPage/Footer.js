@@ -50,9 +50,9 @@ export default function Footer() {
 
    <main>
      <Grid>
-    
+        
         <Toolbar className={classes.navigator}>
-            
+            {/*contact details*/}
             <div > 
             <div>
                 <b>Contact us</b>
@@ -64,10 +64,10 @@ export default function Footer() {
                 506-804-1080
                 </Typography>
             </div>
-         
+            {/*logo and summary*/}
             <div >
                 <div className={classes.media}>
-                <img src={require("../../images/footerLogo.png")} />
+                <img src={require("../../images/footerLogo.png")} alt="company logo" />
                 </div>
                 <div>
                 <p className={classes.fonty}>
@@ -80,7 +80,7 @@ export default function Footer() {
                 </p>
                 </div>
             </div>
-            
+            {/*social media icons*/}
             <div className={classes.icon} >
                 <a href='https://www.facebook.com/navecopower/' className={classes.a} >
                 <FacebookIcon />

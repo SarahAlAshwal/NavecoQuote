@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -22,21 +22,12 @@ const useStyles = makeStyles((theme) => ({
     width: 500,
     height: 366
   },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
-  },
 }));
 
+/*youtube video with embeded link in src*/
 export default function MediaControlCard() {
   const classes = useStyles();
-  const theme = useTheme();
+  
 
   return (
     <Grid>

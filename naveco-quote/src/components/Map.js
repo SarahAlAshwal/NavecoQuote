@@ -61,7 +61,7 @@ export default function GoogleMaps(props) {
           </form>
           <Card>
             <div style={{display:'flex', justifyContent:'center'}}>
-              <iframe width="520" height="400" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" id="gmap_canvas" className="responsive-iframe"
+              <iframe title="maps" width="520" height="400" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" id="gmap_canvas" className="responsive-iframe"
                 src={finalAddr}>
               </iframe>
             </div>
