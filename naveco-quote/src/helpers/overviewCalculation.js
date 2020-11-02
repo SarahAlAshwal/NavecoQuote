@@ -83,16 +83,18 @@ export function calculateAcPowerValue(acAnnual,rate, lifespan = 25) {
 }
 
 
-
+// calculate system cost + taxes including rebate if defined
 export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0, rebateLimit=0) {
     const rebate = (systemBaseCost * rebatePrc) < rebateLimit ? systemBaseCost * rebatePrc : rebateLimit;
     return systemBaseCost * (1 + 0.13) - rebate;
   }
 
+  // calculate system without taxes including rebate if defined
   export function calculateSystemNetCostAfterRebate(systemBaseCost, rebatePrc=0, rebateLimit=0) {
     const rebate = (systemBaseCost * rebatePrc) < rebateLimit ? systemBaseCost * rebatePrc : rebateLimit;
     return systemBaseCost - rebate;
   }
+
 
   export function calculateROI (profit, investment, projectLC = 25) {
     return profit / investment * 100 / projectLC;
@@ -125,7 +127,6 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0,
   }
 
   export function newBill (acMonthly, monthlyAmount, year, rate) {
-    //return (totalOriginal(monthlyBill) - totalSaving(acAnnual)) / (12 * 25);
     const yearsData = calculateAcMonthlyForManyYears(acMonthly, monthlyAmount, rate);
     const grid = yearsData[year].grid.reduce((total,value)=> total + value);
     return -1 * grid / 12;
@@ -133,15 +134,18 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0,
 
   export function calculatePayback(acAnnual, netCost, rate, lifespan = 25 ) {
     
+    // calculate total saving based on degradation and escalation rate in 25 years
     const sum = totalSaving(acAnnual, rate);
-   
     const avg = sum / lifespan;
 
+    // return payBack value
     return netCost / avg;
   };
 
+  // monthly payment calculation based on percentage rate, priniple and number of years term
   export function calculateMonthlyPaiment(principal, percentageRate, term) {
     const lengthOfLoan = term * 12;
     const rate = percentageRate / 100 / 12;
+
     return (principal * rate) / (1 - (Math.pow((1 + rate), lengthOfLoan * -1)));
   }

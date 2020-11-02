@@ -1,18 +1,12 @@
 import React, {useContext} from "react";
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import styles from "../styles/MonthlyFormStyle";
 import { formatNumbers } from '../helpers/formatNumbers';
 import { Card, Grid, Form, Alert, Header } from "tabler-react";
 import StateContext from '../StateContext';
 
-
-const useStyles = makeStyles(styles);
-
 export default function MonthlyForm(props) {
   const state = useContext(StateContext);
-  const classes = useStyles();
 
   return (
     <Grid.Row>
@@ -67,28 +61,28 @@ export default function MonthlyForm(props) {
           <Card>
             <Card.Status color="blue" side />
             <Card.Header>
-              <Card.Title>Current Comsumption</Card.Title>
+              <Card.Title>Current Consumption</Card.Title>
             </Card.Header>
             <Card.Body>
               <div>
                 <Typography gutterBottom variant="h5" component="h2">
                   {formatNumbers(state.powerPerMonth)}
                 </Typography>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                <Typography color="textSecondary" gutterBottom>
                   {'kWhs used per month'}
                 </Typography>
                 <br />
                 <Typography gutterBottom variant="h5" component="h2">
                   {`$${formatNumbers(state.yearlyAmount)}`}
                 </Typography>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                <Typography color="textSecondary" gutterBottom>
                   {'spent on power each year'}
                 </Typography>
                 <br />
                 <Typography gutterBottom variant="h5" component="h2">
                   {formatNumbers(state.powerPerYear)}
                 </Typography>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                <Typography color="textSecondary" gutterBottom>
                   {'kWhs used per year'}
                 </Typography>
                 

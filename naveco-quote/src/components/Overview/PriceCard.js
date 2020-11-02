@@ -1,14 +1,12 @@
 import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import styles from "../../AppStyle";
 import {formatNumbers} from '../../helpers/formatNumbers';
 import {newBill} from '../../helpers/overviewCalculation';
 import StateContext from '../../StateContext';
+
+import { Card } from "tabler-react";
 
 
 const useStyles = makeStyles(styles);
@@ -18,12 +16,17 @@ export default function PriceCard() {
   const classes = useStyles();
 
   return (
-    <Card  className={classes.rootPrice}>
-      <CardContent className={classes.cardContent}>
-        <div className={classes.cardDiv}>
+<>
+          <Card>
+            <Card.Status color="blue" side />
+            <Card.Header>
+              <Card.Title>Price Details</Card.Title>
+            </Card.Header>
+            <Card.Body>
+            <div className={classes.cardDiv}>
           <Typography variant="h5" component="h2">
             Total Price
-        </Typography>
+         </Typography>
         </div>
         <div className={classes.inlineClass}>
           <Typography variant="h6" component="h2" className={classes.priceCardValue}>
@@ -47,12 +50,9 @@ export default function PriceCard() {
             /month
           </Typography>
         </div>
-      </CardContent>
-      <CardActions className={classes.cardContent}>
-        <Button size="small" variant="contained" color="primary">
-          Price
-        </Button>
-      </CardActions>
-    </Card>
+            </Card.Body>
+          </Card>
+    </>
+    
   );
 }
