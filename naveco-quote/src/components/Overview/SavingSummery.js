@@ -23,14 +23,14 @@ export default function SavingSummery() {
       <div className={classes.saving}>
           <AttachMoneyIcon fontSize="large"/>
           <Typography gutterBottom variant="h5" component="h2">
-            {`Congratulations!! You can save ${formatNumbers(totalSaving(state.acAnnual, state.rate))} with this solar system in the next 25 years!`}
+            Congratulations!! You can save <b>{formatNumbers(totalSaving(state.acAnnual, state.rate))}</b> with this solar system in the next 25 years!
         </Typography>
       </div>
       <div className={classes.saving}>
         <SettingsIcon fontSize="large"/>
         <div>
           <Typography gutterBottom variant="h5" component="h2">
-            {`Size: ${state.systemCapacity} KW System`}
+            Size: <b> {formatNumbers(state.systemCapacity)}</b> KW System
           </Typography>
         </div>
       </div>
