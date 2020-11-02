@@ -27,7 +27,7 @@ export default function PaybackCard(props) {
             </Card.Header>
             <Card.Body>
               <div>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                <Typography color="textSecondary" gutterBottom>
                   Payback Period
                 </Typography>
                 <Typography variant="h5" component="h2">
@@ -36,7 +36,7 @@ export default function PaybackCard(props) {
               </div>
               <br />
               <div>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                <Typography color="textSecondary" gutterBottom>
                   ROI
                 </Typography>
               </div>

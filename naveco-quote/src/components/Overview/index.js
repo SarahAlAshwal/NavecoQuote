@@ -58,9 +58,7 @@ export default function Overview(props) {
       <Tab title="Price">
         <Grid.Row cards={true}>
           <Grid.Col width={20} sm={20} lg={20}>
-            <Card>
               <PriceCard/>
-            </Card>
           </Grid.Col>
           <Grid.Col width={20} sm={20} lg={20}>
             <Card>
