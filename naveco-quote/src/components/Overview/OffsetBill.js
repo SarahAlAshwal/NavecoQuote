@@ -23,8 +23,8 @@ export default function OffsetBill () {
   //const solar = totalSaving(state.acAnnual, state.rate) / totalOriginal(state.monthlyAmount, state.rate)
   const solar = newBill(state.acMonthly, state.monthlyAmount, state.year, state.rate) / state.monthlyAmount;
   const dataMock=[
-    { title: 'Solar', value: (solar) * 100 , color: 'orange', },
-    { title: 'Grid', value: (1 - (solar)) * 100 , color: 'blue' },
+    { title: 'Solar', value: (1 - solar) * 100 , color: 'orange', },
+    { title: 'Grid', value: (solar) * 100 , color: 'blue' },
     ];
 
     
