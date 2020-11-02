@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
       align: {
         display: "flex",
         justifyContent: "space-between",
-      }
+      },
 }));
 
 /*navigator bar that has socialmedia icon, company logo, home icon and how it works tags*/

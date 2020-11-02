@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   space: {
     marginBottom: theme.spacing(2),
     color: 'white'
-  }
+  },
 }));
 
 
