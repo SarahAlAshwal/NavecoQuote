@@ -9,7 +9,6 @@ import {calculatePayback, calculateROI, totalSaving} from '../../helpers/overvie
 
 import styles from "../../styles/FinancingFormStyle";
 
-import '../frontPage.css';
 import { Card } from "tabler-react";
 
 const useStyles = makeStyles(styles);

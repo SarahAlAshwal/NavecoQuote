@@ -34,7 +34,12 @@ export default function OffsetBill() {
   const shiftSize = 0.5;
 
   return (
-    <Card title="Power Bill">
+    <Card>
+      <Card.Status color="blue" side />
+      <Card.Header>
+        <Card.Title>Power Bill</Card.Title>
+      </Card.Header>
+
       <Card.Body>
         <Grid container space={0}>
           <Grid item xs={6}>

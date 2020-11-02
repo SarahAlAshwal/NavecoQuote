@@ -47,8 +47,7 @@ export default function Overview(props) {
               <SavingSummery />
             </Grid.Col>
             <Grid.Col width={20} sm={20} lg={20} >
-              <Card title={"First Year Saving"}
-                body={<FirstYear />} />
+              <FirstYear />
             </Grid.Col>
           </Grid.Row>
         </Tab>

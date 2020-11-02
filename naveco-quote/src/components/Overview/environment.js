@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'orange',
   },
   media: {
     height: 50,
