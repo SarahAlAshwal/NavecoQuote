@@ -186,7 +186,7 @@ export function useApplicationData() {
     if (state.loanTermInYears && state.interestRate) {
       monthlyPayments = calculateMonthlyPaiment(state.totalGross, state.interestRate, state.loanTermInYears);
       newSystemBaseCost = monthlyPayments * state.loanTermInYears * 12;
-      console.log('inside if', state.roi)
+     
     }
 
     const roi = calculateROI(totalSaving(state.acAnnual, state.rate), newSystemBaseCost);
@@ -200,9 +200,6 @@ export function useApplicationData() {
 
     const systemCapacity = state.numberOfPanels * panelCapacity / 1000;
 
-
-    console.log('inside useEffect', roi);
-    console.log('inside useEffect other values:' ,totalSaving(state.acAnnual), state.acAnnual, newSystemBaseCost);
     
     setState({
       ...state,

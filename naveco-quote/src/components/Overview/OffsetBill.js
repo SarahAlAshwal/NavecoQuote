@@ -44,7 +44,7 @@ export default function OffsetBill () {
         data={dataMock}
         animate={true}
         segmentsShift={(index) => (index === 0 ? shiftSize : 0.5)}
-        label={({ dataEntry }) => dataEntry.title ==='Solar' ? ` Solar ${formatNumbers(dataEntry.value)}%`: `Grid ${formatNumbers(dataEntry.value)}`}
+        label={({ dataEntry }) => dataEntry.title ==='Solar' ? ` Solar ${formatNumbers(dataEntry.value)}%`: `Grid ${formatNumbers(dataEntry.value)}%`}
         labelStyle={{
           ...defaultLabelStyle,
         }}
