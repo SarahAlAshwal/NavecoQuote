@@ -6,7 +6,12 @@ import Header from './components/Header';
 import Navigator from "./components/FrontPage/navigator"
 import Overview from './components/Overview'
 import {useVisualMode} from './hooks/useVisualMode'
+
 import FrontPage from "./components/FrontPage/frontPage";
+
+import StateContext from './StateContext';
+
+
 
 import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import GoogleMaps from './components/map';
@@ -60,17 +65,19 @@ function App() {
   return (
     <main >
       <Router>
+
       {! (mode === CALCULATION) && <Navigator goHome={goHome} goHow={goHow} />}
+
+        <StateContext.Provider value={state}>
+        
+
         <Switch>
           <Route exact path = '/'>
             {mode === FRONTPAGE && <FrontPage frontPage={frontPage} goHow={goHow}/>}
             <div className='userInput'>
              {mode === ADDRESS && <GoogleMaps 
-              address= {state.address}
               UpdateAddress={UpdateAddress}
               changeMode={changeMode}
-              addressFotmaError={state.addressFotmaError}
-              addressButtonDisabled={state.addressButtonDisabled}
               />}
               {mode === BILLINFO  && <MonthlyForm
                 handleChangeAmount={handleChangeAmount}
@@ -80,24 +87,19 @@ function App() {
                 calculate={onCalculate}
               />}
               {state.acMonthly[0] && mode === CALCULATION && <Overview 
-                acAnnual= {state.acAnnual}
-                acMonthly={state.acMonthly}
-                monthlyAmount={state.monthlyAmount}
                 handleLoanChange={handleLoanChange}
-                state={state}
                 handleYearChange = {handleYearChange}
-                year = {state.year}
-                capacity={state.systemCapacity}
                 />}
              {mode === HOW && <HowItWorks close={close}/>}
               
             </div>
           </Route>
           <Route path='/how'>
-           
+
           </Route>
           
         </Switch>
+        </StateContext.Provider>
       </Router>
     </main>
   );
