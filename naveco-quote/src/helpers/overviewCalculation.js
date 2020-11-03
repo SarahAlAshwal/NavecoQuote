@@ -146,6 +146,7 @@ export function calculateSystemGrossCostAfterRebate(systemBaseCost, rebatePrc=0,
     const avg = sum / lifespan;
 
     // return payBack value
+    console.log('saving', sum, 'netCost', netCost,'avg', avg, 'payback', netCost / avg);
     return netCost / avg;
   };
 

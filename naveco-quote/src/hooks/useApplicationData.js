@@ -11,15 +11,12 @@ import { calculateMonthlyPaiment,
 } from '../helpers/overviewCalculation';
 
 export function useApplicationData() {
-  const installation = 3000;
-  const panelCost = 925;
-  const panelCapacity = 415;
-  let totalHardware = 20 * panelCost;
 
+  const totalNet = calculateSystemNetCostAfterRebate((8.3 * 1.25 * 1000 * 2.7));
+  // default values
+  const totalGross = calculateSystemGrossCostAfterRebate((8.3 * 1.25 * 1000 * 2.7));
 
-  const totalNet = calculateSystemNetCostAfterRebate(totalHardware + installation);
-  //totalGross is the Gross cost (Hardware (nb panel) + installation) after rebate
-  const totalGross = calculateSystemGrossCostAfterRebate(totalHardware + installation);
+  //console.log ("init totalNet, totalGross", totalNet, totalGross);
   
   const [state, setState] = useState({
     monthlyAmount: 175,
@@ -52,7 +49,7 @@ export function useApplicationData() {
     offset: 0.5
   });
 
-  totalHardware = state.numberOfPanels * panelCost;
+  //totalHardware = state.numberOfPanels * panelCost;
 
   
   // handle monthly amuont typed value in monthly form
@@ -221,17 +218,21 @@ export function useApplicationData() {
       newSystemBaseCost = monthlyPayments * state.loanTermInYears * 12;
     }
 
+    
 
-    // recalculate ROI and payback based on new system cost
-    const roi = calculateROI(totalSaving(state.acAnnual, state.rate), newSystemBaseCost);
-    const payback = calculatePayback(state.acAnnual, state.totalNet + (newSystemBaseCost - state.totalGross), state.rate);
-
-    const totalHardware = state.systemCapacity * 1.25 * 1000 * 2.7; //1.25 is a factor to calculate DC system cost 
-    const baseCost = totalHardware;
+    const baseCost = state.systemCapacity * 1.25 * 1000 * 2.7; //1.25 is a factor to calculate DC system cost
     
     // recalculate net and gross system cost based on number of pannels filled
     const totalGross = calculateSystemGrossCostAfterRebate(baseCost);
     const totalNet = calculateSystemNetCostAfterRebate(baseCost);
+
+        
+    // recalculate ROI and payback based on new system cost
+    const roi = calculateROI(totalSaving(state.acAnnual, state.rate), newSystemBaseCost);
+    const payback = calculatePayback(state.acAnnual, totalNet + (newSystemBaseCost - totalGross), state.rate);
+    
+
+    console.log('inside useEffect', 'base', baseCost, 'net', totalNet, 'gross', totalGross, 'payback', payback);
 
     //const systemCapacity = state.numberOfPanels * panelCapacity / 1000;
    
@@ -255,7 +256,7 @@ export function useApplicationData() {
     state.totalGross,
     state.payback,
     state.roi,
-    state.numberOfPanels,
+    state.offset,
   ]);
 
 

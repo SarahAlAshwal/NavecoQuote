@@ -24,7 +24,6 @@ import {
   Tab,
   TabbedCard,
   Grid,
-  Card,
 } from "tabler-react";
 
 import { useVisualMode } from "../../hooks/useVisualMode";

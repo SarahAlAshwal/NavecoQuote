@@ -33,7 +33,7 @@ export default function PriceCard() {
             ${formatNumbers(state.totalGross)}
           </Typography>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
-            Including HST + Rebate Deducted
+            Including HST 
           </Typography>
         </div>
         <br />
