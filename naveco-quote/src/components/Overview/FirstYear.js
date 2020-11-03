@@ -23,7 +23,7 @@ export default function FirstYear() {
         <Card.Body>
           <div className={classes.cardContent}>
             <Typography variant="h5" component="h2">
-              {formatNumbers(state.acAnnual)} kWhs
+              {formatNumbers(state.acAnnual)} KWhs
             </Typography>
             <Typography variant="h6" component="h2">
               {`$${formatNumbers(state.acAnnual * state.rate)} value`}
