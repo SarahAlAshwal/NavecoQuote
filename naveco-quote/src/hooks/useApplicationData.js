@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import {formatAddress} from './../helpers/formatAddress';
 
-
 import { calculateMonthlyPaiment,
   calculatePayback,
   calculateSystemNetCostAfterRebate,
@@ -48,7 +47,8 @@ export function useApplicationData() {
     npFotmaError: '',
     loanFotmaError: '',
     addressFotmaError: '',
-    addressButtonDisabled: true,
+    addressButtonDisabledNext: true,
+    addressButtonDisabledGo: true,
     offset: 0.5
   });
 
@@ -162,16 +162,34 @@ export function useApplicationData() {
   const UpdateAddress = (event) => {
     let address = event.target.value;
     let addressFotmaError = '';
-    let addressButtonDisabled = false;
+    let addressButtonDisabledGo = false;
     if(address === ''){  
       addressFotmaError = ' field sould not be empty';
-      addressButtonDisabled = true;
+      addressButtonDisabledGo = true;
     }
     setState({
       ...state,
       address,
       addressFotmaError,
-      addressButtonDisabled,
+      addressButtonDisabledGo,
+    });
+  }
+
+  const enableNextButton = () => {
+    let addressButtonDisabledNext = false;
+    setState({
+      ...state,
+      addressButtonDisabledNext,
+    });
+  }
+
+  const disableButton = () => {
+    let addressButtonDisabledNext = true;
+    let addressButtonDisabledGo = true;
+    setState({
+      ...state,
+      addressButtonDisabledNext,
+      addressButtonDisabledGo,
     });
   }
 
@@ -269,6 +287,8 @@ export function useApplicationData() {
     handleLoanChange,
     handleInputs,
     UpdateAddress,
+    enableNextButton,
+    disableButton,
     handleRateInput,
     handleOffsetChange
   }; 

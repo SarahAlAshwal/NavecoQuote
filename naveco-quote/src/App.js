@@ -28,6 +28,8 @@ function App() {
     handleYearChange,
     handleInputs,
     UpdateAddress,
+    enableNextButton,
+    disableButton,
     handleRateInput,
     handleOffsetChange,
   } = useApplicationData();
@@ -40,6 +42,7 @@ function App() {
 
   function changeMode(){
     transition('BILLINFO')
+    disableButton();
   }
 
   function frontPage(){
@@ -70,6 +73,7 @@ function App() {
             <div className='userInput'>
              {mode === ADDRESS && <GoogleMaps 
               UpdateAddress={UpdateAddress}
+              enableNextButton={enableNextButton}
               changeMode={changeMode}
               />}
               {mode === BILLINFO  && <MonthlyForm

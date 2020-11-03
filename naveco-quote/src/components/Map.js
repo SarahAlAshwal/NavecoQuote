@@ -22,6 +22,7 @@ export default function GoogleMaps(props) {
 
   //adds user input to the webaddress and diplays the map on click
   const handleAddress = () => {
+    props.enableNextButton();
     finalAddr = webaddress + state.address;
     //to diplay the hidden map
     document.getElementById('gmap_canvas').style.visibility = 'visible';
@@ -50,7 +51,7 @@ export default function GoogleMaps(props) {
                     RootComponent="a"
                     color="primary"
                     onClick={handleAddress}
-                    disabled={state.addressButtonDisabled}
+                    disabled={state.addressButtonDisabledGo}
                     type="submit"
                   >
                     Go!
@@ -72,7 +73,7 @@ export default function GoogleMaps(props) {
               color="primary"
               id="next"
               onClick={props.changeMode}
-              disabled={state.addressButtonDisabled}
+              disabled={state.addressButtonDisabledNext}
             >
               Next
             </Button>
