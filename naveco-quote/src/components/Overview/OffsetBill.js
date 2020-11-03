@@ -15,19 +15,20 @@ export default function OffsetBill() {
   const classes = useStyles();
 
   const state = useContext(StateContext);
-  let solar = newBill(state.acMonthly, state.monthlyAmount, state.year, state.rate) / state.monthlyAmount;
+  let grid = newBill(state.acMonthly, state.monthlyAmount, state.year, state.rate) / state.monthlyAmount;
 
-  if (solar < 0) {
-    solar = 0;
+  if (grid < 0) {
+    grid = 0;
   }
   const dataMock = [
-    { title: 'Solar', value: (1 - solar) * 100, color: 'orange', },
-    { title: 'Grid', value: (solar) * 100, color: 'blue' },
+    { title: 'Solar', value: (1 - grid) * 100, color: 'orange', },
+    { title: 'Grid', value: (grid) * 100, color: 'blue' },
   ];
 
   const defaultLabelStyle = {
-    fontSize: '10px',
-    fontFamily: 'sans-serif',
+    fontSize: '8px',
+    fontColor: "FFFFFF",
+    fontWeight: "800"
   };
 
   //shiftSize determine the space between the pie peices 
@@ -44,14 +45,13 @@ export default function OffsetBill() {
         <Grid container space={0}>
           <Grid item xs={6}>
             <PieChart
-              style={{ width: 200 }}
+              style={{ fontColor: 'white', width: 200 }}
               data={dataMock}
               animate={true}
               segmentsShift={(index) => (index === 0 ? shiftSize : 0.5)}
-              label={({ dataEntry }) => dataEntry.title === 'Solar' ? `${formatNumbers(dataEntry.value)}%` : `${formatNumbers(dataEntry.value)}%`}
+              label={({ dataEntry }) => dataEntry.title === 'Solar' ? `${formatNumbers(dataEntry.value)}%` : (dataEntry.value === 0 ? '' : `${formatNumbers(dataEntry.value)}%`) }
               labelStyle={{
                 ...defaultLabelStyle,
-                fontSize: "8px"
               }}
             />
           </Grid>

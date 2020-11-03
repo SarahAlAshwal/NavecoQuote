@@ -94,7 +94,7 @@ const modifyDomain = () =>{
   for (let i = 0; i < props.data[props.changedYear].length; i++) {
     values.push(props.data[props.changedYear][i].power);
   }
-  return [ 0, 1600]
+  return [ 0, 2000]
 }
 
 const classes = useStyles();
