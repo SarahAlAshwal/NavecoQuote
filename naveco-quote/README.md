@@ -8,7 +8,7 @@ this application lets the users provide their location and  monthly energy bill.
 !["Solar-Quote home 2"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/home2.png)
 
 ### Map Input
-!["Map input"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/home2.png)
+!["Map input"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/map.png)
 
 ### Monthly Form
 !["Monthly Form inputs"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/monthlyForm.png)
@@ -16,9 +16,9 @@ this application lets the users provide their location and  monthly energy bill.
 ### Overview
 !["Price"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/overview1.png)
 
-!["Production"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/overview1.png)
+!["Production"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/overview2.png)
 
-!["Yearly Production"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/overview1.png)
+!["Yearly Production"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/overview3.png)
 
 ## Setup
 
