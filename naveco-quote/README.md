@@ -3,7 +3,7 @@ this application lets the users provide their location and  monthly energy bill.
 
 ## Final Product
 
-!["Solar-Quote home"]()
+!["Solar-Quote home"](https://raw.githubusercontent.com/SarahAlAshwal/NavecoQuote/master/naveco-quote/src/images/home1.png)
 
 
 ## Setup
