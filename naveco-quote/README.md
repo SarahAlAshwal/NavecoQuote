@@ -1,4 +1,14 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Solar-Quote 
+this application lets the users provide their location and  monthly energy bill. Then the application does all the required calculations to display the energy production graphs and saving summery tables with estimation for 25 years. Those calculations consider the location electricity rates, system degradation and power escalation rate. Moreover, the application gives the users a financing estimation based on their needs.
+
+## Final Product
+
+!["Solar-Quote home"]()
+
+
+## Setup
+
+Install dependencies with `npm install`.
 
 ## Available Scripts
 
@@ -11,11 +21,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -43,26 +48,16 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
 ### Deployment
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### `npm run build` fails to minify
+### Dependencies
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- axios 0.18.1
+- react 16.9.0 or above
+- react-hooks-testing-library
+- tabler-react
+- material-ui
+- devexpress/dx-react-chart
+- eact-circular-input
