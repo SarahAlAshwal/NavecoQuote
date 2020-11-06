@@ -24,10 +24,10 @@ const useStyles = makeStyles((theme) => ({
         textAlign:'center'
       },
       a: {
-        color:"white"
+        color:"black"
       },
       fontx: {
-        fontSize: 10,
+        fontSize: 14,
         width:200,
         alignItems: 'center'
       },
@@ -94,6 +94,22 @@ export default function Footer() {
                 <a href='https://www.linkedin.com/company/navecopower' className={classes.a} >
                 <LinkedInIcon />
                 </a>
+            </div>
+            <div>
+             Built By,
+              <div>
+                <a href='https://www.linkedin.com/in/thasleema-fathima-puroskhan-0a85731a4' className={classes.a} >
+                Thasleema Fathima
+                </a>
+              </div> 
+                <a href='https://www.linkedin.com/in/hasnaa-messaoudi-005245191/' className={classes.a} >
+                Hasnaa Messaoudi
+                </a>
+              <div>
+                <a href='https://www.linkedin.com/in/sarah-al-ashwal/' className={classes.a} >
+                Sarah Al-Ashwal 
+                </a>
+              </div>
             </div>
         </Toolbar>
         
