@@ -2,9 +2,23 @@
 this application lets the users provide their location and  monthly energy bill. Then the application does all the required calculations to display the energy production graphs and saving summery tables with estimation for 25 years. Those calculations consider the location electricity rates, system degradation and power escalation rate. Moreover, the application gives the users a financing estimation based on their needs.
 
 ## Final Product
+### Home 
+!["Solar-Quote home 1"](https://raw.githubusercontent.com/SarahAlAshwal/NavecoQuote/master/naveco-quote/src/images/home1.png)
 
-!["Solar-Quote home"](https://raw.githubusercontent.com/SarahAlAshwal/NavecoQuote/master/naveco-quote/src/images/home1.png)
+!["Solar-Quote home 2"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/home2.png)
 
+### Map Input
+!["Map input"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/home2.png)
+
+### Monthly Form
+!["Monthly Form inputs"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/monthlyForm.png)
+
+### Overview
+!["Price"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/overview1.png)
+
+!["Production"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/overview1.png)
+
+!["Yearly Production"](https://github.com/SarahAlAshwal/NavecoQuote/blob/master/naveco-quote/src/images/overview1.png)
 
 ## Setup
 
